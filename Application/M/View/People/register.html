@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title></title>
+<style type="text/css">
+body{ padding:0; margin:0; border:0;}
+.login-wrapper{ width:100%; height:100%; background-color:#ebecee; position:absolute;}
+.login-header{ 
+    width:100%;
+    height:45px;
+    line-height:45px;
+    background-color:#fb812b;   
+    padding:0;
+    color:#fff;
+    font-size:20px;
+    text-align:center;
+    font-weight:bold;
+}
+.login-box{ width:80%; margin:10%; position:relative;}
+.login-box input{ width:100%; height:40px; line-height:40px; margin:20px 0; border:1px solid #ccc;  font-size:16px; background-color:#fff; text-indent:10px;}
+.user-name{ background:url(__SITE__/img/m/user-name-icon.png) no-repeat left top;  text-indent:50px;}
+.password{ background:url(__SITE__/img/m/password-icon.png) no-repeat left top;  text-indent:50px;}
+.login-box input.login-btn{ height:40px; line-height:40px; text-align:center; color:#57585a; background:url(__SITE__/img/m/login-btn-bg.png) repeat-x left top; background-size:auto 100%; width:100%; border:none;color:#fff; font-size:16px; font-weight:bold; margin-top:50px;}
+.promptInformation{ color:#666; display:block; width:100%; text-align:center; line-height:2.5em;}
+.phoneNo{ font-size:1.6em; color:#fb812b; line-height:2em; font-weight:bold;}
+.input-information{ display:block; float:left; color:red; position:absolute; right:-20px; top:70%;}
+.aLink-box a{ color:#535353;}
+.aLink-box a:hover{ color:#0078ff;}
+.aLink-box{ width:100%; margin-top:5%;}
+.aLink-left{ float:left; margin-left:10%;}
+.aLink-right{ float:right; margin-right:10%;}
+.start1{ color:red; position:absolute; right:-6%; top:30px;}
+.start2{ color:red; position:absolute; right:-6%; top:115px;}
+</style>
+</head>
+<body>
+<div class="login-wrapper">
+<div class="login-header">注册</div>
+    <form action="__SITE__/m/people/register" method="post">
+    <div class="login-box">
+       
+        <input type="text" name="name" placeholder="姓名" >
+        <input type="text" name="tel" placeholder="手机号" value="{$tel}"> 
+
+        <div class="aLink-box">
+        <a href="__SITE__/m/people/login" class="aLink-left">登&nbsp;录</a><span class="start1">*</span>
+        <a href="__SITE__/m/notice/?key=forget_pwd" class="aLink-right">忘记密码</a><span class="start2">*</span>
+        
+        <br/>
+        <br/>
+        <div style="text-align: center; ">
+            <span style="color:red;">{$err}</span>
+        </div>
+        
+        <input type="submit" value="提 交" class="login-btn">
+        
+        </div>
+    </div>
+    
+    </form>
+</div>
+</body>
+</html>

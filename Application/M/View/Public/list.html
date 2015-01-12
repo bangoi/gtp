@@ -1,0 +1,46 @@
+<foreach name="items" item="item">
+<li>
+    <div class="list-box">
+        <p>
+            <span><a href="#{$item.id}" class="mlbl">编号：DD{$item.id}</a></span> &nbsp;&nbsp;&nbsp; 
+            
+            <?php if(!empty($item['price'])) { ?>
+            <span><a class="mlbl">价格：</a>{$item.price}</span>
+            <?php } ?>
+        </p>
+        
+        <p>
+            <br style="clear: both;" />
+            <span>{$item.content}</span>
+        </p>
+        
+        <?php if(!empty($item['address'])) { ?>
+        <br style="clear: both;" />
+        <p>
+            <span><a class="mlbl">地点：</a>{$item.address}</span>
+        </p>
+        <?php } ?>
+        
+        <?php if(!empty($item['remark'])) { ?>
+        <br style="clear: both;" />
+        <p>
+            <span><a class="mlbl">特殊说明：</a>{$item.remark}</span>
+        </p>
+        <?php } ?>
+        
+        <p>
+            <br style="clear: both;" />
+            <span><?php echo date("Y年m月d日 H:i", strtotime($item['add_time'])); ?></span>
+        </p>
+                        
+        <?php if(!applied($item['id'], $_uid)) { ?>
+        <div class="list-btn grab-list active" item_id={$item.id} id="btn-{$item.id}" applied="false"><a href="__SITE__/m/item/apply/{$item.id}">抢单</a></div>
+        <?php } else { ?>
+        <div class="list-btn revoke-list" id="btn-{$item.id}" item_id={$item.id} applied="true"><a href="__SITE__/m/item/withdraw/{$item.id}">撤单</a></div>
+        <?php } ?>
+                        
+    </div>
+    <div class="list-line"></div>
+    <input type="hidden" id="item_count" name="item_count" value="{$item_count}" />
+</li>
+</foreach>

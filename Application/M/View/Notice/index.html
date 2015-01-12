@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title></title>
+<link type="text/css" rel="stylesheet" href="__SITE__/css/mobile.css" />
+</head>
+<body>
+<div class="submit-succeed-wrapper">
+
+        <div class="submit-succeed-img"><img src="__SITE__/img/m/submit.png"></div>
+        
+        <?php if($key == "register") { ?>
+                <div class="submit-succeed-txt">感谢您使用“抢活神器”软件，请拨打<a href="tel:40005-30003">40005-30003</a>电话与我们联系，我们会尽快核实确认您的信息，为您开通服务。</div>
+        <?php } else if($key == "apply") { ?>
+            <div class="submit-succeed-txt">订单号：DD{$item.id}</div>
+            <div class="submit-succeed-txt">亲，非常感谢您的参与，为了更快速的为您提供服务，您可以拨打<a href="tel:40005-30003">40005-30003</a>电话与我们联系。</div>
+        <?php } else if($key == "item_bad") { ?>
+            <div class="submit-succeed-txt">亲，很抱歉，该任务已失效。</div>
+        <?php } else if($key == "item_bad_withdraw") { ?>
+            <div class="submit-succeed-txt">亲，很抱歉，该订单不可撤销。</div>
+        <?php } else if($key == "forget_pwd") { ?>
+            <div class="submit-succeed-txt">请拨打免费电话<a href="tel:40005-30003">40005-30003</a>电话与我们联系，我们会为您提供密码找回服务。</div>
+        <?php } else if($key == "login_notice") { ?>
+            <div class="submit-succeed-txt">感谢您使用“抢活神器”软件，请拨打免费电话<a href="tel:40005-30003">40005-30003</a>电话与我们联系，我们会尽快核实确认您的信息，为您开通服务。</div>
+        <?php } ?>
+        
+        <!--
+        <div class="submit-succeed-txt">免费电话：<a href="tel:40005-30003">40005-30003</a></div>
+        -->
+        
+</div>
+
+<div id="footer">
+    免费电话 <span class="tel"><a href="tel:40005-30003">40005-30003</a></span>
+    &nbsp;&nbsp; 
+    <a href="__SITE__/m" style="font-size: 14px;">&larr;返回</a> 
+</div>
+
+</body>
+</html>

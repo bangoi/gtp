@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title></title>
+<style type="text/css">
+body{ padding:0; margin:0; border:0;}
+.login-wrapper{ width:100%; height:100%; background-color:#ebecee; position:absolute;}
+.login-header{ 
+    width:100%;
+    height:45px;
+    line-height:45px;
+    background-color:#fb812b;   
+    padding:0;
+    color:#fff;
+    font-size:20px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.login-box{ width:80%; margin:10%;}
+.login-box input{ width:100%; height:40px; line-height:40px; margin:20px 0; border:1px solid #ccc;  font-size:16px; background-color:#fff;}
+.user-name{ background:url(__SITE__/img/m/user-name-icon.png) no-repeat left top;  text-indent:50px;}
+.password{ background:url(__SITE__/img/m/password-icon.png) no-repeat left top;  text-indent:50px;}
+.login-box input.login-btn{ height:40px; line-height:40px; text-align:center; color:#57585a; background:url(__SITE__/img/m/login-btn-bg.png) repeat-x left top; background-size:auto 100%; width:100%; border:none;color:#fff; font-size:16px; font-weight:bold; margin-top:50px;}
+.aLink-box a{ color:#535353;}
+.aLink-box a:hover{ color:#0078ff;}
+.aLink-box{ width:100%; margin-top:5%;}
+.aLink-left{ float:left; margin-left:10%;}
+.aLink-right{ float:right; margin-right:10%;}
+.telephoneNo{ line-height:3em;text-align: center; color:#535353;}
+.telephoneNo a{color:#ff6900;}
+</style>
+</head>
+<body>
+<include file="Public:info" />   
+    
+<div class="login-wrapper">
+<div class="login-header">登录</div>
+    <form action="__SITE__/m/people/login" method="post">
+    <div class="login-box">
+        <input type="text" name="tel" placeholder="输入手机号" value="{$tel}" class="user-name">        
+        <input type="password" name="pwd" placeholder="输入密码" class="password">
+        <div class="aLink-box">
+        <a href="__SITE__/m/people/register" class="aLink-left">注&nbsp;册</a>
+        <a href="__SITE__/m/notice/?key=forget_pwd" class="aLink-right">忘记密码</a>
+        <br/>
+        <br/>
+        <div style="text-align: center; ">
+            <span style="color:red;">{$err}</span>
+        </div>
+        <div class="telephoneNo">免费客服电话：<a href="tel:40005-30003">40005-30003</a></div>
+        <input type="submit" value="登 录" class="login-btn">
+        </div>
+    </div>
+    </form>
+</div>
+
+</body>
+</html>
