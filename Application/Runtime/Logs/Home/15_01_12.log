@@ -1,0 +1,485 @@
+[ 2015-01-12T09:54:46+08:00 ] ::1 /gtp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000028s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000508s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000804s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000970s ]
+INFO: [ view_parse ] --START--
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.000678s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.000879s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000507s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000640s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000757s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000876s ]
+
+[ 2015-01-12T10:31:01+08:00 ] ::1 /gtp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000633s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000989s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001126s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/side.html): failed to open stream: No such file or directory C:\wamp\www\gtp\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000101s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000239s ]
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 44 行.
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 45 行.
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 46 行.
+NOTIC: [8] Undefined variable: index_gtps C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 74 行.
+NOTIC: [8] Undefined variable: index_vedioes C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 93 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.019725s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.019880s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000516s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000645s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000711s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000833s ]
+
+[ 2015-01-12T10:31:01+08:00 ] ::1 /gtp/__SITE__/js/apu9.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000050s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001008s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001147s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001401s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:31:01+08:00 ] ::1 /gtp/__SITE__/css/concision.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000054s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001163s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001126s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001443s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:31:01+08:00 ] ::1 /gtp/__SITE__/js/jquery-1.7.2.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000084s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001215s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.007807s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.008193s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:31:01+08:00 ] ::1 /gtp/__SITE__/css/prettify.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000050s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000819s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001957s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002242s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:31:34+08:00 ] ::1 /gtp/__SITE__/css/concision.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000066s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000919s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002686s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003005s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:34:23+08:00 ] ::1 /gtp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000574s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000746s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000877s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/side.html): failed to open stream: No such file or directory C:\wamp\www\gtp\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000150s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000401s ]
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 44 行.
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 45 行.
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 46 行.
+NOTIC: [8] Undefined variable: index_gtps C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 74 行.
+NOTIC: [8] Undefined variable: index_vedioes C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 93 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023253s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.023451s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000553s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000688s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000840s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001004s ]
+
+[ 2015-01-12T10:34:23+08:00 ] ::1 /gtp/__SITE__/css/prettify.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000064s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002542s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002179s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002467s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:34:23+08:00 ] ::1 /gtp/__SITE__/css/concision.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000054s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001032s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002902s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003206s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:34:23+08:00 ] ::1 /gtp/__SITE__/js/jquery-1.7.2.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000049s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001145s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.009117s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.009440s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:34:23+08:00 ] ::1 /gtp/__SITE__/js/apu9.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000051s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000874s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001056s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001310s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:34:59+08:00 ] ::1 /gtp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000572s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000846s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001036s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/side.html): failed to open stream: No such file or directory C:\wamp\www\gtp\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000096s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000228s ]
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 44 行.
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 45 行.
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 46 行.
+NOTIC: [8] Undefined variable: index_gtps C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 74 行.
+NOTIC: [8] Undefined variable: index_vedioes C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 93 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.018872s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.019027s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000503s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000622s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000714s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000835s ]
+
+[ 2015-01-12T10:34:59+08:00 ] ::1 /gtp/__SITE__/js/jquery-1.7.2.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000052s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000845s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001215s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001490s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:34:59+08:00 ] ::1 /gtp/__SITE__/js/apu9.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000052s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000959s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001274s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001543s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:34:59+08:00 ] ::1 /gtp/__SITE__/css/concision.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000055s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001236s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.036476s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.036779s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:34:59+08:00 ] ::1 /gtp/__SITE__/css/prettify.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000054s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002467s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002944s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004053s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:35:00+08:00 ] ::1 /gtp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000033s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000621s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000682s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000812s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/side.html): failed to open stream: No such file or directory C:\wamp\www\gtp\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000109s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000279s ]
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 44 行.
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 45 行.
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 46 行.
+NOTIC: [8] Undefined variable: index_gtps C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 74 行.
+NOTIC: [8] Undefined variable: index_vedioes C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 93 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.019058s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.019198s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000592s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000728s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000736s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000859s ]
+
+[ 2015-01-12T10:35:00+08:00 ] ::1 /gtp/__SITE__/css/concision.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000058s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000893s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002430s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004437s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:35:00+08:00 ] ::1 /gtp/__SITE__/css/prettify.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000053s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000766s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001251s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001514s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:35:00+08:00 ] ::1 /gtp/__SITE__/js/jquery-1.7.2.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000050s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001114s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.010059s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.010393s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:35:00+08:00 ] ::1 /gtp/__SITE__/js/apu9.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000067s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001113s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001283s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001594s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:35:00+08:00 ] ::1 /gtp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000078s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000982s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001286s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001558s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/side.html): failed to open stream: No such file or directory C:\wamp\www\gtp\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.002316s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.002577s ]
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 44 行.
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 45 行.
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 46 行.
+NOTIC: [8] Undefined variable: index_gtps C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 74 行.
+NOTIC: [8] Undefined variable: index_vedioes C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 93 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.044892s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.045209s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001080s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001462s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001134s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001373s ]
+
+[ 2015-01-12T10:35:00+08:00 ] ::1 /gtp/__SITE__/css/concision.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000057s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001367s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001370s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001650s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:35:00+08:00 ] ::1 /gtp/__SITE__/js/jquery-1.7.2.min.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000053s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000839s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001032s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001286s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:35:00+08:00 ] ::1 /gtp/__SITE__/css/prettify.css
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000076s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001234s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.009457s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.009749s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:35:00+08:00 ] ::1 /gtp/__SITE__/js/apu9.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000051s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000954s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.009788s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.010198s ]
+ERR: 无法加载控制器:__SITE__
+
+[ 2015-01-12T10:37:03+08:00 ] ::1 /gtp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000077s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000959s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001525s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001819s ]
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/side.html): failed to open stream: No such file or directory C:\wamp\www\gtp\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000162s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000311s ]
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 44 行.
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 45 行.
+NOTIC: [8] Undefined variable: channel C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 46 行.
+NOTIC: [8] Undefined variable: index_gtps C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 74 行.
+NOTIC: [8] Undefined variable: index_vedioes C:\wamp\www\gtp\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 93 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022994s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.023201s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000647s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000819s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000841s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001014s ]
+
+[ 2015-01-12T10:37:06+08:00 ] ::1 /gtp/gtp/?p=2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000028s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000462s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000769s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000940s ]
+ERR: 无法加载控制器:Gtp
+
+[ 2015-01-12T10:47:01+08:00 ] ::1 /gtp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000048s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000764s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000968s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001122s ]
+
+[ 2015-01-12T10:48:49+08:00 ] ::1 /gtp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000055s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000920s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001193s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001448s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\gtp\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.006159s ]
+SQL: SELECT v.id AS id,v.user_id AS user_id,v.title AS title,v.code AS code,v.thumb AS thumb,v.digg_num AS digg_num,v.view_num AS view_num,v.comment_num AS comment_num,v.artist_name AS artist_name,v.song_title AS song_title,v.add_time AS add_time,v.status AS status,User.nick AS nick FROM vedio v  JOIN user User ON v.user_id=User.id WHERE ( v.status = 100 ) ORDER BY v.add_time DESC LIMIT 25   [ RunTime:0.000608s ]
+ERR: 1146:La table 'gtp.vedio' n'existe pas
+ [ SQL语句 ] : SELECT v.id AS id,v.user_id AS user_id,v.title AS title,v.code AS code,v.thumb AS thumb,v.digg_num AS digg_num,v.view_num AS view_num,v.comment_num AS comment_num,v.artist_name AS artist_name,v.song_title AS song_title,v.add_time AS add_time,v.status AS status,User.nick AS nick FROM vedio v  JOIN user User ON v.user_id=User.id WHERE ( v.status = 100 ) ORDER BY v.add_time DESC LIMIT 25  
+SQL: SHOW COLUMNS FROM `device_group` [ RunTime:0.006003s ]
+ERR: 1146:La table 'gtp.device_group' n'existe pas
+ [ SQL语句 ] : SHOW COLUMNS FROM `device_group`
+SQL: SELECT DeviceGroup.group_id AS group_id,d.id AS id,d.name AS name,d.device_id AS device_id,d.district AS district,d.address AS address,d.owner AS owner,d.tel AS tel,d.state AS state,d.screen_timespan AS screen_timespan,d.heartbeat_timespan AS heartbeat_timespan,d.ad_content AS ad_content,d.add_time AS add_time FROM device_group DeviceGroup ON dg.device_id = Device.id  JOIN device d WHERE ( g.status = 100 ) ORDER BY d.add_time DESC LIMIT 25   [ RunTime:0.000295s ]
+ERR: 1064:Erreur de syntaxe près de 'ON dg.device_id = Device.id  JOIN device d WHERE ( g.status = 100 ) ORDER BY d.a' à la ligne 1
+ [ SQL语句 ] : SELECT DeviceGroup.group_id AS group_id,d.id AS id,d.name AS name,d.device_id AS device_id,d.district AS district,d.address AS address,d.owner AS owner,d.tel AS tel,d.state AS state,d.screen_timespan AS screen_timespan,d.heartbeat_timespan AS heartbeat_timespan,d.ad_content AS ad_content,d.add_time AS add_time FROM device_group DeviceGroup ON dg.device_id = Device.id  JOIN device d WHERE ( g.status = 100 ) ORDER BY d.add_time DESC LIMIT 25  
+INFO: [ view_parse ] --START--
+NOTIC: [2] file_get_contents(./Application/Home/View/Public/side.html): failed to open stream: No such file or directory C:\wamp\www\gtp\ThinkPHP\Library\Think\Template.class.php 第 696 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000236s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000502s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022735s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022896s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000651s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000836s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001750s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002086s ]
+
+[ 2015-01-12T10:55:48+08:00 ] ::1 /gtp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000033s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000644s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000833s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000999s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead C:\wamp\www\gtp\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `user` [ RunTime:0.005803s ]
+SQL: SELECT v.id AS id,v.user_id AS user_id,v.title AS title,v.code AS code,v.thumb AS thumb,v.digg_num AS digg_num,v.view_num AS view_num,v.comment_num AS comment_num,v.artist_name AS artist_name,v.song_title AS song_title,v.add_time AS add_time,v.status AS status,User.nick AS nick FROM vedio v  JOIN user User ON v.user_id=User.id WHERE ( v.status = 100 ) ORDER BY v.add_time DESC LIMIT 25   [ RunTime:0.000597s ]
+ERR: 1146:La table 'gtp.vedio' n'existe pas
+ [ SQL语句 ] : SELECT v.id AS id,v.user_id AS user_id,v.title AS title,v.code AS code,v.thumb AS thumb,v.digg_num AS digg_num,v.view_num AS view_num,v.comment_num AS comment_num,v.artist_name AS artist_name,v.song_title AS song_title,v.add_time AS add_time,v.status AS status,User.nick AS nick FROM vedio v  JOIN user User ON v.user_id=User.id WHERE ( v.status = 100 ) ORDER BY v.add_time DESC LIMIT 25  
+SQL: SHOW COLUMNS FROM `device_group` [ RunTime:0.004922s ]
+ERR: 1146:La table 'gtp.device_group' n'existe pas
+ [ SQL语句 ] : SHOW COLUMNS FROM `device_group`
+SQL: SELECT DeviceGroup.group_id AS group_id,d.id AS id,d.name AS name,d.device_id AS device_id,d.district AS district,d.address AS address,d.owner AS owner,d.tel AS tel,d.state AS state,d.screen_timespan AS screen_timespan,d.heartbeat_timespan AS heartbeat_timespan,d.ad_content AS ad_content,d.add_time AS add_time FROM device_group DeviceGroup ON dg.device_id = Device.id  JOIN device d WHERE ( g.status = 100 ) ORDER BY d.add_time DESC LIMIT 25   [ RunTime:0.000222s ]
+ERR: 1064:Erreur de syntaxe près de 'ON dg.device_id = Device.id  JOIN device d WHERE ( g.status = 100 ) ORDER BY d.a' à la ligne 1
+ [ SQL语句 ] : SELECT DeviceGroup.group_id AS group_id,d.id AS id,d.name AS name,d.device_id AS device_id,d.district AS district,d.address AS address,d.owner AS owner,d.tel AS tel,d.state AS state,d.screen_timespan AS screen_timespan,d.heartbeat_timespan AS heartbeat_timespan,d.ad_content AS ad_content,d.add_time AS add_time FROM device_group DeviceGroup ON dg.device_id = Device.id  JOIN device d WHERE ( g.status = 100 ) ORDER BY d.add_time DESC LIMIT 25  
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000233s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000386s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023699s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.024401s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000856s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001055s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001154s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001367s ]
+
+[ 2015-01-12T10:55:51+08:00 ] ::1 /gtp/gtp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000048s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000703s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001101s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001327s ]
+ERR: 无法加载控制器:Gtp
+
+[ 2015-01-12T12:57:53+08:00 ] ::1 /gtp/gtp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000663s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000991s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001164s ]
+ERR: 无法加载控制器:Gtp
+
+[ 2015-01-12T12:59:38+08:00 ] ::1 /gtp/gtp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000056s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001220s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001592s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001903s ]
+
+[ 2015-01-12T13:00:08+08:00 ] ::1 /gtp/gtp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000513s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000823s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001029s ]
+
+[ 2015-01-12T13:00:29+08:00 ] ::1 /gtp/gtp/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000054s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000746s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000847s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001005s ]
+ERR: Think\Controller:_get方法不存在！
+

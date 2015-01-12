@@ -1,0 +1,65 @@
+<tagLib name="html" />
+<include file="Public:header" />
+
+<div class="contaier wp">
+    <div class="channel-left">
+        <div class="think-search cf">
+            <form action="/search" method="post">
+                <input class="text" type="text" name="name" placeholder="输入关键字..." value="" /><input class="submit" type="submit" value="搜索" />
+                <input type="hidden" name="type" value="1">
+                <input type="hidden" value="0" name="time">
+            </form>
+        </div>
+        <div class="ident">首页</div>
+        
+        <div class="think-slogan"><a class="post" href="__SITE__/gtp/add">发布吉他谱</a><p>吉他谱 <A href="__SITE__/gtp/?p=2">More</A></p></div>
+        
+        <div class="think-cate">
+            <ul class="think-item">
+            <foreach name="index_gtps" item="gtp">
+            <li>
+                <div class="left">
+                    <span class="sort">[ 吉他谱 ]</span>
+                </div>
+                <div class="middle">
+                    <span class="title"> <a href="__SITE__/gtp/{$gtp.id}">{$gtp.song_title}</a></span>
+                   <span class="down"> [ <a class="" href="__SITE__/gtp/download/{$gtp.id}" title="下载">下载： {$gtp.download_num}</a> ]</span>
+                    <span class="author"> <a href="__SITE__/gtp/?artist_name={$gtp.artist_name|urlencode}">{$gtp.artist_name}</a></span>
+                </div>
+                <div class="right">
+                    <span class="date">{$gtp.add_time|firendlyTime}</span>
+                </div>
+            </li>
+            </foreach>
+            </ul>
+    </div>
+    
+    <div class="think-slogan"><a class="post" href="__SITE__/vedio/add">发布吉他视频</a><p>吉他视频 <A href="__SITE__/vedio/?p=2">More</A></p></div>
+    <div class="think-cate">
+        <ul class="think-item">
+        <foreach name="index_vedioes" item="vedio">
+        <li>
+            <div class="left">
+                <span class="sort">[ 吉他视频 ]</span>
+            </div>
+            <div class="middle">
+                <span class="title"> <a href="__SITE__/vedio/{$vedio.id}">{$vedio.title}</a></span>
+                <span class="down"> [ 播放： {$vedio.view_num} ]</span>
+                <span class="comment"><A href="__SITE__/vedio/{$vedio.id}l#review">(3)</A></span>
+                <span class="author"><a href="__SITE__/vedio/?artist_name={$vedio.artist_name|urlencode}">{$vedio.artist_name}</a></span>
+            </div>
+            <div class="right">
+                <span class="date">{$vedio.add_time|firendlyTime}</span>
+            </div>
+        </li>
+        </foreach>
+        </ul>
+    </div>
+    
+    </div>
+    <!-- right begin --> 
+    <include file="Public:side" />
+    <!-- right end -->
+</div>
+
+<include file="Public:footer" />

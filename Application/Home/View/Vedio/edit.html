@@ -1,0 +1,87 @@
+<tagLib name="html" />
+<include file="Public:header" />
+     
+<div class="contaier wp">
+    <div class="think-add">
+        <div class="body think-form">
+            <form action="__SITE__/vedio/edit/{$vedio.id}" method="post">
+                <table>
+                    <?php if (!empty($err)): ?>
+                     <tr>
+                        <th></th>
+                        <td><span style="color: red">{$err}</span></td>
+                    </tr>
+                    <?php endif; ?>
+                    <tr>
+                        <th><i class="must">*</i>视频标题</th>
+                        <td><input class="text" type="text" name="title" id="title" value="{$vedio.title}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><i class="must">*</i>视频截图</th>
+                        <td>
+                            <?php if (empty($vedio['thumb'])): ?>
+                            <img src="__SITE__/upload/thumb/default.jpg" name="thumb" id="thumb" alt="上传视频缩略图" width="120" height="90" />
+                            <?php else: ?>
+                            <img src="{$vedio.thumb}" name="thumb" id="thumb" alt="上传视频缩略图" width="120" height="90" />
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><i class="must">*</i>截图地址</th>
+                        <td><input class="text" type="text" name="thumb_value" id="thumb_value" value="{$vedio.thumb}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><i class="must">*</i>视频swf</th>
+                        <td><input class="text" type="text" name="code" id="code" value="{$vedio.code}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><i class="must">*</i>音乐人</th>
+                        <td><input class="text" type="text" name="artist_name" value="{$vedio.artist_name}" /></td>
+                    </tr>
+                    <tr>
+                        <th><i class="must">*</i>歌曲名称</th>
+                        <td><input class="text" type="text" name="song_title" value="{$vedio.song_title}" /></td>
+                    </tr>
+                    <tr>
+                        <th>标&#12288;&#12288;签</th>
+                        <td><input class="text" type="text" name="tags" value="{$vedio.tags}" /> 用空格分隔</td>
+                    </tr>
+                    <tr>
+                        <th>摘&#12288;&#12288;要</th>
+                        <td>
+                            <div class="add-remark">
+                                <textarea name="description">{$vedio.description}</textarea>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <td> <input class="submit" type="submit" value="提交" />
+                        </td>
+                    </tr>
+                </table>
+                <input type="hidden" name="id" value="{$vedio.id}" />
+            </form>
+        </div>
+    </div>
+            
+            
+    <div class="home-right">
+        <div class="think-fast">
+            <dl>
+                <dt>发布应用<sub>Publish</sub></dt>
+                <dd>应用标识、中文描述、应用主页（以http打头）、分类和应用LOGO（不超过50K 支持JPG PNG和GIF）必须，描述和标签可选，多个标签之间用空格分隔，案例发布需要审核。</dd>
+            </dl>
+            <dl>
+                <dt>快捷键<sub>Keyboard</sub></dt>
+                <dd>选中文字内容后使用键盘快捷键<br/>CTRL+B ：字体加粗<br/>ALT + U ：添加超链接<br/> ALT + C ：插入代码</dd>
+            </dl>
+        </div>
+    </div>
+        
+</div>
+
+<include file="Public:footer" />

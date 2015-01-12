@@ -1,0 +1,77 @@
+* {margin:0;padding:0;border:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;}
+
+/* typograpghy.css */
+body{font-family: Helvetica, Arial, "Lucida Grande", Verdana, sans-serif;line-height:1.5;font-size:75%;}
+html > body{font-size:12px;}
+h1,h2,h3,h4,h5,h6{font-family:Helvetica,Arial,"Lucida Grande",Verdana,sans-serif;color:#111;clear:both;}
+h1{font-size:3em;}
+h2{font-size:2em;}
+h3{font-size:1.5em;line-height:2;}
+h4{font-size:1.2em;line-height:1.25;font-weight:bold;}
+h5{font-size:1em;font-weight:bold;}
+h6{font-size:1em;}
+h2, h3 {font-weight: normal; font-family:'微软雅黑','宋体','helvetica neue',arial,'liberation sans',freesans,sans-serif;}
+p{margin:0 0 1.5em 0;text-align:justify;}
+p.last{margin-bottom:0;}
+p img{float:left;margin:1.5em 1.5em 1.5em 0;padding:0;}
+p img.top{margin-top:0;}
+ul,ol{margin:0 0 1.5em 1.5em;}
+a{color:#224970;text-decoration:none;outline:none;}
+a:hover{ background:#224970; color:#fff;}
+blockquote{margin:1.5em 0 1.5em 1.5em;color:#666;font-style:italic;}
+strong{font-weight:bold;}
+em{font-style:italic;}
+pre{margin-bottom:1.3em;background:#eee;border:0.1em solid #ddd;padding:1.5em;}
+hr{background:#B2CCFF;color:#B2CCFF;clear:both;float:none;width:100%;height:0.1em;margin:0 0 1.4em 0;border:none;}
+
+.f12 {font-size: 12px;}
+.f14 {font-size: 14px;}
+.c3 {color: #333;}
+.c6 {color: #666;}
+.c7 {color: #777;}
+.clear {clear: both;}
+
+.red {color:#a11b1b;}
+.red-b {font-family:'微软雅黑, 黑体'; font:14px;}
+.red-b a {background-color:#a11b1b; color:#fff; padding:5px;}
+.red-b a:hover { background-color:#fff; color:#a11b1b; padding:5px; text-decoration:underline;}
+
+.blue-b {font-family:'微软雅黑, 黑体'; font:14px;}
+.blue-b a {background-color:#224970; color:#fff; padding:5px;}
+.blue-b a:hover {background-color:#fff; color:#224970; padding:5px; text-decoration:underline;}
+
+h3.mast {text-transform: uppercase; font-size: 1.2em; line-height: 1.8em; font-weight: bold; padding: 0 0 0.6em 0; letter-spacing: 0.1em; color: #a11b1b;}
+
+.header {height: 90px;}
+.header .logo {font-family:'微软雅黑'; font-weight: bold; font-size:46px; margin-left: 208px;}
+.header .logo a {color:#111;}
+.header .logo a:hover {background:none;}
+
+.container {padding: 0px 40px 40px; background: #fff;margin:0 auto;width:880px;}
+.left{float: left; width: 170px;}
+.right{float: left; margin-left:40px; width:680px;}
+
+.archive_post_block {padding: 0.1em 0 0 0; margin: 0 0 1.2em 0;}
+.archive_post_meta {color: #666; padding: 10px 0 0.6em 0; font-size: 0.8em; text-transform: uppercase;}
+h3.archive_title {line-height: 1em; padding: 0 0 5px 0; font-size:22px; font-family:'微软雅黑'; font-weight: bold;}
+
+.v_list {width:100%;}
+.v_list ul {margin-left:0px;}
+.v_list li {list-style:none;}
+.v_list .item {float:left; width:135px; height:240px;}
+.v_list .item img {height: 90px; width: 120px;}
+
+#channel { margin: 0 0 1em 0; }
+.left ul {list-style: none;margin: 0px;}
+.left ul.cat li { padding: 0 0 0.3em 0; margin: 0; }
+.left ul.cat li a { display: block; text-transform: uppercase; font-size: 1.0em; font-weight: bold; color: #000; border-bottom: 1px solid #dadada; border-left: 3px solid #dadada; padding: 3px 12px 0 7px; margin: 0; background: url(../img/bg/arrow.png) no-repeat 177px 3px; height: 19px; }
+.left ul.cat li a:hover { background: #f1f1f1 url(../img/bg/arrow2.png) no-repeat 177px 3px; color: #3a6999; }
+.left ul.cat li ul { list-style: none; list-style-image: url(foo.gif); margin: 0; padding: 0.3em 0 0.2em 0.8em; }
+.left ul.cat li ul li { padding: 0; margin: 0; }
+.left ul.cat li ul li a { border: 0; margin: 0; padding: 0 0 0 12px; text-transform: none; font-size: 1.0em; height: 19px; background: url(../img/bg/sub.png) no-repeat; }
+.left ul.cat li ul li a:hover { background: #f1f1f1 url(../img/bg/sub1.png) no-repeat; }
+
+.letter ul { list-style: none; margin: 0px; padding: 0px; }
+.letter li { float: left; border: none; white-space: nowrap; margin-right: 10px; line-height: 25px; }
+.letter a { color: #224970; text-decoration: underline; }
+.letter a:hover { color: #000; }

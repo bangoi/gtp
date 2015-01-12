@@ -1,0 +1,167 @@
+<tagLib name="html" />
+<include file="Public:header" />
+
+<div class="contaier wp">
+    <div class="channel-left">
+        <div class="think-search cf">
+            <form action="__SITE__/index/search" method="post">
+                <input class="text" type="text" name="name" placeholder="输入关键字..." value="" /><input class="submit" type="submit" value="搜索" />
+                <input type="hidden" name="type" value="gtp">
+            </form>
+        </div>
+        <div class="ident">吉他谱</div>
+        
+        <div class="think-slogan"><a class="post" href="__SITE__/gtp/add">发布吉他谱</a><p>{$artist_name} 吉他谱 <A href="__SITE__/gtp/?p=2">More</A></p></div>
+        
+        <div class="think-cate">
+            <ul class="think-item">
+            <foreach name="list" item="gtp">
+            <li>
+                <div class="left">
+                    <span class="sort">[ 吉他谱 ]</span>
+                </div>
+                <div class="middle">
+                    <span class="title"> <a href="__SITE__/gtp/{$gtp.id}">{$gtp.song_title}</a></span>
+                   <span class="down"> [ <a class="" href="__SITE__/gtp/download/{$gtp.id}" title="下载">下载： {$gtp.download_num}</a> ]</span>
+                    <span class="comment"><A href="__SITE__/gtp/{$gtp.id}l#review">(3)</A></span>
+                    <span class="author"> <a href="__SITE__/gtp/?artist_name={$gtp.artist_name|urlencode}">{$gtp.artist_name}</a></span>
+                </div>
+                <div class="right">
+                    <span class="date">{$gtp.add_time|firendlyTime}</span>
+                </div>
+            </li>
+            </foreach>
+            </ul>
+    </div>
+    
+    <!-- page begin -->
+    <div class="manu">{$page}</div>
+    <!-- page end -->
+    
+    </div>
+    <!-- right begin --> 
+    <div class="channel-right">
+        
+        <include file="Public:right_search" />
+        
+        <div class="think-sort">
+            <ul class="cf">
+                <li class="selected"><a href="__SITE__/gtp/">吉他谱</a></li>
+            </ul>
+        </div>
+        
+        <div class="think-fast" style="background: #F1F1F1; margin-top: -10px">
+            <dl>
+            <dt>首字母<sub>Initial</sub></dt>
+            <dd>
+                <a href="__SITE__/gtp/?start=number">#</a>
+                <a href="__SITE__/gtp/?start=a">A</a>
+                <a href="__SITE__/gtp/?start=b">B</a>
+                <a href="__SITE__/gtp/?start=c">C</a>
+                <a href="__SITE__/gtp/?start=d">D</a>
+                <a href="__SITE__/gtp/?start=e">E</a>
+                <a href="__SITE__/gtp/?start=f">F</a>
+                <a href="__SITE__/gtp/?start=g">G</a>
+                <a href="__SITE__/gtp/?start=h">H</a>
+                <a href="__SITE__/gtp/?start=i">I</a>
+                <a href="__SITE__/gtp/?start=j">J</a>
+                <a href="__SITE__/gtp/?start=k">K</a>
+                <a href="__SITE__/gtp/?start=l">L</a>
+                <a href="__SITE__/gtp/?start=m">M</a>
+                <a href="__SITE__/gtp/?start=n">N</a>
+                <a href="__SITE__/gtp/?start=o">O</a>
+                <a href="__SITE__/gtp/?start=p">P</a>
+                <a href="__SITE__/gtp/?start=q">Q</a>
+                <a href="__SITE__/gtp/?start=r">R</a>
+                <a href="__SITE__/gtp/?start=s">S</a>
+                <a href="__SITE__/gtp/?start=t">T</a>
+                <a href="__SITE__/gtp/?start=u">U</a>
+                <a href="__SITE__/gtp/?start=v">V</a>
+                <a href="__SITE__/gtp/?start=w">W</a>
+                <a href="__SITE__/gtp/?start=x">X</a>
+                <a href="__SITE__/gtp/?start=y">Y</a>
+                <a href="__SITE__/gtp/?start=z">Z</a>
+            </dd>
+            </dl>
+            
+            <dl>
+            <dt>音乐人<sub>Musician</sub></dt>
+            <dd>
+                <a href="__SITE__/gtp/?artist_name=陈绮贞">陈绮贞</a>
+                <a href="__SITE__/gtp/?artist_name=张震岳">张震岳</a>
+                <a href="__SITE__/gtp/?artist_name=曹方">曹方</a>
+                <a href="__SITE__/gtp/?artist_name=卢广仲">卢广仲</a>
+                <a href="__SITE__/gtp/?artist_name=方大同">方大同</a>
+                <a href="__SITE__/gtp/?artist_name=蔡健雅">蔡健雅</a>
+                <a href="__SITE__/gtp/?artist_name=张悬">张悬</a>
+            </dd>
+            </dl>
+            
+            <dl>
+            <dt>指弹大师<sub>Master</sub></dt>
+            <dd>
+                <a href="__SITE__/gtp/?artist_name=Tommy+Emmanuel">Tommy Emmanuel</a>
+                <a href="__SITE__/gtp/?artist_name=押尾桑">押尾桑</a>
+                <a href="__SITE__/gtp/?artist_name=Andy+McKee">Andy McKee</a>
+                <a href="__SITE__/gtp/?artist_name=Antoine+Dufour">Antoine Dufour</a>
+                <a href="__SITE__/gtp/?artist_name=岸部真明">岸部真明</a>
+            </dd>
+            </dl>
+            
+            <dl>
+                <dt>订阅<sub>Subscribe</sub></dt>
+                <dd class="rss-form">
+                <form method="post" target="_blank" action="http://list.qq.com/cgi-bin/qf_compose_send">
+                    <input type="hidden" value="qf_booked_feedback" name="t">
+                    <input type="hidden" value="99e976340812fea881e5cfac31c46b1dbb5b5aa8bfe415f5" name="id">
+                    <input class="text" type="text" value="" placeholder="请输入邮件地址..." class="rsstxt" name="to" id="to">
+                    <input class="submit" type="submit" value="订阅">
+                </form>
+                </dd>
+                <dd>
+                    <a class="rss" href="/Rss/index.xml" target="_blank">RSS订阅</a>
+                    <a href="/info/175.html" target="_blank">什么是RSS？</a>
+                </dd>
+            </dl>
+        </div>
+        
+        <?php if(1==0){ ?>
+        <div class="think-sort">
+            <ul class="cf">
+                <li class="selected"><a href="/extend/index.html">全部</a></li>
+                <li><a href="/extend/engine.html">引擎</a></li>
+                <li><a href="/extend/example.html">示例</a></li>
+                <li><a href="/extend/mode.html">模式</a></li>
+                <li><a href="/extend/behavior.html">行为</a></li>
+                <li><a href="/extend/model.html">模型</a></li>
+                <li><a href="/extend/action.html">控制器</a></li>
+                <li><a href="/extend/driver.html">驱动</a></li>
+                <li><a href="/extend/library.html">类库</a></li>
+                <li><a href="/extend/function.html">函数</a></li>
+                <li><a href="/extend/others.html">其他</a></li>        
+            </ul>
+        </div>
+        <div class="hot-rank thinkphp-box1">
+            <div class="head"><strong>热门应用排行</strong></div>
+            <div class="body">
+                <ul>
+                    <li>1、<a title="微购社会化导购系统" href="/app/wego.html">微购社会化导购系统</a></li>
+                    <li>2、<a title="ShuipFCMS内容管理系统" href="/app/shuipfcms.html">ShuipFCMS内容管理系统</a></li>
+                    <li>3、<a title="CMSHead内容管理系统" href="/app/cmshead.html">CMSHead内容管理系统</a></li>
+                    <li>4、<a title="简单CMS(JDCMS)" href="/app/jdcms.html">简单CMS(JDCMS)</a></li>
+                    <li>5、<a title="ThinkPHP助手" href="/app/tphelper.html">ThinkPHP助手</a></li>
+                    <li>6、<a title="艾米网站管理工具" href="/app/aimee.html">艾米网站管理工具</a></li>
+                    <li>7、<a title="SibohCRM企业管理平台" href="/app/sibohcrm.html">SibohCRM企业管理平台</a></li>
+                    <li>8、<a title="方维购物分享系统" href="/app/fangweshare.html">方维购物分享系统</a></li>
+                    <li>9、<a title="ThinkSNS微博系统" href="/app/thinksns.html">ThinkSNS微博系统</a></li>
+                    <li>10、<a title="光线cms" href="/app/gxcms.html">光线cms</a></li>
+                </ul>
+            </div>
+        </div>
+        <?php } ?>
+        
+    </div>
+    <!-- right end -->
+</div>
+
+<include file="Public:footer" />

@@ -13,8 +13,6 @@ return array(
     'DB_PORT'=>'3306',
     'DB_PREFIX'=>'',
     
-	'__SITE__' => 'http://localhost:9990/gtp',
-
 	'TOKEN_ON'  => false,
     'URL_CASE_INSENSITIVE' => true,
     'VAR_PAGE' => 'p',
@@ -47,6 +45,12 @@ return array(
 		'order/:id\d$' => 'order/details',
 		'order/edit/:id' => 'order/edit',
 		'order/delete/:id' => 'order/delete',
-    )
+    ),
+    
+	'TMPL_PARSE_STRING'  =>	array(
+		'__SITE__' => 'http://localhost:9990/gtp',
+		//'__SITE__' => 'http://www.ganhuole.com/ganhuo',
+		'__TITLE__' => '干活网',
+	)
 	
 );

@@ -2,7 +2,8 @@
 
 namespace Org\Util;
 
-	class Tudou{
+class Tudou{
+
 		private $appKey = '02c791b7d0e1fde1';
 		private $appSecret = '9c98dcae8e8d520d0aeac9c3e35f1fef';
 		private $base_url = 'http://api.tudou.com/v3/gw?';
@@ -73,7 +74,6 @@ namespace Org\Util;
 			);
 			try{
 				$strParam = $this->createStrParam(array_merge($this->paramArr, $locaoParam));
-				dump($this->base_url.$strParam);
 				return $this->getJsonResult($this->base_url.$strParam);
 			}catch(Exception $ex){
 	    		throw $ex;

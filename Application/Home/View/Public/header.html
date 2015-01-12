@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
+    <notempty name="title">
+    <title>{$title}|__SITE_TITLE__</title>
+    <else />
+    <title>__SITE_TITLE__</title>
+    </notempty>
+    <meta name="keywords" content="吉他谱,吉他,吉他视频,GTP,Guitar Pro,吉他谱下载" />
+    <notempty name="description">
+    <meta name="description" content="{$description},收藏自阿谱小站." />
+    <else />
+    <meta name="description" content="阿谱小站,收集分享Guitar-pro吉他谱,吉他视频,为吉他爱好者打造网上资源互动社区." />
+    </notempty>
+    <link rel="alternate" type="application/rss+xml" title="阿谱小站" href="__SITE__/feed" />
+    <link rel="shortcut icon" href="__SITE__/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="__SITE__/css/concision.css" />
+    <link rel="stylesheet" type="text/css" href="__SITE__/css/prettify.css" />
+    <script type="text/javascript" src="__SITE__/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="__SITE__/js/apu9.js"></script>
+    <!--
+    <script type="text/javascript" src="__SITE__/js/prettify.js"></script>
+    <script type="text/javascript" src="__SITE__/js/concision.js"></script>
+    -->
+    <script type="text/javascript">
+    $(function(){
+        $(document).keyup(function(event){
+            if(event.keyCode == 37){
+                $('.page .prev span').click();
+            }else if(event.keyCode == 39){
+                $('.page .next span').click();
+            }
+        })
+        $(':text,textarea').keyup(function(event){
+            event.stopPropagation();
+        })
+    })
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="header-wrap wp cf">
+            <h3 class="think-logo"><a href="__SITE__" title="返回首页">阿谱小站</a></h3>
+            <ul class="think-navg">
+                <li class="title <if condition="($channel eq 'home')">selected</if>"><a class="show" href="__SITE__">首页</a></li>
+                <li class="title <if condition="($channel eq 'gtp')">selected</if>"><a class="show" href="__SITE__/gtp/">吉他谱</a></li>
+                <li class="title <if condition="($channel eq 'vedio')">selected</if>"><a class="show" href="__SITE__/vedio/">吉他视频</a></li>
+            </ul>
+            
+            <p class="think-user">
+                <?php if (empty($nick)): ?>
+                [<a href="__SITE__/user/login">登录</a><a href="__SITE__/user/register">注册</a>]
+                <?php else: ?>
+                [ {$nick|urldecode} <a href="__SITE__/user/logout">退出</a>]
+                <?php endif; ?>
+            </p>
+        </div>
+    </div>
