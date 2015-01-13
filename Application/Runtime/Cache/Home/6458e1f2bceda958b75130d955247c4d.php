@@ -41,15 +41,14 @@
 <div class="contaier wp">
     <div class="channel-left">
         <div class="think-search cf">
-            <form action="/search" method="post">
+            <form action="http://localhost:9990/gtp/index/search" method="post">
                 <input class="text" type="text" name="name" placeholder="输入关键字..." value="" /><input class="submit" type="submit" value="搜索" />
-                <input type="hidden" name="type" value="1">
-                <input type="hidden" value="0" name="time">
+                <input type="hidden" name="type" value="gtp">
             </form>
         </div>
-        <div class="ident">首页</div>
+        <div class="ident">吉他谱</div>
         
-        <div class="think-slogan"><a class="post" href="http://localhost:9990/gtp/gtp/add">发布吉他谱</a><p>吉他谱 <A href="http://localhost:9990/gtp/gtp/?p=2">More</A></p></div>
+        <div class="think-slogan"><a class="post" href="http://localhost:9990/gtp/gtp/add">发布吉他谱</a><p><?php echo ($artist_name); ?> 吉他谱 <A href="http://localhost:9990/gtp/gtp/?p=2">More</A></p></div>
         
         <div class="think-cate">
             <ul class="think-item">
@@ -60,6 +59,7 @@
                 <div class="middle">
                     <span class="title"> <a href="http://localhost:9990/gtp/gtp/<?php echo ($gtp["id"]); ?>"><?php echo ($gtp["song_title"]); ?></a></span>
                    <span class="down"> [ <a class="" href="http://localhost:9990/gtp/gtp/download/<?php echo ($gtp["id"]); ?>" title="下载">下载： <?php echo ($gtp["download_num"]); ?></a> ]</span>
+                    <span class="comment"><A href="http://localhost:9990/gtp/gtp/<?php echo ($gtp["id"]); ?>l#review">(3)</A></span>
                     <span class="author"> <a href="http://localhost:9990/gtp/gtp/?artist_name=<?php echo (urlencode($gtp["artist_name"])); ?>"><?php echo ($gtp["artist_name"]); ?></a></span>
                 </div>
                 <div class="right">
@@ -69,25 +69,9 @@
             </ul>
     </div>
     
-    <div class="think-slogan"><a class="post" href="http://localhost:9990/gtp/vedio/add">发布吉他视频</a><p>吉他视频 <A href="http://localhost:9990/gtp/vedio/?p=2">More</A></p></div>
-    <div class="think-cate">
-        <ul class="think-item">
-        <?php if(is_array($vedio_list)): foreach($vedio_list as $key=>$vedio): ?><li>
-            <div class="left">
-                <span class="sort"></span>
-            </div>
-            <div class="middle">
-                <span class="title"> <a href="http://localhost:9990/gtp/vedio/<?php echo ($vedio["id"]); ?>"><?php echo ($vedio["title"]); ?></a></span>
-                <span class="down"> <!--[ 播放： <?php echo ($vedio["view_num"]); ?> ]--></span>
-                <span class="comment"></span>
-                <span class="author"><a href="http://localhost:9990/gtp/vedio/?artist_name=<?php echo (urlencode($vedio["artist_name"])); ?>"><?php echo ($vedio["artist_name"]); ?></a></span>
-            </div>
-            <div class="right">
-                <span class="date"><?php echo (firendlytime($vedio["add_time"])); ?></span>
-            </div>
-        </li><?php endforeach; endif; ?>
-        </ul>
-    </div>
+    <!-- page begin -->
+    <div class="manu"><?php echo ($page); ?></div>
+    <!-- page end -->
     
     </div>
     <!-- right begin --> 

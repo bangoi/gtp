@@ -9,6 +9,7 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 namespace Org\Util;
+
 class String {
 
     /**
@@ -245,4 +246,17 @@ class String {
             return $string;
         }
     }
+
+	static public function isEmail($email) {
+		return strlen($email) > 6 && preg_match("/^[\w\-\.]+@[\w\-]+(\.\w+)+$/", $email);
+	}
+	
+	static public function isUrl($url) {
+		return preg_match("/^http:\/\/[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&_~`@[\]\’:+!]*([^<>\"])*$/", $url);
+	}
+	
+	static public function isMobile($mobile){
+		return preg_match("/^((\(\d{3}\))|(\d{3}\-))?13\d{9}$/", $mobile);
+	}
+	
 }

@@ -16,7 +16,7 @@
         
         <div class="think-cate">
             <ul class="think-item">
-            <foreach name="index_gtps" item="gtp">
+            <foreach name="gtp_list" item="gtp">
             <li>
                 <div class="left">
                     <span class="sort">[ 吉他谱 ]</span>
@@ -37,15 +37,15 @@
     <div class="think-slogan"><a class="post" href="__SITE__/vedio/add">发布吉他视频</a><p>吉他视频 <A href="__SITE__/vedio/?p=2">More</A></p></div>
     <div class="think-cate">
         <ul class="think-item">
-        <foreach name="index_vedioes" item="vedio">
+        <foreach name="vedio_list" item="vedio">
         <li>
             <div class="left">
-                <span class="sort">[ 吉他视频 ]</span>
+                <span class="sort"></span>
             </div>
             <div class="middle">
                 <span class="title"> <a href="__SITE__/vedio/{$vedio.id}">{$vedio.title}</a></span>
-                <span class="down"> [ 播放： {$vedio.view_num} ]</span>
-                <span class="comment"><A href="__SITE__/vedio/{$vedio.id}l#review">(3)</A></span>
+                <span class="down"> <!--[ 播放： {$vedio.view_num} ]--></span>
+                <span class="comment"></span>
                 <span class="author"><a href="__SITE__/vedio/?artist_name={$vedio.artist_name|urlencode}">{$vedio.artist_name}</a></span>
             </div>
             <div class="right">

@@ -12,7 +12,7 @@
     <notempty name="description">
     <meta name="description" content="{$description},收藏自阿谱小站." />
     <else />
-    <meta name="description" content="阿谱小站,收集分享Guitar-pro吉他谱,吉他视频,为吉他爱好者打造网上资源互动社区." />
+    <meta name="description" content="Guitar-pro,收集分享Guitar-pro吉他谱,吉他视频,为吉他爱好者打造网上资源互动社区." />
     </notempty>
     <link rel="alternate" type="application/rss+xml" title="阿谱小站" href="__SITE__/feed" />
     <link rel="shortcut icon" href="__SITE__/favicon.png" type="image/x-icon" />
@@ -20,24 +20,7 @@
     <link rel="stylesheet" type="text/css" href="__SITE__/css/prettify.css" />
     <script type="text/javascript" src="__SITE__/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="__SITE__/js/apu9.js"></script>
-    <!--
-    <script type="text/javascript" src="__SITE__/js/prettify.js"></script>
-    <script type="text/javascript" src="__SITE__/js/concision.js"></script>
-    -->
-    <script type="text/javascript">
-    $(function(){
-        $(document).keyup(function(event){
-            if(event.keyCode == 37){
-                $('.page .prev span').click();
-            }else if(event.keyCode == 39){
-                $('.page .next span').click();
-            }
-        })
-        $(':text,textarea').keyup(function(event){
-            event.stopPropagation();
-        })
-    })
-    </script>
+
 </head>
 <body>
     <div class="header">
@@ -48,13 +31,12 @@
                 <li class="title <if condition="($channel eq 'gtp')">selected</if>"><a class="show" href="__SITE__/gtp/">吉他谱</a></li>
                 <li class="title <if condition="($channel eq 'vedio')">selected</if>"><a class="show" href="__SITE__/vedio/">吉他视频</a></li>
             </ul>
-            
             <p class="think-user">
-                <?php if (empty($nick)): ?>
+                <?php if(!$_logined) { ?>
                 [<a href="__SITE__/user/login">登录</a><a href="__SITE__/user/register">注册</a>]
-                <?php else: ?>
-                [ {$nick|urldecode} <a href="__SITE__/user/logout">退出</a>]
-                <?php endif; ?>
+                <?php } else { ?>
+                [ {$_nick|urldecode} <a href="__SITE__/user/logout">退出</a>]
+                <?php } ?>
             </p>
         </div>
     </div>

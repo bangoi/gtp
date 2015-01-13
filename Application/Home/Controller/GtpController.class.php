@@ -3,6 +3,7 @@
 namespace Home\Controller;
 use Think\Controller;
 use Think\Exception;
+use Think\Page;
 use Think\Upload;
 use Org\Util\PinYin;
 
@@ -20,8 +21,8 @@ class GtpController extends BaseController
 			$map["state"] = 100;
 			$map["song_title"] = array('like', "%{$k}%");
 			
-			$gtp_list = M("GtpView")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
-			$count = M("GtpView")->where($map)->count();
+			$gtp_list = D("GtpView")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
+			$count = D("GtpView")->where($map)->count();
 			
 			$this->assign('k', $k);
 			$this->assign("title", $k."吉他谱"." 第{$p}页");
@@ -34,10 +35,10 @@ class GtpController extends BaseController
 			$map["state"] = 100;
 			$map["artist_name"] = array('like', "%{$artist_name}%");
 			
-			$gtp_list = M("GtpView")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
-			$count = M("GtpView")->where($map)->count();
+			$gtp_list = D("GtpView")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
+			$count = D("GtpView")->where($map)->count();
 			
-			$this->assign('artist_name', $this->_get("artist_name"));
+			$this->assign('artist_name', $artist_name);
 			$this->assign("title", $artist_name."吉他谱"." 第{$p}页");
 			$this->assign("page_title", $artist_name."吉他谱"." 第{$p}页");
 		}
@@ -48,8 +49,8 @@ class GtpController extends BaseController
 			$map["state"] = 100;
 			$map["author"] = array('like', "%{$author}%");
 			
-			$gtp_list = M("GtpView")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
-			$count = M("GtpView")->where($map)->count();
+			$gtp_list = D("GtpView")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
+			$count = D("GtpView")->where($map)->count();
 			
 			$this->assign('author', $author);
 			$this->assign("title", $author."制作 吉他谱"." 第{$p}页");
@@ -64,13 +65,13 @@ class GtpController extends BaseController
 			if($start == "number") {
 				$where = "state = 100 AND letters REGEXP '^[0-9]'";
 				
-				$gtp_list = M("GtpView")->where($where)->order('download_num desc')->page($p.",{$size}")->select();
-				$count = M("GtpView")->where($where)->count();
+				$gtp_list = D("GtpView")->where($where)->order('download_num desc')->page($p.",{$size}")->select();
+				$count = D("GtpView")->where($where)->count();
 			} else {
 				$map["letters"] = array('like', "{$start}%");
 				
-				$gtp_list = M("GtpView")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
-				$count = M("GtpView")->where($map)->count();
+				$gtp_list = D("GtpView")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
+				$count = D("GtpView")->where($map)->count();
 			}
 			
 			$this->assign("title", $start." 吉他谱"." 第{$p}页");
@@ -80,8 +81,8 @@ class GtpController extends BaseController
 		{
 			$map["state"] = 100;
 			
-			$gtp_list = M("GtpView")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
-			$count = M("GtpView")->where($map)->count();
+			$gtp_list = D("GtpView")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
+			$count = D("GtpView")->where($map)->count();
 			
 			$this->assign("title", "吉他谱"." 第{$p}页");
 			$this->assign("page_title", "吉他谱"." 第{$p}页");
@@ -110,28 +111,28 @@ class GtpController extends BaseController
 		$map["state"] = 100;
 		$map["id"] = $id;
 		
-		$gtp = M("GtpView")->where($map)->find();
+		$gtp = D("GtpView")->where($map)->find();
 		
 		$song_title_gtps_map["id"] = array('neq', $id);
 		$song_title_gtps_map["state"] = 100;
 		$song_title_gtps_map["artist_name"] = $gtp['artist_name'];
 		$song_title_gtps_map["song_title"] = $gtp['song_title'];
 		
-		$song_title_gtps = M("GtpView")->where($song_title_gtps_map)
+		$song_title_gtps = D("GtpView")->where($song_title_gtps_map)
 			->order('download_num desc')->limit($size)->select();
 			
 		$artist_name_gtps_map["id"] = array('neq', $id);
 		$artist_name_gtps_map["state"] = 100;
 		$artist_name_gtps_map["artist_name"] = $gtp['artist_name'];
 			
-		$artist_name_gtps = M("GtpView")->where($artist_name_gtps_map)
+		$artist_name_gtps = D("GtpView")->where($artist_name_gtps_map)
 			->order('download_num desc')->limit($size)->select();
 		
 		$vedio_map["state"] = 100;
 		$vedio_map["artist_name"] = $gtp["artist_name"];
 		$vedio_map["song_title"] = $gtp["song_title"];
 		
-		$vedioes = M("VedioView")->where($vedio_map)->order('view_num desc')->limit($size)->select();
+		$vedioes = D("VedioView")->where($vedio_map)->order('view_num desc')->limit($size)->select();
 		
 		$this->assign("gtp", $gtp);
 		$this->assign("song_title_gtps", $song_title_gtps);
@@ -150,22 +151,17 @@ class GtpController extends BaseController
 		
 		$id = I("get.id");
 		
-		$gtp = M('Gtp');
-		
 		$map["state"] = 100;
 		$map["id"] = $id;
 		
-		$gtp->where($map)->setInc('download_num');
-		$gtp = $gtp->where($map)->find();
+		M("Gtp")->where($map)->setInc('download_num');
+		$gtp = M("Gtp")->where($map)->find();
 	
-		$extend = substr($gtp->file_name, (strrpos($gtp->file_name, '.') + 1 ));    
-		$extend = strtolower($extend);
-		
-		$file_path = $_SERVER['DOCUMENT_ROOT'].'/upload/gtp/';
+		$extend = substr($gtp['file_name'], (strrpos($gtp['file_name'], '.') + 1 ));    
+		$extend = '.'.strtolower($extend);
+		$file_path = $_SERVER['DOCUMENT_ROOT']."gtp/";
 
-		//dump($file_path);
-		
-		$download_file_name = $gtp->artist_name."-".$gtp->song_title.$extend;
+		$download_file_name = $gtp['artist_name']."-".$gtp['song_title'].$extend;
 		
 		$ua = $_SERVER["HTTP_USER_AGENT"];
 		$encoded_filename = urlencode($download_file_name);
@@ -183,13 +179,12 @@ class GtpController extends BaseController
 		else	
 			header('Content-Disposition: attachment; filename="'.$download_file_name. '"');
 		
-		readfile($file_path.$gtp->file_name);
+		readfile($file_path.substr($gtp['file_name'], 2));
 	 }
 
-	public function _before_add(){
-		if($logined != true) {
-			$this->redirect("/user/login/?page=gtp/add");
-		}
+	public function _before_add() {
+		if($this->logined != true)
+			redirect($this->site_url."/user/login/?page=gtp/add");
 	}
 	
 	public function add() {
@@ -197,11 +192,14 @@ class GtpController extends BaseController
 		if(IS_POST) {
 			try {
 				
-				if(empty(I("post.artst_name")))
+				if(empty(I("post.artist_name")))
 					throw  new Exception("必须输入音乐人");
 				
 				if(empty(I("post.song_title")))
 					throw new Exception("必须输入音乐名称");
+				
+				if(empty($_FILES["file_name"]))
+					throw new Exception("必须上传Guitar Pro文件");
 				
 				$gtp = D("Gtp");
 		        if($gtp->create()) {
@@ -220,21 +218,24 @@ class GtpController extends BaseController
 					if(!empty($_FILES["file_name"]) && $_FILES["file_name"]['size'] > 0) {
 						
 						$upload = new Upload();
-						
 						$upload->maxSize = 3145728;
-						$upload->allowExts = array('gp3', 'gp4', 'gp5', 'gp6');
-						$upload->saveRule = 'time';
-						$upload->savePath =  './upload/gtp/';
+						$upload->saveName = 'time';
+						$upload->exts = array('gp3', 'gp4', 'gp5', 'gp6');
+						$upload->rootPath = './';
+						$upload->savePath = './upload/gtp/';
 						
-						if(!$upload->upload()) {
-							$this->err($upload->getErrorMsg());
+						$info = $upload->uploadOne($_FILES['file_name']);
+						if(!$info) {
+							throw new Exception($upload->getErrorMsg());
 						} else {
-							$info = $upload->getUploadFileInfo();
-							$gtp->file_name = $info[0]["savename"];
-		 				}
+							//echo $info['savepath'].$info['savename'];
+							$people->face = $info['savepath'].$info['savename'];
+							$gtp->file_name = $info['savepath'].$info['savename'];
+						}
 					} else {
 						throw new Exception("必须上传Guitar Pro附件");
 					}
+					
 					$id = $gtp->add($data);
 					$this->redirect('/gtp/'.$id);
 		        } else {
@@ -242,7 +243,7 @@ class GtpController extends BaseController
 		        }
 			} catch (Exception $ex) {
 
-				$this->assign("artist_name", I("post.artst_name"));
+				$this->assign("artist_name", I("post.artist_name"));
 				$this->assign("song_title", I("post.song_title"));
 				
 	    		$this->assign("err", $ex->getMessage());
@@ -270,17 +271,17 @@ class GtpController extends BaseController
 	public function _before_edit() {
 		
 		$id = I("get.id");
-		$url = "/user/login/?action=/gtp/edit/".$id;
+		$url = $this->site_url."/user/login/?action=/gtp/edit/".$id;
 		
 		if($this->logined != true)
-			$this->redirect($url);
+			redirect($url);
 		
 		$map["state"] = 100;
 		$map["id"] = $id;
 		$gtp = M('Gtp')->where($map)->find();
 		
 		if($this->uid != $gtp["user_id"])
-			$this->redirect($url);
+			redirect($url);
 	}
 
 	public function edit() {

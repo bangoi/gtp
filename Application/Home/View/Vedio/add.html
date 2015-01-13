@@ -14,7 +14,7 @@
                     <?php endif; ?>
                     <tr>
                         <th>视频地址</th>
-                        <td><input class="text" type="text" name="vedio_url" id="vedio_url" /> &nbsp; <input class="submit" id="btnVedioUrl" type="button" style="height: 32px; margin-top: -4px;" value="获取" />
+                        <td><input class="text" type="text" name="vedio_url" id="vedio_url" value="{$vedio_url}" /> &nbsp; <input class="submit" id="btnVedioUrl" type="button" style="height: 32px; margin-top: -4px;" value="获取" />
                         </td>
                     </tr>
                     <tr>
@@ -24,9 +24,15 @@
                     </tr>
                     <tr>
                         <th><i class="must">*</i>视频截图</th>
-                        <td><img src="__SITE__/upload/thumb/default.jpg" name="thumb" id="thumb"
-                            alt="上传视频缩略图" width="120" height="90" />
-                            <input type="hidden" name="thumb_value" id="thumb_value" value="" />
+                        <td>
+                            <?php if(!empty($thumb_value)) { ?>
+                            <img src="{$thumb_value}" name="thumb" id="thumb"
+                                alt="上传视频缩略图" width="120" height="90" />
+                            <?php } else { ?>
+                            <img src="__SITE__/upload/thumb/default.jpg" name="thumb" id="thumb"
+                                alt="上传视频缩略图" width="120" height="90" />
+                            <?php } ?>
+                            <input type="hidden" name="thumb_value" id="thumb_value" value="{$thumb_value}" />
                         </td>
                     </tr>
                     <tr>

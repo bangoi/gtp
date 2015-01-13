@@ -108,35 +108,7 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    var title,url;
-    $('.share a').click(function(){
-        var ele = $(this).closest('.think-info').find('.tihead h3 a');
-        title = encodeURIComponent("{$vedio.title}");
-        url   = encodeURIComponent(document.location);
-        window.open( eval($(this).attr('class') + '()') , "_blank" ,"width=680,height=430,scrollbars=no,location=no" ) ;
-    });
-    function tencent(){
-        var param = [
-            'c=share',
-            'a=index',
-            'url=' + url,
-            'appkey=801098607',
-            'title=' + title
-        ].join('&');
-        return 'http://share.v.t.qq.com/index.php?' + param;
-    }
-    function sina(){
-        var param = [
-            'url=' + url,
-            'appkey=3891435835',
-            'title=' + title
-        ].join('&');
-        return 'http://service.weibo.com/share/share.php?' + param;
-    }
-    $('textarea').focus(function(){if($(this).val() == '输入你的评论内容...') $(this).val('')});
 
-</script>
         <!--/文章评论-->
     </div>
     <!-- right begin --> 

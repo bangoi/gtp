@@ -9,11 +9,14 @@ class IndexController extends BaseController {
     	
 		$size = 25;
 		
-		$vedioes = M('VedioView')->where("v.status = 100")->order('add_time DESC')->limit($size)->select();
-		$gtps = M('GtpView')->where("g.status = 100")->order('add_time DESC')->limit($size)->select();
-			
-		$this->assign("vedioes", $vedioes);
-		$this->assign("gtps", $gtps);
+		$map["state"] = 100;
+		$order = "add_time desc";
+		
+		$vedioes = D("VedioView")->where($map)->order($order)->limit($size)->select();
+		$gtps = D("GtpView")->where($map)->order($order)->limit($size)->select();
+		
+		$this->assign("vedio_list", $vedioes);
+		$this->assign("gtp_list", $gtps);
 		
 		$this->assign("channel", "home");
 		$this->display();

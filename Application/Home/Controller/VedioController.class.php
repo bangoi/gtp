@@ -3,14 +3,17 @@
 namespace Home\Controller;
 use Think\Controller;
 use Think\Exception;
+use Think\Page;
 use Org\Util\VideoUrlParser;
 
-class Vedio extends BaseController {
+class VedioController extends BaseController {
 	
 	public function index() {
 		
 		$p = I("get.p") ? I("get.p") : 1;
 		$size = 20;
+		
+		$order = "add_time desc";
 		 
 		if(!empty(I("get.k"))) {
 			
@@ -19,8 +22,8 @@ class Vedio extends BaseController {
 			$map["state"] = 100;
 			$map["title"] = array('like', "%{$k}%");
 			
-			$vedio_list = M("VedioView")->where($map)->order('view_num desc')->page($p.",{$size}")->select();
-			$count = M("VedioView")->where($map)->count();
+			$vedio_list = D("VedioView")->where($map)->order($order)->page($p.",{$size}")->select();
+			$count = D("VedioView")->where($map)->count();
 			
 			$this->assign('k', $k);
 			$this->assign("title", $k."吉他视频"." 第{$p}页");
@@ -33,8 +36,8 @@ class Vedio extends BaseController {
 			$map["state"] = 100;
 			$map["artist_name"] = array('like', "%{$artist_name}%");
 			
-			$vedio_list = M("VedioView")->where($map)->order('view_num desc')->page($p.",{$size}")->select();
-			$count = M("VedioView")->where($map)->count();
+			$vedio_list = D("VedioView")->where($map)->order($order)->page($p.",{$size}")->select();
+			$count = D("VedioView")->where($map)->count();
 			
 			$this->assign('artist_name', $artist_name);
 			$this->assign("title", $artist_name."吉他视频"." 第{$p}页");
@@ -44,8 +47,8 @@ class Vedio extends BaseController {
 			
 			$map["state"] = 100;
 			
-			$vedio_list = M("VedioView")->where($map)->order('v.view_num desc')->page($p.",{$size}")->select();
-			$count = M("VedioView")->where($map)->count();
+			$vedio_list = D("VedioView")->where($map)->order($order)->page($p.",{$size}")->select();
+			$count = D("VedioView")->where($map)->count();
 			
 			$this->assign("title", "吉他视频"." 第{$p}页");
 			$this->assign("page_title", "吉他视频"." 第{$p}页");
@@ -71,7 +74,8 @@ class Vedio extends BaseController {
 		$map["id"] = $id;
 		$map["state"] = 100;
 		
-		$vedio = M("VedioView")->where($map)->find();
+		$vedio = M("Vedio")->where($map)->find();
+		//dump(M("Vedio")->getLastSql());
 		M("Vedio")->where("id={$id}")->setInc('view_num');
 
 		$gtp_map["artist_name"] = $vedio["artist_name"];
@@ -99,7 +103,7 @@ class Vedio extends BaseController {
 	
 	public function _before_add() {
 		if($this->logined != true) {
-			$this->redirect("/user/login/?action=/vedio/add");
+			redirect($this->site_url."/user/login/?action=/vedio/add");
 		}
 	}
 	
@@ -107,22 +111,22 @@ class Vedio extends BaseController {
 		
 		if(IS_POST) {
 				
-			if(empty(I("post.title")))
+			try {
+				
+				if(empty(I("post.title")))
 					throw new Exception("必须输入视频标题");
 				
-			if(empty(I("post.thumb_value")))
-				throw new Exception("必须输入截图地址");
-				
-			if(empty(I("post.code")))
-				throw new Exception("必须输入视频swf");
-				
-			if(empty(I("post.artist_name")))
-				throw new Exception("必须输入音乐人");
-				
-			if(empty(I("post.song_title")))
-				throw new Exception("必须输入歌曲名称");
-			
-			try {
+				if(empty(I("post.thumb_value")))
+					throw new Exception("必须输入截图地址");
+					
+				if(empty(I("post.code")))
+					throw new Exception("必须输入视频swf");
+					
+				if(empty(I("post.artist_name")))
+					throw new Exception("必须输入音乐人");
+					
+				if(empty(I("post.song_title")))
+					throw new Exception("必须输入歌曲名称");
 				
 				$vedio = D("Vedio");
 		        if($vedio->create()) {
@@ -142,6 +146,9 @@ class Vedio extends BaseController {
 			    }
 				
 			}catch(Exception $ex) {
+				
+				$this->assign("vedio_url", I("post.vedio_url"));
+				$this->assign("thumb_value", I("post.thumb_value"));
 						
 				$this->assign("vedio_title", I("post.title"));
 				$this->assign("thumb", I("post.thumb"));
@@ -172,7 +179,7 @@ class Vedio extends BaseController {
 	public function _before_edit() {
 		
 		$id = I("get.id");
-		$url = "/user/login/?action=/vedio/edit/".$id;
+		$url = $this->site_url."/user/login/?action=/vedio/edit/".$id;
 		
 		if($this->logined != true)
 			$this->redirect($url);

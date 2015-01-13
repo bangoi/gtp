@@ -5,6 +5,13 @@ img{ vertical-align: top; border: 0; }
 input[type=submit]::-moz-focus-inner,input[type=button]::-moz-focus-inner{ border: 0; padding: 0; }
 ol{ margin-left: 40px; }
 
+.f12 {font-size: 12px;}
+.f14 {font-size: 14px;}
+.c3 {color: #333;}
+.c6 {color: #666;}
+.c7 {color: #777;}
+.clear {clear: both;}
+
 .cf{ zoom: 1; }
 .cf:after{ content : '.'; display: block; visibility: hidden; height: 0; line-height: 0; font-size: 0; clear: both; }
 .cfl{ clear: left; }

@@ -47,6 +47,16 @@ class BaseController extends Controller {
 		}
 	}
 	
+	protected function get_now() {
+		return date("Y-m-d H:i:s");
+	}
+	
+	protected function add_cookie($id, $nick, $role) {
+		cookie('uid', $id, $this->cookie_parm);
+		cookie('nick', urlencode($nick), $this->cookie_parm);
+		cookie('role', $role, $this->cookie_parm);
+	}
+	
 }
 
 ?>

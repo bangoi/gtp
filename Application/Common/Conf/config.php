@@ -45,6 +45,15 @@ return array(
 		'order/:id\d$' => 'order/details',
 		'order/edit/:id' => 'order/edit',
 		'order/delete/:id' => 'order/delete',
+		
+		'gtp/:id\d$' => 'gtp/details',
+		'gtp/edit/:id' => 'gtp/edit',
+		'gtp/delete/:id' => 'gtp/delete',
+		'gtp/download/:id' => 'gtp/download',
+		
+		'vedio/:id\d$' => 'vedio/details',
+		'vedio/edit/:id' => 'vedio/edit',
+		'vedio/delete/:id' => 'vedio/delete',
     ),
     
 	'TMPL_PARSE_STRING'  =>	array(
