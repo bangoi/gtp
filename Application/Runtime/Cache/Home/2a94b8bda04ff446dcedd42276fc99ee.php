@@ -4,9 +4,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
-    <?php if(!empty($title)): ?><title><?php echo ($title); ?>|__SITE_TITLE__</title>
+    <?php if(!empty($title)): ?><title><?php echo ($title); ?>|Guitar Pro</title>
     <?php else: ?>
-    <title>__SITE_TITLE__</title><?php endif; ?>
+    <title>Guitar Pro</title><?php endif; ?>
     <meta name="keywords" content="吉他谱,吉他,吉他视频,GTP,Guitar Pro,吉他谱下载" />
     <?php if(!empty($description)): ?><meta name="description" content="<?php echo ($description); ?>,收藏自阿谱小站." />
     <?php else: ?>
@@ -17,18 +17,17 @@
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/prettify.css" />
     <script type="text/javascript" src="http://localhost:9990/gtp/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="http://localhost:9990/gtp/js/apu9.js"></script>
-
 </head>
 <body>
     <div class="header">
         <div class="header-wrap wp cf">
-            <h3 class="think-logo"><a href="http://localhost:9990/gtp" title="返回首页">阿谱小站</a></h3>
-            <ul class="think-navg">
+            <h3 class="logo"><a href="http://localhost:9990/gtp" title="返回首页">Guitar Pro</a></h3>
+            <ul class="navg">
                 <li class="title <?php if(($channel == 'home')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp">首页</a></li>
                 <li class="title <?php if(($channel == 'gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
                 <li class="title <?php if(($channel == 'vedio')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/vedio/">吉他视频</a></li>
             </ul>
-            <p class="think-user">
+            <p class="user">
                 <?php if(!$_logined) { ?>
                 [<a href="http://localhost:9990/gtp/user/login">登录</a><a href="http://localhost:9990/gtp/user/register">注册</a>]
                 <?php } else { ?>
@@ -40,19 +39,19 @@
 
 <div class="contaier wp">
     <div class="channel-left">
-        <div class="think-search cf">
-            <form action="/search" method="post">
-                <input class="text" type="text" name="name" placeholder="输入关键字..." value="" /><input class="submit" type="submit" value="搜索" />
-                <input type="hidden" name="type" value="1">
-                <input type="hidden" value="0" name="time">
-            </form>
-        </div>
+        
+        <div class="search cf">
+    <form action="http://localhost:9990/gtp/search" method="get">
+        <input class="text" type="text" name="q" placeholder="输入关键字..." value="" /><input class="submit" type="submit" value="搜索" />
+    </form>
+</div>
+        
         <div class="ident">首页</div>
         
-        <div class="think-slogan"><a class="post" href="http://localhost:9990/gtp/gtp/add">发布吉他谱</a><p>吉他谱 <A href="http://localhost:9990/gtp/gtp/?p=2">More</A></p></div>
+        <div class="slogan"><a class="post" href="http://localhost:9990/gtp/gtp/add">发布吉他谱</a><p>吉他谱 <A href="http://localhost:9990/gtp/gtp/?p=2">More</A></p></div>
         
-        <div class="think-cate">
-            <ul class="think-item">
+        <div class="cate">
+            <ul class="item">
             <?php if(is_array($gtp_list)): foreach($gtp_list as $key=>$gtp): ?><li>
                 <div class="left">
                     <span class="sort">[ 吉他谱 ]</span>
@@ -69,9 +68,9 @@
             </ul>
     </div>
     
-    <div class="think-slogan"><a class="post" href="http://localhost:9990/gtp/vedio/add">发布吉他视频</a><p>吉他视频 <A href="http://localhost:9990/gtp/vedio/?p=2">More</A></p></div>
-    <div class="think-cate">
-        <ul class="think-item">
+    <div class="slogan"><a class="post" href="http://localhost:9990/gtp/vedio/add">发布吉他视频</a><p>吉他视频 <A href="http://localhost:9990/gtp/vedio/?p=2">More</A></p></div>
+    <div class="cate">
+        <ul class="item">
         <?php if(is_array($vedio_list)): foreach($vedio_list as $key=>$vedio): ?><li>
             <div class="left">
                 <span class="sort"></span>
@@ -93,7 +92,7 @@
     <!-- right begin --> 
     <div class="channel-right">
         
-        <div class="think-toper">
+        <div class="toper">
     <dl>
         <dt>搜索<sub>Search</sub></dt>
         <dd>    
@@ -118,45 +117,25 @@
     </dl>
 </div>
         
-        <div class="think-sort">
+        <div class="sort">
             <ul class="cf">
                 <li class="selected"><a href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
             </ul>
         </div>
         
-        <div class="think-fast" style="background: #F1F1F1; margin-top: -10px">
+        <div class="fast" style="background: #F1F1F1; margin-top: -10px">
+            
             <dl>
-            <dt>首字母<sub>Initial</sub></dt>
-            <dd>
-                <a href="http://localhost:9990/gtp/gtp/?start=number">#</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=a">A</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=b">B</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=c">C</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=d">D</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=e">E</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=f">F</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=g">G</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=h">H</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=i">I</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=j">J</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=k">K</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=l">L</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=m">M</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=n">N</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=o">O</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=p">P</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=q">Q</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=r">R</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=s">S</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=t">T</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=u">U</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=v">V</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=w">W</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=x">X</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=y">Y</a>
-                <a href="http://localhost:9990/gtp/gtp/?start=z">Z</a>
-            </dd>
-            </dl>
+    <dt>首字母<sub>Initial</sub></dt>
+    <dd>
+    <?php $letters = array("#", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"); ?>
+    <?php if(is_array($letters)): foreach($letters as $key=>$item): if($item == '#'){ ?>
+        <a href="http://localhost:9990/gtp/vedio/?start=number">#</a>
+    <?php } else { ?>
+        <a href="http://localhost:9990/gtp/vedio/?start=<?php echo ($item); ?>"><?php echo (strtoupper($item)); ?></a>
+    <?php } endforeach; endif; ?>
+        </dd>
+</dl>
             
             <dl>
             <dt>音乐人<sub>Musician</sub></dt>
@@ -200,7 +179,7 @@
         </div>
         
         <?php if(1==0){ ?>
-        <div class="think-sort">
+        <div class="sort">
             <ul class="cf">
                 <li class="selected"><a href="/extend/index.html">全部</a></li>
                 <li><a href="/extend/engine.html">引擎</a></li>

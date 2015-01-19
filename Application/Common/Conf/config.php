@@ -59,7 +59,7 @@ return array(
 	'TMPL_PARSE_STRING'  =>	array(
 		'__SITE__' => 'http://localhost:9990/gtp',
 		//'__SITE__' => 'http://www.ganhuole.com/ganhuo',
-		'__TITLE__' => '干活网',
+		'__TITLE__' => 'Guitar Pro',
 	)
 	
 );

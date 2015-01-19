@@ -36,71 +36,68 @@
             </p>
         </div>
     </div>
-     
-<div class="contaier wp">
-    <div class="add">
+
+<div class="contaier wp cf">
+<div class="ident">注册</div>
+    <div class="register">
+        <div class="head">
+            <strong>用户注册</strong><span>已有帐号？点击<a href="http://localhost:9990/gtp/user/login">登录</a></span>
+            <?php if (!empty($err)): ?><span style="color: red"><?php echo ($err); ?></span><?php endif; ?>
+        </div>
         <div class="body form">
-            <form action="http://localhost:9990/gtp/gtp/add" method="post" id="gtpCreate" enctype="multipart/form-data">
+            <form action="http://localhost:9990/gtp/user/register" method="post" class="login">
                 <table>
-                    <?php if (!empty($err)): ?>
-                     <tr>
-                        <th></th>
-                        <td><span style="color: red"><?php echo ($err); ?></span></td>
-                    </tr>
-                    <?php endif; ?>
                     <tr>
-                        <th><i class="must">*</i>音乐人</th>
-                        <td><input class="text" type="text" name="artist_name" id="artist_name" value="<?php echo ($artist_name); ?>" style="width:200px" /></td>
-                    </tr>
-                    <tr>
-                        <th><i class="must">*</i>音乐名称</th>
-                        <td><input class="text" type="text" name="song_title" id="song_title" size="22" value="<?php echo ($song_title); ?>" />
+                        <th>用户名</th>
+                        <td>
+                            <input class="text" type="text" name="nick" value=""  />
                         </td>
                     </tr>
                     <tr>
-                        <th><i class="must">*</i>上传文件</th>
-                        <td><input id="upload_file1" type="file" name="file_name" id="file_name" /></td>
+                        <th>密码</th>
+                        <td>
+                            <input class="text" type="password" name="pwd" />
+                        </td>
                     </tr>
                     <tr>
-                        <th><i class="must"></i>原作者</th>
-                        <td><input class="text" type="text" name="author" id="author" /></td>
+                        <th>确认密码</th>
+                        <td>
+                            <input class="text" type="password" name="re_pwd" />
+                        </td>
                     </tr>
                     <tr>
-                        <th></th>
-                        <td><span class="c6">出于对吉他谱制原作者付出辛劳的尊重，请填写曲谱原作者。</span></td>
-                    </tr>
-                    <tr>
-                        <th><i class="must"></i>吉他谱来源</th>
-                        <td><input class="text" type="text" name="source" id="source" /></td>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <td><span class="c6">如果吉他谱并非原创，出于版权考虑，请填写转载来源。</span></td>
+                        <th>邮箱</th>
+                        <td>
+                            <input class="text" type="text" name="email" value="" />
+                        </td>
                     </tr>
                     <tr>
                         <th>&nbsp;</th>
-                        <td> <input class="submit" type="submit" value="提交" />
+                        <td>
+                            <input class="submit" type="submit" value="完成" />
                         </td>
                     </tr>
                 </table>
             </form>
         </div>
     </div>
-            
-    <div class="home-right">
-        <div class="fast">
-            <dl>
-                <dt>发布应用<sub>Publish</sub></dt>
-                <dd>应用标识、中文描述、应用主页（以http打头）、分类和应用LOGO（不超过50K 支持JPG PNG和GIF）必须，描述和标签可选，多个标签之间用空格分隔，案例发布需要审核。</dd>
-            </dl>
-            <dl>
-                <dt>快捷键<sub>Keyboard</sub></dt>
-                <dd>选中文字内容后使用键盘快捷键<br/>CTRL+B ：字体加粗<br/>ALT + U ：添加超链接<br/> ALT + C ：插入代码</dd>
-            </dl>
+    <div class="login-other">
+        <div class="head">
+            <strong>使用其他帐号直接登录</strong>
+        </div>
+        <div class="body">
+            <ul class="other-account">
+                <li><a class="qq" href="/oauth/index/type/qq.html">腾讯QQ登录</a></li><li><a class="tencent" href="/oauth/index/type/tencent.html">腾讯微博登录</a></li><li><a class="t163" href="/oauth/index/type/t163.html">网易微博登录</a></li><li><a class="sina" href="/oauth/index/type/sina.html">新浪微博登录</a></li>            </ul>
         </div>
     </div>
-        
 </div>
+<script type="text/javascript">
+    $(function(){
+        $('.reloadverify').click(function(){
+            $('.verifyimg').attr('src', "/member/verify.html?" + Math.random());
+        });
+    })
+</script>
 
 <div class="footer">
         <div class="wp">

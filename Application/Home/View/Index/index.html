@@ -3,19 +3,15 @@
 
 <div class="contaier wp">
     <div class="channel-left">
-        <div class="think-search cf">
-            <form action="/search" method="post">
-                <input class="text" type="text" name="name" placeholder="输入关键字..." value="" /><input class="submit" type="submit" value="搜索" />
-                <input type="hidden" name="type" value="1">
-                <input type="hidden" value="0" name="time">
-            </form>
-        </div>
+        
+        <include file="Public:search" />
+        
         <div class="ident">首页</div>
         
-        <div class="think-slogan"><a class="post" href="__SITE__/gtp/add">发布吉他谱</a><p>吉他谱 <A href="__SITE__/gtp/?p=2">More</A></p></div>
+        <div class="slogan"><a class="post" href="__SITE__/gtp/add">发布吉他谱</a><p>吉他谱 <A href="__SITE__/gtp/?p=2">More</A></p></div>
         
-        <div class="think-cate">
-            <ul class="think-item">
+        <div class="cate">
+            <ul class="item">
             <foreach name="gtp_list" item="gtp">
             <li>
                 <div class="left">
@@ -34,9 +30,9 @@
             </ul>
     </div>
     
-    <div class="think-slogan"><a class="post" href="__SITE__/vedio/add">发布吉他视频</a><p>吉他视频 <A href="__SITE__/vedio/?p=2">More</A></p></div>
-    <div class="think-cate">
-        <ul class="think-item">
+    <div class="slogan"><a class="post" href="__SITE__/vedio/add">发布吉他视频</a><p>吉他视频 <A href="__SITE__/vedio/?p=2">More</A></p></div>
+    <div class="cate">
+        <ul class="item">
         <foreach name="vedio_list" item="vedio">
         <li>
             <div class="left">

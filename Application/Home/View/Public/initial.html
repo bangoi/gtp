@@ -1,0 +1,16 @@
+<dl>
+    <dt>首字母<sub>Initial</sub></dt>
+    <dd>
+    <?php $letters = array("#", "a", "b", "c", "d", "e", "f", "g",
+        "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
+            "u", "v", "w", "x", "y", "z");
+    ?>
+    <foreach name="letters" item="item">
+    <?php if($item == '#'){ ?>
+        <a href="__SITE__/vedio/?start=number">#</a>
+    <?php } else { ?>
+        <a href="__SITE__/vedio/?start={$item}">{$item|strtoupper}</a>
+    <?php } ?>
+    </foreach>
+        </dd>
+</dl>

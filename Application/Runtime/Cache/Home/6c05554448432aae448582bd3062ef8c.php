@@ -4,61 +4,42 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
-    <?php if(!empty($title)): ?><title><?php echo ($title); ?>|__SITE_TITLE__</title>
+    <?php if(!empty($title)): ?><title><?php echo ($title); ?>|Guitar Pro</title>
     <?php else: ?>
-    <title>__SITE_TITLE__</title><?php endif; ?>
+    <title>Guitar Pro</title><?php endif; ?>
     <meta name="keywords" content="吉他谱,吉他,吉他视频,GTP,Guitar Pro,吉他谱下载" />
     <?php if(!empty($description)): ?><meta name="description" content="<?php echo ($description); ?>,收藏自阿谱小站." />
     <?php else: ?>
-    <meta name="description" content="阿谱小站,收集分享Guitar-pro吉他谱,吉他视频,为吉他爱好者打造网上资源互动社区." /><?php endif; ?>
+    <meta name="description" content="Guitar-pro,收集分享Guitar-pro吉他谱,吉他视频,为吉他爱好者打造网上资源互动社区." /><?php endif; ?>
     <link rel="alternate" type="application/rss+xml" title="阿谱小站" href="http://localhost:9990/gtp/feed" />
     <link rel="shortcut icon" href="http://localhost:9990/gtp/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/concision.css" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/prettify.css" />
     <script type="text/javascript" src="http://localhost:9990/gtp/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="http://localhost:9990/gtp/js/apu9.js"></script>
-    <!--
-    <script type="text/javascript" src="http://localhost:9990/gtp/js/prettify.js"></script>
-    <script type="text/javascript" src="http://localhost:9990/gtp/js/concision.js"></script>
-    -->
-    <script type="text/javascript">
-    $(function(){
-        $(document).keyup(function(event){
-            if(event.keyCode == 37){
-                $('.page .prev span').click();
-            }else if(event.keyCode == 39){
-                $('.page .next span').click();
-            }
-        })
-        $(':text,textarea').keyup(function(event){
-            event.stopPropagation();
-        })
-    })
-    </script>
 </head>
 <body>
     <div class="header">
         <div class="header-wrap wp cf">
-            <h3 class="think-logo"><a href="http://localhost:9990/gtp" title="返回首页">阿谱小站</a></h3>
-            <ul class="think-navg">
+            <h3 class="logo"><a href="http://localhost:9990/gtp" title="返回首页">Guitar Pro</a></h3>
+            <ul class="navg">
                 <li class="title <?php if(($channel == 'home')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp">首页</a></li>
                 <li class="title <?php if(($channel == 'gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
                 <li class="title <?php if(($channel == 'vedio')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/vedio/">吉他视频</a></li>
             </ul>
-            
-            <p class="think-user">
-                <?php if (empty($nick)): ?>
+            <p class="user">
+                <?php if(!$_logined) { ?>
                 [<a href="http://localhost:9990/gtp/user/login">登录</a><a href="http://localhost:9990/gtp/user/register">注册</a>]
-                <?php else: ?>
-                [ <?php echo (urldecode($nick)); ?> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
-                <?php endif; ?>
+                <?php } else { ?>
+                [ <?php echo (urldecode($_nick)); ?> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
+                <?php } ?>
             </p>
         </div>
     </div>
      
 <div class="contaier wp">
-    <div class="think-add">
-        <div class="body think-form">
+    <div class="add">
+        <div class="body form">
             <form action="http://localhost:9990/gtp/vedio/add" method="post">
                 <table>
                     <?php if (!empty($err)): ?>
@@ -127,7 +108,7 @@
             
             
     <div class="home-right">
-        <div class="think-fast">
+        <div class="fast">
             <dl>
                 <dt>发布应用<sub>Publish</sub></dt>
                 <dd>应用标识、中文描述、应用主页（以http打头）、分类和应用LOGO（不超过50K 支持JPG PNG和GIF）必须，描述和标签可选，多个标签之间用空格分隔，案例发布需要审核。</dd>

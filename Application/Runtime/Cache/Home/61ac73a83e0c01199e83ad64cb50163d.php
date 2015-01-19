@@ -4,54 +4,35 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
-    <?php if(!empty($title)): ?><title><?php echo ($title); ?>|__SITE_TITLE__</title>
+    <?php if(!empty($title)): ?><title><?php echo ($title); ?>|Guitar Pro</title>
     <?php else: ?>
-    <title>__SITE_TITLE__</title><?php endif; ?>
+    <title>Guitar Pro</title><?php endif; ?>
     <meta name="keywords" content="吉他谱,吉他,吉他视频,GTP,Guitar Pro,吉他谱下载" />
     <?php if(!empty($description)): ?><meta name="description" content="<?php echo ($description); ?>,收藏自阿谱小站." />
     <?php else: ?>
-    <meta name="description" content="阿谱小站,收集分享Guitar-pro吉他谱,吉他视频,为吉他爱好者打造网上资源互动社区." /><?php endif; ?>
+    <meta name="description" content="Guitar-pro,收集分享Guitar-pro吉他谱,吉他视频,为吉他爱好者打造网上资源互动社区." /><?php endif; ?>
     <link rel="alternate" type="application/rss+xml" title="阿谱小站" href="http://localhost:9990/gtp/feed" />
     <link rel="shortcut icon" href="http://localhost:9990/gtp/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/concision.css" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/prettify.css" />
     <script type="text/javascript" src="http://localhost:9990/gtp/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="http://localhost:9990/gtp/js/apu9.js"></script>
-    <!--
-    <script type="text/javascript" src="http://localhost:9990/gtp/js/prettify.js"></script>
-    <script type="text/javascript" src="http://localhost:9990/gtp/js/concision.js"></script>
-    -->
-    <script type="text/javascript">
-    $(function(){
-        $(document).keyup(function(event){
-            if(event.keyCode == 37){
-                $('.page .prev span').click();
-            }else if(event.keyCode == 39){
-                $('.page .next span').click();
-            }
-        })
-        $(':text,textarea').keyup(function(event){
-            event.stopPropagation();
-        })
-    })
-    </script>
 </head>
 <body>
     <div class="header">
         <div class="header-wrap wp cf">
-            <h3 class="think-logo"><a href="http://localhost:9990/gtp" title="返回首页">阿谱小站</a></h3>
-            <ul class="think-navg">
+            <h3 class="logo"><a href="http://localhost:9990/gtp" title="返回首页">Guitar Pro</a></h3>
+            <ul class="navg">
                 <li class="title <?php if(($channel == 'home')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp">首页</a></li>
                 <li class="title <?php if(($channel == 'gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
                 <li class="title <?php if(($channel == 'vedio')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/vedio/">吉他视频</a></li>
             </ul>
-            
-            <p class="think-user">
-                <?php if (empty($nick)): ?>
+            <p class="user">
+                <?php if(!$_logined) { ?>
                 [<a href="http://localhost:9990/gtp/user/login">登录</a><a href="http://localhost:9990/gtp/user/register">注册</a>]
-                <?php else: ?>
-                [ <?php echo (urldecode($nick)); ?> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
-                <?php endif; ?>
+                <?php } else { ?>
+                [ <?php echo (urldecode($_nick)); ?> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
+                <?php } ?>
             </p>
         </div>
     </div>
@@ -71,7 +52,7 @@
                     <?php if (empty($nick) == false): ?>
                     <a href="http://localhost:9990/gtp/gtp/edit/<?php echo ($gtp["id"]); ?>">[编辑]</a>
                     <?php endif; ?>
-                    <div class="think-score">
+                    <div class="score">
                         <span record="37" class="score" model="45" score="0"></span>
                         <span class="total">(共<span id="score-count"><?php echo ($gtp["download_num"]); ?></span>人下载)</span>
                     </div>
@@ -80,11 +61,11 @@
             <div class="body">
                 <div class="app-relative">
                     <a href="http://localhost:9990/gtp/gtp/download/<?php echo ($gtp["id"]); ?>" target="_blank">下载吉他谱</a>
-                    <i class="think-line">&nbsp;</i><?php echo ($gtp["download_num"]); ?>人下载过
+                    <i class="line">&nbsp;</i><?php echo ($gtp["download_num"]); ?>人下载过
                 </div>
                 
                 <?php if(count($song_title_gtps) > 0): ?>
-                <div class="think-relation">
+                <div class="relation">
                     <div class="trhead">
                         <b><?php echo ($gtp["song_title"]); ?> 其他吉他谱下载</b>
                     </div>
@@ -95,7 +76,7 @@
                 <?php endif; ?>
                 
                 <?php if(count($artist_name_gtps) > 0): ?>
-                <div class="think-relation">
+                <div class="relation">
                     <div class="trhead">
                         <b><?php echo ($gtp["artist_name"]); ?>吉他谱下载</b>
                     </div>
@@ -118,7 +99,7 @@
                     <br />
                     <br />
                     <ul>
-                        <?php if(is_array($vedioes)): foreach($vedioes as $key=>$vedio): ?><li class="item">
+                        <?php if(is_array($vedioes)): foreach($vedioes as $key=>$vedio): ?><li class="vitem">
                         <ul>
                             <li><a href="http://localhost:9990/gtp/vedio/<?php echo ($vedio["id"]); ?>"><img src="<?php echo ($vedio["thumb"]); ?>" alt="<?php echo ($vedio["song_title"]); ?>" /></a></li>
                             <li><a href="http://localhost:9990/gtp/vedio/<?php echo ($vedio["id"]); ?>"><?php echo ($vedio["song_title"]); ?></a></li>
@@ -133,7 +114,7 @@
             </div>
             
             <div class="foot">
-                <span class="page">
+                <span class="fpage">
                     <a class="prev" href="/app/jdcms.html" title="上一篇"><span>上一篇</span></a>                <a class="dir" href="http://localhost:9990/gtp/gtp/" title="返回目录">返回目录</a>
                 <a class="next" href="/app/efucms.html" title="下一篇"><span>下一篇</span></a>                </span>
                 <span class="share">
@@ -145,7 +126,7 @@
         </div>
         <!--/文章详细-->
         <!--文章评论-->
-        <div class="think-review">
+        <div class="review">
     <div class="trhead">
         <a name="review"></a>
         <strong>评论</strong>共<span class="review-count"><?php echo ($gtp["comment_num"]); ?></span>条
@@ -174,7 +155,7 @@
 <script type="text/javascript">
     var title,url;
     $('.share a').click(function(){
-        var ele = $(this).closest('.think-info').find('.tihead h3 a');
+        var ele = $(this).closest('.info').find('.tihead h3 a');
         title = encodeURIComponent("<?php echo ($gtp["artist_name"]); ?>-<?php echo ($gtp["song_title"]); ?> 吉他谱下载");
         url   = encodeURIComponent(document.location);
         window.open( eval($(this).attr('class') + '()') , "_blank" ,"width=680,height=430,scrollbars=no,location=no" ) ;

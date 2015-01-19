@@ -4,9 +4,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
     <notempty name="title">
-    <title>{$title}|__SITE_TITLE__</title>
+    <title>{$title}|__TITLE__</title>
     <else />
-    <title>__SITE_TITLE__</title>
+    <title>__TITLE__</title>
     </notempty>
     <meta name="keywords" content="吉他谱,吉他,吉他视频,GTP,Guitar Pro,吉他谱下载" />
     <notempty name="description">
@@ -20,18 +20,17 @@
     <link rel="stylesheet" type="text/css" href="__SITE__/css/prettify.css" />
     <script type="text/javascript" src="__SITE__/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="__SITE__/js/apu9.js"></script>
-
 </head>
 <body>
     <div class="header">
         <div class="header-wrap wp cf">
-            <h3 class="think-logo"><a href="__SITE__" title="返回首页">阿谱小站</a></h3>
-            <ul class="think-navg">
+            <h3 class="logo"><a href="__SITE__" title="返回首页">__TITLE__</a></h3>
+            <ul class="navg">
                 <li class="title <if condition="($channel eq 'home')">selected</if>"><a class="show" href="__SITE__">首页</a></li>
                 <li class="title <if condition="($channel eq 'gtp')">selected</if>"><a class="show" href="__SITE__/gtp/">吉他谱</a></li>
                 <li class="title <if condition="($channel eq 'vedio')">selected</if>"><a class="show" href="__SITE__/vedio/">吉他视频</a></li>
             </ul>
-            <p class="think-user">
+            <p class="user">
                 <?php if(!$_logined) { ?>
                 [<a href="__SITE__/user/login">登录</a><a href="__SITE__/user/register">注册</a>]
                 <?php } else { ?>

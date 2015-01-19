@@ -4,9 +4,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
-    <?php if(!empty($title)): ?><title><?php echo ($title); ?>|__SITE_TITLE__</title>
+    <?php if(!empty($title)): ?><title><?php echo ($title); ?>|Guitar Pro</title>
     <?php else: ?>
-    <title>__SITE_TITLE__</title><?php endif; ?>
+    <title>Guitar Pro</title><?php endif; ?>
     <meta name="keywords" content="吉他谱,吉他,吉他视频,GTP,Guitar Pro,吉他谱下载" />
     <?php if(!empty($description)): ?><meta name="description" content="<?php echo ($description); ?>,收藏自阿谱小站." />
     <?php else: ?>
@@ -17,18 +17,17 @@
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/prettify.css" />
     <script type="text/javascript" src="http://localhost:9990/gtp/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="http://localhost:9990/gtp/js/apu9.js"></script>
-
 </head>
 <body>
     <div class="header">
         <div class="header-wrap wp cf">
-            <h3 class="think-logo"><a href="http://localhost:9990/gtp" title="返回首页">阿谱小站</a></h3>
-            <ul class="think-navg">
+            <h3 class="logo"><a href="http://localhost:9990/gtp" title="返回首页">Guitar Pro</a></h3>
+            <ul class="navg">
                 <li class="title <?php if(($channel == 'home')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp">首页</a></li>
                 <li class="title <?php if(($channel == 'gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
                 <li class="title <?php if(($channel == 'vedio')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/vedio/">吉他视频</a></li>
             </ul>
-            <p class="think-user">
+            <p class="user">
                 <?php if(!$_logined) { ?>
                 [<a href="http://localhost:9990/gtp/user/login">登录</a><a href="http://localhost:9990/gtp/user/register">注册</a>]
                 <?php } else { ?>
@@ -53,7 +52,7 @@
                     <?php if (empty($nick) == false): ?>
                     <a href="http://localhost:9990/gtp/vedio/edit/<?php echo ($vedio["id"]); ?>">[编辑]</a>
                     <?php endif; ?>
-                    <div class="think-score">
+                    <div class="score">
                         <span record="37" class="score" model="45" score="0"></span>
                         <span class="total">(共<span id="score-count"><?php echo ($vedio["view_num"]); ?></span>人看过)</span>
                     </div>
@@ -68,7 +67,7 @@
                 <br />
                 
                 <?php if(count($gtps) > 0): ?>
-                <div class="think-relation">
+                <div class="relation">
                     <div class="trhead">
                         <b><?php echo ($vedio["song_title"]); ?> 吉他谱下载</b>
                     </div>
@@ -103,7 +102,7 @@
                 
             </div>
             <div class="foot">
-                <span class="page">
+                <span class="fpage">
                     <a class="prev" href="/app/jdcms.html" title="上一篇"><span>上一篇</span></a>                <a class="dir" href="http://localhost:9990/gtp/vedio/" title="返回目录">返回目录</a>
                 <a class="next" href="/app/efucms.html" title="下一篇"><span>下一篇</span></a>                </span>
                 <span class="share">
@@ -115,7 +114,7 @@
         </div>
         <!--/文章详细-->
         <!--文章评论-->
-        <div class="think-review">
+        <div class="review">
     <div class="trhead">
         <a name="review"></a>
         <strong>评论</strong>共<span class="review-count"><?php echo ($vedio["comment_num"]); ?></span>条

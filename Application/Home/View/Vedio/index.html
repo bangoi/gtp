@@ -3,21 +3,18 @@
 
 <div class="contaier wp">
     <div class="channel-left">
-        <div class="think-search cf">
-            <form action="__SITE__/index/search" method="post">
-                <input class="text" type="text" name="name" placeholder="输入关键字..." value="" /><input class="submit" type="submit" value="搜索" />
-                <input type="hidden" name="type" value="vedio">
-            </form>
-        </div>
+        
+        <include file="Public:search" />
+        
         <div class="ident">吉他视频</div>
     
-    <div class="think-slogan"><a class="post" href="__SITE__/vedio/add">发布吉他视频</a><p>{$artist_name}吉他视频 <A href="__SITE__/vedio/?p=2">More</A></p></div>
+    <div class="slogan"><a class="post" href="__SITE__/vedio/add">发布吉他视频</a><p>{$artist_name}吉他视频 <A href="__SITE__/vedio/?p=2">More</A></p></div>
 
     <div class="app-summary v_list">
     <br />
     <ul>
     <foreach name="vedio_list" item="vedio">
-        <li class="item">
+        <li class="vitem">
             <ul>
                 <li><a href="__SITE__/vedio/{$vedio.id}"><img src="{$vedio.thumb}" alt="{$vedio.song_title}" /></a></li>
                 <li><a href="__SITE__/vedio/{$vedio.id}">{$vedio.song_title}</a></li>
@@ -39,45 +36,15 @@
         
         <include file="Public:right_search" />
         
-        <div class="think-sort">
+        <div class="sort">
             <ul class="cf">
                 <li class="selected"><a href="__SITE__/gtp/">吉他谱</a></li>
             </ul>
         </div>
         
-        <div class="think-fast" style="background: #F1F1F1; margin-top: -10px">
-            <dl>
-            <dt>首字母<sub>Initial</sub></dt>
-            <dd>
-                <a href="__SITE__/vedio/?start=number">#</a>
-                <a href="__SITE__/vedio/?start=a">A</a>
-                <a href="__SITE__/vedio/?start=b">B</a>
-                <a href="__SITE__/vedio/?start=c">C</a>
-                <a href="__SITE__/vedio/?start=d">D</a>
-                <a href="__SITE__/vedio/?start=e">E</a>
-                <a href="__SITE__/vedio/?start=f">F</a>
-                <a href="__SITE__/vedio/?start=g">G</a>
-                <a href="__SITE__/vedio/?start=h">H</a>
-                <a href="__SITE__/vedio/?start=i">I</a>
-                <a href="__SITE__/vedio/?start=j">J</a>
-                <a href="__SITE__/vedio/?start=k">K</a>
-                <a href="__SITE__/vedio/?start=l">L</a>
-                <a href="__SITE__/vedio/?start=m">M</a>
-                <a href="__SITE__/vedio/?start=n">N</a>
-                <a href="__SITE__/vedio/?start=o">O</a>
-                <a href="__SITE__/vedio/?start=p">P</a>
-                <a href="__SITE__/vedio/?start=q">Q</a>
-                <a href="__SITE__/vedio/?start=r">R</a>
-                <a href="__SITE__/vedio/?start=s">S</a>
-                <a href="__SITE__/vedio/?start=t">T</a>
-                <a href="__SITE__/vedio/?start=u">U</a>
-                <a href="__SITE__/vedio/?start=v">V</a>
-                <a href="__SITE__/vedio/?start=w">W</a>
-                <a href="__SITE__/vedio/?start=x">X</a>
-                <a href="__SITE__/vedio/?start=y">Y</a>
-                <a href="__SITE__/vedio/?start=z">Z</a>
-            </dd>
-            </dl>
+        <div class="fast" style="background: #F1F1F1; margin-top: -10px">
+            
+            <include file="Public:initial" />
             
             <dl>
             <dt>音乐人<sub>Musician</sub></dt>
@@ -121,7 +88,7 @@
         </div>
         
         <?php if(1==0){ ?>
-        <div class="think-sort">
+        <div class="sort">
             <ul class="cf">
                 <li class="selected"><a href="/extend/index.html">全部</a></li>
                 <li><a href="/extend/engine.html">引擎</a></li>
