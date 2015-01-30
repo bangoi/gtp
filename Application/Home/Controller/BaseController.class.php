@@ -47,14 +47,54 @@ class BaseController extends Controller {
 		}
 	}
 	
+	protected function can_edit($item_type, $item_id) {
+		
+		if($this->logined == false) 
+			return false;
+		
+		if(cookie($this->prefix."role") == "admin")
+			return true;
+		
+		$user_id = -1;
+		if($item_type == "vedio") {
+			$vedio = M("Vedio")->where("id = {$item_id}")->find();
+			$user_id = $vedio["user_id"];
+		} else if($item_type == "gtp") {
+			$gtp = M("Gtp")->where("id = {$item_id}")->find();
+			$user_id = $gtp["user_id"];
+		}
+		return $this->uid == $user_id;
+	}
+	
 	protected function get_now() {
 		return date("Y-m-d H:i:s");
 	}
 	
 	protected function add_cookie($id, $nick, $role) {
+				
 		cookie('uid', $id, $this->cookie_parm);
 		cookie('nick', urlencode($nick), $this->cookie_parm);
 		cookie('role', $role, $this->cookie_parm);
+	}
+	
+	protected function render_gtp($file_name, $title) {
+		$ua = $_SERVER["HTTP_USER_AGENT"];
+		$encoded_filename = urlencode($file_name);
+		$encoded_filename = str_replace("+", "%20", $encoded_filename);
+
+		header("Pragma: public");
+		header("Expires: 0");
+		header("Cache-Component: must-revalidate, post-check=0, pre-check=0");
+		header('Content-Type: application/octet-stream');
+
+		if (preg_match("/MSIE/", $ua))	
+			header('Content-Disposition: attachment; filename="' . $encoded_filename . '"');
+		else if (preg_match("/Firefox/", $ua))	
+			header('Content-Disposition: attachment; filename*="utf8\'\''.$file_name.'"');
+		else	
+			header('Content-Disposition: attachment; filename="'.$file_name. '"');
+		
+		readfile($title);
 	}
 	
 }

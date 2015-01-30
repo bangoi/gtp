@@ -15,8 +15,8 @@
     <link rel="shortcut icon" href="http://localhost:9990/gtp/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/concision.css" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/prettify.css" />
-    <script type="text/javascript" src="http://localhost:9990/gtp/js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="http://localhost:9990/gtp/js/apu9.js"></script>
+    <script type="text/javascript" src="http://localhost:9990/gtp/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="http://localhost:9990/gtp/js/guitar.js"></script>
 </head>
 <body>
     <div class="header">
@@ -31,7 +31,7 @@
                 <?php if(!$_logined) { ?>
                 [<a href="http://localhost:9990/gtp/user/login">登录</a><a href="http://localhost:9990/gtp/user/register">注册</a>]
                 <?php } else { ?>
-                [ <?php echo (urldecode($_nick)); ?> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
+                [ <?php echo (urldecode($_nick)); ?> <a href="http://localhost:9990/gtp/user/settings">设置</a> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
                 <?php } ?>
             </p>
         </div>
@@ -88,6 +88,7 @@
             <p class="links"><a href="/donate/index.html">捐赠</a><a href="/rss/index.xml">订阅</a><a href="/about/attention.html">关注</a><a href="http://bbs.thinkphp.cn" target="_blank">论坛</a></p>
         </div>
     </div>
+    <input type="hidden" name="site" id="site" value="http://localhost:9990/gtp" />
 <div style="display:none">
     <script language="javascript" type="text/javascript" src="http://js.users.51.la/14961362.js"></script>
 <noscript><a href="http://www.51.la/?14961362" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/14961362.asp" style="border:none" /></a></noscript>

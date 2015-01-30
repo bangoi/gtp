@@ -1,15 +1,15 @@
 <?php
 return array(
-	'MODULE_ALLOW_LIST' => array ( 'Home', 'M'),
+	'MODULE_ALLOW_LIST' => array ( 'Home', 'M', 'Admin'),
 	'DEFAULT_MODULE'	=> 'Home',
 	'URL_MODEL' => '2',
 	'SESSION_AUTO_START' => true,
-	
+	 
 	'DB_TYPE'=>'mysql',
-    'DB_HOST'=>'localhost',
+    'DB_HOST'=>'114.215.131.58',
     'DB_NAME'=>'gtp',
     'DB_USER'=>'root',
-    'DB_PWD'=>'qeephp',
+    'DB_PWD'=>'6fa1fa1952',
     'DB_PORT'=>'3306',
     'DB_PREFIX'=>'',
     
@@ -22,7 +22,7 @@ return array(
 	'URL_ROUTER_ON' => true,
 	'URL_HTML_SUFFIX' => '',
 	
-	 'URL_ROUTE_RULES' => array(
+	'URL_ROUTE_RULES' => array(
         
 		//'topic/edit/:id' => 'topic/edit',
 		//'topic/delete/:id' => 'topic/delete',
@@ -30,21 +30,17 @@ return array(
 		//'topic/:id\d$' => 'topic/details',
 		'search' => 'index/search',
 		
-		'item/:id\d$' => 'item/details',
-		'item/edit/:id' => 'item/edit',
-		'item/delete/:id' => 'item/delete',
-		'item/reopen/:id' => 'item/reopen',
-		'item/apply/:id' => 'item/apply',
-		'item/withdraw/:id' => 'item/withdraw',
-		
-		'people/:id\d$' => 'people/details',
-		'people/edit/:id' => 'people/edit',
-		'people/delete/:id' => 'people/delete',
-		'people/repwd/:id' => 'people/repwd',
-		
-		'order/:id\d$' => 'order/details',
-		'order/edit/:id' => 'order/edit',
-		'order/delete/:id' => 'order/delete',
+		'user/settings' => 'user/settings',
+		'user/face' => 'user/face',
+		'user/crop' => 'user/crop',
+		'user/login' => 'user/login',
+		'user/register' => 'user/register',
+		'user/logout' => 'user/logout',
+		'user/get_city' => 'user/get_city',
+		'user/edit/:id' => 'user/edit',
+		'user/delete/:id' => 'user/delete',
+		'user/:id\d$' => 'user/details',
+		'user/:domain\s$' => 'user/details',
 		
 		'gtp/:id\d$' => 'gtp/details',
 		'gtp/edit/:id' => 'gtp/edit',
@@ -54,6 +50,10 @@ return array(
 		'vedio/:id\d$' => 'vedio/details',
 		'vedio/edit/:id' => 'vedio/edit',
 		'vedio/delete/:id' => 'vedio/delete',
+		
+		'blog/:id\d$' => 'blog/details',
+		'blog/edit/:id' => 'blog/edit',
+		'blog/delete/:id' => 'blog/delete',
     ),
     
 	'TMPL_PARSE_STRING'  =>	array(

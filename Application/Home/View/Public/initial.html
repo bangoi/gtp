@@ -7,9 +7,9 @@
     ?>
     <foreach name="letters" item="item">
     <?php if($item == '#'){ ?>
-        <a href="__SITE__/vedio/?start=number">#</a>
+        <a href="__SITE__/gtp/?start=number">#</a>
     <?php } else { ?>
-        <a href="__SITE__/vedio/?start={$item}">{$item|strtoupper}</a>
+        <a href="__SITE__/gtp/?start={$item}">{$item|strtoupper}</a>
     <?php } ?>
     </foreach>
         </dd>

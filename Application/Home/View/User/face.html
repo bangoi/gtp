@@ -1,0 +1,150 @@
+<tagLib name="html" />
+<include file="Public:header" />
+
+<script type="text/javascript" src="__SITE__/js/jquery.uploadify.min.js"></script>
+<script src="__SITE__/js/jquery.Jcrop.js"></script>
+
+<script type="text/javascript">
+  jQuery(function($){
+
+    // Create variables (in this scope) to hold the API and image size
+    var jcrop_api,
+        boundx,
+        boundy,
+
+        // Grab some information about the preview pane
+        $preview = $('#preview-pane'),
+        $pcnt = $('#preview-pane .preview-container'),
+        $pimg = $('#preview-pane .preview-container img'),
+
+        xsize = $pcnt.width(),
+        ysize = $pcnt.height();
+    
+    $('#target').Jcrop({
+      onChange: updatePreview,
+      onSelect: updatePreview,
+      setSelect: [ 100, 100, 0, 0 ],
+      aspectRatio: xsize / ysize
+    },function(){
+      // Use the API to get the real image size
+      var bounds = this.getBounds();
+      boundx = bounds[0];
+      boundy = bounds[1];
+      // Store the API in the jcrop_api variable
+      jcrop_api = this;
+
+      // Move the preview into the jcrop container for css positioning
+      //$preview.appendTo(jcrop_api.ui.holder);
+    });
+
+     function updatePreview(c)
+    {
+      if (parseInt(c.w) > 0)
+      {
+        var rx = xsize / c.w;
+        var ry = ysize / c.h;
+
+        $pimg.css({
+          width: Math.round(rx * boundx) + 'px',
+          height: Math.round(ry * boundy) + 'px',
+          marginLeft: '-' + Math.round(rx * c.x) + 'px',
+          marginTop: '-' + Math.round(ry * c.y) + 'px'
+        });
+        
+        $('#x').val(c.x);
+        $('#y').val(c.y);
+        $('#w').val(c.w);
+        $('#h').val(c.h);
+      }
+    };
+
+  });
+</script>
+
+<link rel="stylesheet" href="__SITE__/css/jquery.Jcrop.css" type="text/css" />
+<style type="text/css">
+
+/* Apply these styles only when #preview-pane has
+   been placed within the Jcrop widget */
+.jcrop-holder #preview-pane {
+  
+  position: absolute;
+  z-index: 2000;
+  top: 0px;
+  right: -86px;
+  padding: 2px;
+  border: 1px rgba(0,0,0,.4) solid;
+  background-color: white;
+}
+
+/* The Javascript code will set the aspect ratio of the crop
+   area based on the size of the thumbnail preview,
+   specified here */
+#preview-pane .preview-container {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+
+
+</style>
+
+<div class="contaier wp cf">
+<div class="ident">头像</div>
+    <div class="login" style="width: 660px;">
+        <div class="head">
+            <strong>1. 添加或更改你的头像</strong>
+            <?php if (!empty($err)): ?><span style="color: red">{$err}</span><?php endif; ?>
+            <?php if (!empty($notice)): ?><span style="color: #fff;background: green; padding: 3px 10px 3px 10px;">{$notice}</span><?php endif; ?>
+        </div>
+        <div class="body form " style="margin-top: -30px;">
+            <form action="__SITE__/user/face" method="post" class="login" enctype="multipart/form-data">
+            
+            <div style="width: 230px; float: left;">
+                <img src="__SITE__/<?php get_imgPath($face, 'm'); ?>" style="width:200px; height: 200px;" class="jcrop-preview" id="target" alt="Preview" />
+            </div>
+            <div style="width: 330px; float: left;">
+                <span class="c9 f14">从电脑中选择你喜欢的照片:</span>
+                <br />
+                <span class="c9 f14">你可以上传JPG、JPEG、GIF、或PNG文件。</span>
+                <div style="margin-top: 10px;">
+                    <input type="file" name="face" id="faceFile" class="text" />
+                </div>
+                <div style="margin-top: 5px;">
+                    <input class="submit" type="submit" value="更新头像" /> &nbsp; <a href="__SITE__/user/settings" style="line-height: 30px;">返回</a>    
+                </div>
+            </div>
+            </form>
+            <br class="clear" />
+            <br/>
+            <div class="head">
+                <strong>2. 设置你的小头像图标</strong>
+            </div>
+            <div id="preview-pane" style="margin-top: 15px; float: left;">
+                <div class="preview-container" >
+                    <img src="__SITE__/<?php get_imgPath($face, 'm'); ?>" class="jcrop-preview" alt="Preview" />
+                </div>
+            </div>
+            <div style="margin: 13px; float: left;">
+                <span class="c9 f16">随意拖拽或缩放大图中的虚线方格，<br/>预览的小图即为保存后的小头像图标。</span>
+            </div>
+            
+            <br class="clear" />
+            
+            <form action="__SITE__/user/crop" method="post">
+            <div style="margin-top: 10px;">
+                <input type="hidden" id="x" name="x" />  
+                <input type="hidden" id="y" name="y" />  
+                <input type="hidden" id="w" name="w" />  
+                <input type="hidden" id="h" name="h" />
+                <input type="submit" class="submit" value="保存小头像设置" /> &nbsp; <a href="__SITE__/user/settings" style="line-height: 30px;">返回</a>
+            </div>
+            </form>
+        </div>
+    </div>
+    <div class="login-other" style="width: 230px;padding-left: 20px; min-width: 0px;">
+        <include file="Public:operate_panel" />
+    </div>
+</div>
+
+<include file="Public:footer" />

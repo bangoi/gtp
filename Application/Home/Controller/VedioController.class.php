@@ -14,51 +14,32 @@ class VedioController extends BaseController {
 		$size = 20;
 		
 		$order = "add_time desc";
-		 
-		if(!empty(I("get.k"))) {
+		
+		$k = urldecode(I("get.k"));
+		$artist_name = urldecode(I("get.artist_name"));
+		
+		$map["state"] = 100;
+		
+		if(!empty($k)) {
 			
-			$k = urldecode(I("get.k"));
-			
-			$map["state"] = 100;
 			$map["title"] = array('like', "%{$k}%");
-			
-			$vedio_list = D("VedioView")->where($map)->order($order)->page($p.",{$size}")->select();
-			$count = D("VedioView")->where($map)->count();
 			
 			$this->assign('k', $k);
 			$this->assign("title", $k."吉他视频"." 第{$p}页");
-			$this->assign("page_title", $k."吉他视频"." 第{$p}页");
+		} else if(!empty($artist_name)) {
 			
-		} else if(!empty(I("get.artist_name"))) {
-			
-			$artist_name = urldecode(I("get.artist_name"));
-			
-			$map["state"] = 100;
 			$map["artist_name"] = array('like', "%{$artist_name}%");
-			
-			$vedio_list = D("VedioView")->where($map)->order($order)->page($p.",{$size}")->select();
-			$count = D("VedioView")->where($map)->count();
 			
 			$this->assign('artist_name', $artist_name);
 			$this->assign("title", $artist_name."吉他视频"." 第{$p}页");
-			$this->assign("page_title", $artist_name."吉他视频"." 第{$p}页");
-			
 		} else {
-			
-			$map["state"] = 100;
-			
-			$vedio_list = D("VedioView")->where($map)->order($order)->page($p.",{$size}")->select();
-			$count = D("VedioView")->where($map)->count();
-			
 			$this->assign("title", "吉他视频"." 第{$p}页");
-			$this->assign("page_title", "吉他视频"." 第{$p}页");
-			
 		}
 		
-		$Page = new Page($count, $size);
+		$vedio_list = M("Vedio")->where($map)->order($order)->page($p.",{$size}")->select();
+		$count = M("Vedio")->where($map)->count();
 		
-		if(!empty(I("get.k")))
-			$Page->parameter .= "$k=".urlencode(I("get.k"))."&";
+		$Page = new Page($count, $size);
 		$page = $Page->show();
 		
 		$this->assign('vedio_list', $vedio_list);
@@ -66,8 +47,40 @@ class VedioController extends BaseController {
 		$this->assign("channel", "vedio");
 		$this->display();
 	}
+	
+	public function search() {
+		
+		$p = I("get.p") ? I("get.p") : 1;
+		$size = 20;
+		
+		$order = "add_time desc";
+		
+		$k = urldecode(I("get.k"));
+		$artist_name = urldecode(I("get.artist_name"));
+		
+		$map["state"] = 100;
+		
+		if(!empty($k)) {
+			
+			$map["title"] = array('like', "%{$k}%");
+			
+			$this->assign('k', $k);
+			$this->assign("title", $k."吉他视频"." 第{$p}页");
+		}
+		
+		$vedio_list = M("Vedio")->where($map)->order($order)->page($p.",{$size}")->select();
+		$count = M("Vedio")->where($map)->count();
+		
+		$Page = new Page($count, $size);
+		$page = $Page->show();
+		
+		$this->assign('vedio_list', $vedio_list);
+		$this->assign('page', $page);
+		$this->assign("channel", "vedio");
+		$this->display("index");
+	}
 
-	public function details(){
+	public function details() {
 		
 		$id = I("get.id");
 		
@@ -75,8 +88,10 @@ class VedioController extends BaseController {
 		$map["state"] = 100;
 		
 		$vedio = M("Vedio")->where($map)->find();
+		$user = M("User")->where("id={$vedio['user_id']}")->find();
 		//dump(M("Vedio")->getLastSql());
 		M("Vedio")->where("id={$id}")->setInc('view_num');
+		//M("Vedio")->where("id={$id}")->setLazyInc("view_num", 1, 60);
 
 		$gtp_map["artist_name"] = $vedio["artist_name"];
 		$gtp_map["song_title"] = $vedio["song_title"];
@@ -91,12 +106,14 @@ class VedioController extends BaseController {
 		$vedio_list = M("VedioView")	->where($video_map)->order('view_num DESC')->limit(10)->select();
 				
 		$this->assign("vedio", $vedio);
+		$this->assign("user", $user);
 		$this->assign("gtps", $gtp_list);
 		$this->assign("vedioes", $vedioes);
 		
 		$this->assign("title", $vedio['title']);
 		$this->assign("page_title", $vedio['title']);
 		$this->assign("description", $vedio['title'].",".$vedio['song_title'].",".$vedio['artist_name'].",".'吉他视频');
+		$this->assign("can_edit", $this->can_edit("vedio", $vedio['id']));
 		$this->assign("channel", "vedio");
 		$this->display();
 	}
@@ -113,19 +130,25 @@ class VedioController extends BaseController {
 				
 			try {
 				
-				if(empty(I("post.title")))
+				$title = I("post.title");
+				$thumb_value = I("post.thumb_value");
+				$code = I("post.code");
+				$artist_name = I("post.artist_name");
+				$song_title = I("post.song_title");
+				
+				if(empty($title))
 					throw new Exception("必须输入视频标题");
 				
-				if(empty(I("post.thumb_value")))
+				if(empty($thumb_value))
 					throw new Exception("必须输入截图地址");
 					
-				if(empty(I("post.code")))
+				if(empty($code))
 					throw new Exception("必须输入视频swf");
 					
-				if(empty(I("post.artist_name")))
+				if(empty($artist_name))
 					throw new Exception("必须输入音乐人");
 					
-				if(empty(I("post.song_title")))
+				if(empty($song_title))
 					throw new Exception("必须输入歌曲名称");
 				
 				$vedio = D("Vedio");
@@ -133,11 +156,11 @@ class VedioController extends BaseController {
 		        	
 					$vedio->user_id = $this->uid;
 					
-					$vedio->title = trim(I("post.title"));
-					$vedio->thumb = trim(I("post.thumb_value"));
-					$vedio->code = trim(I("post.code"));
-					$vedio->song_title = trim(I("post.song_title"));
-					$vedio->thumb = trim(I("post.thumb_value"));
+					$vedio->title = trim($title);
+					$vedio->thumb = trim($thumb_value);
+					$vedio->code = trim($code);
+					$vedio->song_title = trim($song_title);
+					$vedio->artist_name = trim($artist_name);
 					$vedio->tags = trim(I("post.tags"));
 					$vedio->description = trim(I("post.description"));
 						
@@ -196,25 +219,23 @@ class VedioController extends BaseController {
 		$vedio_id = $_GET["_URL_"][2];
 		
 		if(IS_POST) {
+			
+			$title = I("post.title");
+			$code = I("post.code");
+			$artist_name = I("post.artist_name");
+			$song_title = I("post.song_title");
 				
-			if(empty(I("post.title")))
-				throw new Exception("必须输入视频标题");
-			
-			if(empty(I("post.code")))
-				throw new Exception("必须输入视频swf");
-			
-			if(empty(I("post.artist_name")))
-				throw new Exception("必须输入音乐人");
-			
-			if(empty(I("post.song_title")))
-				throw new Exception("必须输入歌曲名称");
+			if(empty($title)) E("必须输入视频标题");
+			if(empty($code)) E("必须输入视频swf");
+			if(empty($artist_name)) E("必须输入音乐人");
+			if(empty($song_title)) E("必须输入歌曲名称");
 			
 			try {
 				
-				$data["title"] = trim(I("post.title"));
-				$data["code"] = trim(I("post.code"));
-				$data["artist_name"] = trim(I("post.artist_name"));
-				$data["song_title"] = trim(I("post.song_title"));
+				$data["title"] = trim($title);
+				$data["code"] = trim($code);
+				$data["artist_name"] = trim($artist_name);
+				$data["song_title"] = trim($song_title);
 				$data['thumb'] = trim(I("post.thumb_value"));				
 				$data['tags'] = trim(I("post.tags"));
 				$data['description'] = trim(I("post.description"));

@@ -348,8 +348,14 @@ function sec2time($sec){
      return $res;  
 }
 
-function get_imgPath($img_url) {
-	echo '/'.substr($img_url, 2);
+function get_imgPath($img_url, $size = "m", $echo = true) {
+	//echo '/'.substr($img_url, 2);
+	$arr = explode("/", $img_url);
+	$arr[3] = $size.$arr[3];
+	if($echo)
+		echo join("/",$arr);
+	else
+		return join("/",$arr);
 }
 
 function url_set_value($url, $key, $value) { 
@@ -361,5 +367,19 @@ function url_set_value($url, $key, $value) {
 	return $url_f.'?'.http_build_query($arr); 
 }
 
+function get_channel($channel) {
+	if($channel != 'home')
+		$ret_val = $channel.'/';
+	else
+		$ret_val = '';
+	echo $ret_val;
+}
+
+function get_domain($user) {
+	$domain = $user["id"];
+	if(!empty($user["domain"]))
+		$domain = $user["domain"];
+	echo $domain;
+}
 
 ?>

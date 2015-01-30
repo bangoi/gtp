@@ -15,8 +15,8 @@
     <link rel="shortcut icon" href="http://localhost:9990/gtp/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/concision.css" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/prettify.css" />
-    <script type="text/javascript" src="http://localhost:9990/gtp/js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="http://localhost:9990/gtp/js/apu9.js"></script>
+    <script type="text/javascript" src="http://localhost:9990/gtp/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="http://localhost:9990/gtp/js/guitar.js"></script>
 </head>
 <body>
     <div class="header">
@@ -31,7 +31,7 @@
                 <?php if(!$_logined) { ?>
                 [<a href="http://localhost:9990/gtp/user/login">登录</a><a href="http://localhost:9990/gtp/user/register">注册</a>]
                 <?php } else { ?>
-                [ <?php echo (urldecode($_nick)); ?> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
+                [ <?php echo (urldecode($_nick)); ?> <a href="http://localhost:9990/gtp/user/settings">设置</a> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
                 <?php } ?>
             </p>
         </div>
@@ -41,8 +41,9 @@
     <div class="channel-left">
         
         <div class="search cf">
-    <form action="http://localhost:9990/gtp/search" method="get">
-        <input class="text" type="text" name="q" placeholder="输入关键字..." value="" /><input class="submit" type="submit" value="搜索" />
+    <form action="http://localhost:9990/gtp/<?php echo get_channel($channel); ?>search" method="get">
+        <input class="text" type="text" name="k" value="<?php echo ($k); ?>" placeholder="输入关键字..." value="" />
+        <input class="submit" type="submit" value="搜索" />
     </form>
 </div>
         
@@ -54,11 +55,9 @@
             <ul class="item">
             <?php if(is_array($gtp_list)): foreach($gtp_list as $key=>$gtp): ?><li>
                 <div class="left">
-                    <span class="sort">[ 吉他谱 ]</span>
                 </div>
                 <div class="middle">
                     <span class="title"> <a href="http://localhost:9990/gtp/gtp/<?php echo ($gtp["id"]); ?>"><?php echo ($gtp["song_title"]); ?></a></span>
-                   <span class="down"> [ <a class="" href="http://localhost:9990/gtp/gtp/download/<?php echo ($gtp["id"]); ?>" title="下载">下载： <?php echo ($gtp["download_num"]); ?></a> ]</span>
                     <span class="author"> <a href="http://localhost:9990/gtp/gtp/?artist_name=<?php echo (urlencode($gtp["artist_name"])); ?>"><?php echo ($gtp["artist_name"]); ?></a></span>
                 </div>
                 <div class="right">
@@ -92,31 +91,6 @@
     <!-- right begin --> 
     <div class="channel-right">
         
-        <div class="toper">
-    <dl>
-        <dt>搜索<sub>Search</sub></dt>
-        <dd>    
-        <div class="search-form">
-            <form method="post" action="http://localhost:9990/gtp/index/search/">
-                <input type="text" class="text" style="width:125px" name="name">
-                <select name="type">
-                    <option value="gtp">谱子</option>
-                    <option value="vedio">视频</option>
-                </select>
-                <input class="submit" type="submit" value="搜索">
-            </form>
-        </div>
-        </dd>
-    </dl>
-    <dl class="attent">
-        <dt>关注<sub>Attention</sub></dt>
-        <dd class="cf">
-        <a class="tencen" href="http://t.qq.com/topthink" target="_blank">腾讯微博</a>
-        <a class="sina" href="http://weibo.com/thinkphp" target="_blank">新浪微博</a>
-        </dd>
-    </dl>
-</div>
-        
         <div class="sort">
             <ul class="cf">
                 <li class="selected"><a href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
@@ -125,14 +99,14 @@
         
         <div class="fast" style="background: #F1F1F1; margin-top: -10px">
             
-            <dl>
+           <dl>
     <dt>首字母<sub>Initial</sub></dt>
     <dd>
     <?php $letters = array("#", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"); ?>
     <?php if(is_array($letters)): foreach($letters as $key=>$item): if($item == '#'){ ?>
-        <a href="http://localhost:9990/gtp/vedio/?start=number">#</a>
+        <a href="http://localhost:9990/gtp/gtp/?start=number">#</a>
     <?php } else { ?>
-        <a href="http://localhost:9990/gtp/vedio/?start=<?php echo ($item); ?>"><?php echo (strtoupper($item)); ?></a>
+        <a href="http://localhost:9990/gtp/gtp/?start=<?php echo ($item); ?>"><?php echo (strtoupper($item)); ?></a>
     <?php } endforeach; endif; ?>
         </dd>
 </dl>
@@ -224,6 +198,7 @@
             <p class="links"><a href="/donate/index.html">捐赠</a><a href="/rss/index.xml">订阅</a><a href="/about/attention.html">关注</a><a href="http://bbs.thinkphp.cn" target="_blank">论坛</a></p>
         </div>
     </div>
+    <input type="hidden" name="site" id="site" value="http://localhost:9990/gtp" />
 <div style="display:none">
     <script language="javascript" type="text/javascript" src="http://js.users.51.la/14961362.js"></script>
 <noscript><a href="http://www.51.la/?14961362" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/14961362.asp" style="border:none" /></a></noscript>

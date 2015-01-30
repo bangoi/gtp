@@ -9,92 +9,69 @@ use Org\Util\PinYin;
 
 class GtpController extends BaseController
 {
-	public function index()
-	{
+	public function index() {
+		
 		$p = I("get.p") ? I("get.p") : 1;
 		$size = 25;
 		
-		if(!empty(I("get.k")))
-		{
-			$k = urldecode(I("get.k"));
+		$k = urldecode(I("get.k"));
+		$artist_name = urldecode(I("get.artist_name"));
+		$author = urldecode(I("get.author"));
+		$start = I("get.start");
+		
+		$map["state"] = 100;
+		
+		if(!empty($start) && $start == "number")	{
 			
-			$map["state"] = 100;
-			$map["song_title"] = array('like', "%{$k}%");
-			
-			$gtp_list = D("GtpView")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
-			$count = D("GtpView")->where($map)->count();
-			
-			$this->assign('k', $k);
-			$this->assign("title", $k."吉他谱"." 第{$p}页");
-			$this->assign("page_title", $k."吉他谱"." 第{$p}页");
-		}
-		else if(!empty(I("get.artist_name")))
-		{
-			$artist_name = urldecode(I("get.artist_name"));
-			
-			$map["state"] = 100;
-			$map["artist_name"] = array('like', "%{$artist_name}%");
-			
-			$gtp_list = D("GtpView")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
-			$count = D("GtpView")->where($map)->count();
-			
-			$this->assign('artist_name', $artist_name);
-			$this->assign("title", $artist_name."吉他谱"." 第{$p}页");
-			$this->assign("page_title", $artist_name."吉他谱"." 第{$p}页");
-		}
-		else if(!empty(I("get.author")))
-		{
-			$author = urldecode(I("get.author"));
-			
-			$map["state"] = 100;
-			$map["author"] = array('like', "%{$author}%");
-			
-			$gtp_list = D("GtpView")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
-			$count = D("GtpView")->where($map)->count();
-			
-			$this->assign('author', $author);
-			$this->assign("title", $author."制作 吉他谱"." 第{$p}页");
-			$this->assign("page_title", $author."制作 吉他谱"." 第{$p}页");
-		}
-		else if(!empty(I("get.start")))
-		{
-			$start = I("get.start");
-			
-			$map["state"] = 100;
-			
-			if($start == "number") {
-				$where = "state = 100 AND letters REGEXP '^[0-9]'";
+			$where = "state = 100 AND letters REGEXP '^[0-9]'";
 				
-				$gtp_list = D("GtpView")->where($where)->order('download_num desc')->page($p.",{$size}")->select();
-				$count = D("GtpView")->where($where)->count();
-			} else {
-				$map["letters"] = array('like', "{$start}%");
-				
-				$gtp_list = D("GtpView")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
-				$count = D("GtpView")->where($map)->count();
-			}
+			$gtp_list = M("Gtp")->where($where)->order('download_num desc')->page($p.",{$size}")->select();
+			$count = M("Gtp")->where($where)->count();
 			
 			$this->assign("title", $start." 吉他谱"." 第{$p}页");
-			$this->assign("page_title", $start." 吉他谱"." 第{$p}页");
-		}
-		else
-		{
-			$map["state"] = 100;
 			
-			$gtp_list = D("GtpView")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
-			$count = D("GtpView")->where($map)->count();
+		} else {
 			
-			$this->assign("title", "吉他谱"." 第{$p}页");
-			$this->assign("page_title", "吉他谱"." 第{$p}页");
+			if(!empty($start)) {
+				
+				$map["letters"] = array('like', "{$start}%");
+				
+				$this->assign('start', $start);
+				$this->assign("title", $start." 吉他谱"." 第{$p}页");
+			}else if(!empty($k)) {
+				
+				$map["song_title"] = array('like', "%{$k}%");
+				
+				$this->assign('k', $k);
+				$this->assign("title", $k."吉他谱"." 第{$p}页");
+			} else if(!empty($artist_name)) {
+				
+				$map["artist_name"] = array('like', "%{$artist_name}%");
+				
+				$this->assign('artist_name', $artist_name);
+				$this->assign("title", $artist_name."吉他谱"." 第{$p}页");
+			} else if(!empty($author)) {
+				
+				$map["author"] = array('like', "%{$author}%");
+				
+				$this->assign('author', $author);
+				$this->assign("title", $author."制作 吉他谱"." 第{$p}页");
+			} else {
+				$this->assign("title", "吉他谱"." 第{$p}页");
+			}
+			
+			$gtp_list = M("Gtp")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
+			$count = M("Gtp")->where($map)->count();
 		}
-		//dump($list);
-
+		
 		$Page = new Page($count, $size);
-		if(!empty(I("get.k")))
-			$Page->parameter .= "$k=".urlencode(I("get.k"))."&";
+
+		//$Page = new Page($count, $size);
+		//if(!empty($k)) $Page->parameter .= "$k=".urlencode(I("get.k"))."&";
 		
 		//dump($Page);
 		$page = $Page->show();
+
 		
 		$this->assign('gtp_list', $gtp_list);
 		$this->assign('page', $page);
@@ -103,7 +80,30 @@ class GtpController extends BaseController
 		$this->display();
     }
 
-	public function details(){
+	public function search() {
+		
+		$p = I("get.p") ? I("get.p") : 1;
+		$size = 25;
+		
+		$k = urldecode(I("get.k"));
+		$map["song_title"] = array('like', "%{$k}%");
+		
+		$gtp_list = M("Gtp")->where($map)->order('download_num desc')->page($p.",{$size}")->select();
+		$count = M("Gtp")->where($map)->count();
+		
+		$Page = new Page($count, $size);
+		$page = $Page->show();
+		
+		$this->assign('k', $k);
+		$this->assign("title", $k."吉他谱"." 第{$p}页");
+		$this->assign('gtp_list', $gtp_list);
+		$this->assign('page', $page);
+		$this->assign("channel", "gtp");
+		
+		$this->display("index");
+	}
+
+	public function details() {
 		
 		$id = I("get.id");
 		$size = 10;
@@ -111,36 +111,39 @@ class GtpController extends BaseController
 		$map["state"] = 100;
 		$map["id"] = $id;
 		
-		$gtp = D("GtpView")->where($map)->find();
+		$gtp = M("Gtp")->where($map)->find();
+		$user = M("User")->where("id={$gtp['user_id']}")->find();
 		
 		$song_title_gtps_map["id"] = array('neq', $id);
 		$song_title_gtps_map["state"] = 100;
 		$song_title_gtps_map["artist_name"] = $gtp['artist_name'];
 		$song_title_gtps_map["song_title"] = $gtp['song_title'];
 		
-		$song_title_gtps = D("GtpView")->where($song_title_gtps_map)
+		$song_title_gtps = M("Gtp")->where($song_title_gtps_map)
 			->order('download_num desc')->limit($size)->select();
 			
 		$artist_name_gtps_map["id"] = array('neq', $id);
 		$artist_name_gtps_map["state"] = 100;
 		$artist_name_gtps_map["artist_name"] = $gtp['artist_name'];
 			
-		$artist_name_gtps = D("GtpView")->where($artist_name_gtps_map)
+		$artist_name_gtps = M("Gtp")->where($artist_name_gtps_map)
 			->order('download_num desc')->limit($size)->select();
 		
 		$vedio_map["state"] = 100;
 		$vedio_map["artist_name"] = $gtp["artist_name"];
 		$vedio_map["song_title"] = $gtp["song_title"];
 		
-		$vedioes = D("VedioView")->where($vedio_map)->order('view_num desc')->limit($size)->select();
+		$vedioes = M("Vedio")->where($vedio_map)->order('view_num desc')->limit($size)->select();
 		
 		$this->assign("gtp", $gtp);
+		$this->assign("user", $user);
 		$this->assign("song_title_gtps", $song_title_gtps);
 		$this->assign("artist_name_gtps", $artist_name_gtps);
 		$this->assign("vedioes", $vedioes);
 		$this->assign("title", $gtp['artist_name'].' '.$gtp['song_title'].' 吉他谱下载');
 		$this->assign("page_title", $gtp['artist_name'].' '.$gtp['song_title'].' 吉他谱下载');
 		$this->assign("description", $gtp['title']. ",".$gtp['song_title'].",".$gtp['artist_name'].",".'吉他谱,Guitar-Pro吉他谱');
+		$this->assign("can_edit", $this->can_edit("gtp", $gtp['id']));
 		
 		$this->assign("channel", "gtp");
 		
@@ -157,30 +160,19 @@ class GtpController extends BaseController
 		M("Gtp")->where($map)->setInc('download_num');
 		$gtp = M("Gtp")->where($map)->find();
 	
+		$download_file_name = $this->get_download_file_name($gtp);
+		
+		$this->render_gtp($download_file_name, $gtp['file_name']);
+	}
+	
+	private function get_download_file_name($gtp) {
+		
 		$extend = substr($gtp['file_name'], (strrpos($gtp['file_name'], '.') + 1 ));    
 		$extend = '.'.strtolower($extend);
 		$file_path = $_SERVER['DOCUMENT_ROOT']."gtp/";
 
-		$download_file_name = $gtp['artist_name']."-".$gtp['song_title'].$extend;
-		
-		$ua = $_SERVER["HTTP_USER_AGENT"];
-		$encoded_filename = urlencode($download_file_name);
-		$encoded_filename = str_replace("+", "%20", $encoded_filename);
-
-		header("Pragma: public");
-		header("Expires: 0");
-		header("Cache-Component: must-revalidate, post-check=0, pre-check=0");
-		header('Content-Type: application/octet-stream');
-
-		if (preg_match("/MSIE/", $ua))	
-			header('Content-Disposition: attachment; filename="' . $encoded_filename . '"');
-		else if (preg_match("/Firefox/", $ua))	
-			header('Content-Disposition: attachment; filename*="utf8\'\''.$download_file_name.'"');
-		else	
-			header('Content-Disposition: attachment; filename="'.$download_file_name. '"');
-		
-		readfile($file_path.substr($gtp['file_name'], 2));
-	 }
+		return $gtp['artist_name']."-".$gtp['song_title'].$extend;
+	}
 
 	public function _before_add() {
 		if($this->logined != true)
@@ -192,21 +184,26 @@ class GtpController extends BaseController
 		if(IS_POST) {
 			try {
 				
-				if(empty(I("post.artist_name")))
-					throw  new Exception("必须输入音乐人");
+				$artist_name = I("post.artist_name");
+				if(empty($artist_name))
+					E("必须输入音乐人");
 				
-				if(empty(I("post.song_title")))
-					throw new Exception("必须输入音乐名称");
+				$song_title = I("post.song_title");
+				if(empty($song_title))
+					E("必须输入音乐名称");
 				
 				if(empty($_FILES["file_name"]))
-					throw new Exception("必须上传Guitar Pro文件");
+					E("必须上传Guitar Pro文件");
+				
+				if($_FILES["file_name"]['size'] <= 0)
+					E("必须上传正确的Guitar Pro附件");
 				
 				$gtp = D("Gtp");
 		        if($gtp->create()) {
 		        	
 		        	$gtp->user_id = $this->uid;
-					$gtp->artist_name = trim(I("post.artist_name"));
-					$gtp->song_title = trim(I("post.song_title"));
+					$gtp->artist_name = trim($artist_name);
+					$gtp->song_title = trim($song_title);
 					
 					$gtp->author = trim(I("post.author"));
 					$gtp->source = trim(I("post.source"));
@@ -220,20 +217,18 @@ class GtpController extends BaseController
 						$upload = new Upload();
 						$upload->maxSize = 3145728;
 						$upload->saveName = 'time';
-						$upload->exts = array('gp3', 'gp4', 'gp5', 'gp6');
+						$upload->exts = array('gp3', 'gp4', 'gp5', 'gp6', 'gpx');
 						$upload->rootPath = './';
 						$upload->savePath = './upload/gtp/';
 						
 						$info = $upload->uploadOne($_FILES['file_name']);
 						if(!$info) {
-							throw new Exception($upload->getErrorMsg());
+							throw new Exception($upload->getError());
 						} else {
-							//echo $info['savepath'].$info['savename'];
-							$people->face = $info['savepath'].$info['savename'];
-							$gtp->file_name = $info['savepath'].$info['savename'];
+							$gtp->file_name = substr($info['savepath'].$info['savename'], 2);
 						}
 					} else {
-						throw new Exception("必须上传Guitar Pro附件");
+						E("必须上传Guitar Pro附件");
 					}
 					
 					$id = $gtp->add($data);
@@ -289,20 +284,28 @@ class GtpController extends BaseController
 		if(IS_POST) {
 			try
 			{
-				if(empty(I("post.artist_name")))
-					throw new Exception("必须输入音乐人");
+				$artist_name = I("post.artist_name");
+				$song_title = I("post.song_title");
 				
-				if(empty(I("post.song_title")))
-					throw new Exception("必须输入音乐名称");
+				if(empty($artist_name))
+					E("必须输入音乐人");
 				
+				if(empty($song_title))
+					E("必须输入音乐名称");
 				
-				$data['artist_name'] = trim(I("post.artist_name"));
-				$data['song_title'] = trim(I("post.song_title"));
+				if(empty($_FILES["file_name"]))
+					E("必须上传Guitar Pro附件");
+				
+				if($_FILES["file_name"]['size'] <= 0)
+					E("必须上传正确的Guitar Pro附件");
+				
+				$data['artist_name'] = trim($artist_name);
+				$data['song_title'] = trim($song_title);
 				$data['author'] = trim(I("post.author"));
 				$data['source'] = trim(I("post.source"));
 				
 				$pinyin = new PinYin();
-				$data['letters'] = $pinyin->pinyin(trim(I("post.song_title")));
+				$data['letters'] = $pinyin->pinyin(trim($song_title));
 				
 				$id = $_POST['id'];
 				
@@ -310,7 +313,7 @@ class GtpController extends BaseController
 					
 					$upload = new Upload();
 					$upload->maxSize = 3145728;
-					$upload->allowExts = array('gp3', 'gp4', 'gp5', 'gp6');
+					$upload->allowExts = array('gp3', 'gp4', 'gp5', 'gp6', 'gpx');
 					
 					$gtp = M("Gtp")->where("id={$id}")->find();
 					$arr = explode(".", $gtp['file_name']);
@@ -341,7 +344,11 @@ class GtpController extends BaseController
 				$this->display();
 	    	}
 		} else  {
-			$gtp = M("Gtp")->where("id={I('get.id')}")->find();
+			
+			$id = I("get.id");
+			$map["id"] = $id;
+			$map["state"] = 100;
+			$gtp = M("Gtp")->where($map)->find();
 		
 			$this->assign("gtp_id", $id);
 			$this->assign("gtp", $gtp);

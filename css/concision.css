@@ -10,7 +10,10 @@ ol{ margin-left: 40px; }
 .c3 {color: #333;}
 .c6 {color: #666;}
 .c7 {color: #777;}
+.c9 {color: #999;}
 .clear {clear: both;}
+
+.face { width: 50px; height: 50px; border: 3px solid #c7c7c7; }
 
 .cf{ zoom: 1; }
 .cf:after{ content : '.'; display: block; visibility: hidden; height: 0; line-height: 0; font-size: 0; clear: both; }
@@ -50,7 +53,7 @@ textarea{ resize: none; overflow: auto;}
 a{ text-decoration: none; color: #007DDB; }
 a:hover{ text-decoration: underline; }
 
-.header{ width: 100%; height: 54px; background-color: #323232; line-height: 54px; color: #fff; position: fixed!important; position: absolute; top: 0; left: 0; z-index: 5;border-bottom:1px solid silver }
+.header{ width: 100%; height: 54px; background-color: #323232; line-height: 54px; color: #fff; position: fixed!important; position: absolute; top: 0; left: 0; z-index: 10;border-bottom:1px solid silver }
 .wp{ max-width: 980px!important; width: auto!important; width: 980px; padding: 0 12px; margin: 0 auto; position:relative;}
 .contaier{ padding-bottom: 18px; padding-top: 74px; background: #fff; height: auto!important; min-height: 500px; height: 500px; }
 .ident{ position: fixed!important;position: absolute; left: 25px; top: 60px; opacity: 0.2; filter: alpha(opacity=20); width: 102px; font-size: 92px; z-index: -1; color: #333; }
@@ -296,6 +299,8 @@ a:hover{ text-decoration: underline; }
 .form th{ font-weight: normal; vertical-align: top; line-height: 32px; padding-right: 9px; text-align: left; }
 .form .text{ height: 24px; width: 350px; line-height: 24px; padding: 3px; border: 1px solid #ccc; }
 .form .text:focus{ box-shadow: 0 0 5px rgba(52,143,212,.6); border-color: #348FD4; }
+.form .textarea { line-height: 24px; padding: 3px; border: 1px solid #ccc; }
+.form .textarea:focus{ box-shadow: 0 0 5px rgba(52,143,212,.6); border-color: #348FD4; }
 .form .checkbox{ margin-right: 6px; }
 .form .submit{ background: #348FD4; color: #fff; font-size: 16px; height: 30px; line-height: 21px; padding: 0 24px; vertical-align: middle; border: 0; cursor: pointer; }
 .form .submit:hover{ background-color: #2F81BF; }
@@ -349,7 +354,7 @@ a:hover{ text-decoration: underline; }
 .item .trhead strong sub{ margin-left: 6px; font-size: 18px; color: #999; font-weight: normal; vertical-align: middle; }
 .item li{ height: 35px; line-height: 35px;border-bottom:1px dashed #eee;  overflow: hidden; }
 .item .title{ margin-right: 12px; }
-.item .title a{ color: #333; font-size: 16px;font-weight:500; }
+.item .author a{ color: #333; font-size: 16px;font-weight:500; }
 .item .comment a{  }
 .item .status{ color: blue; }
 .item .date{ float: right; }

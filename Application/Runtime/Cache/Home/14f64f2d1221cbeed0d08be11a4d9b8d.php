@@ -15,8 +15,8 @@
     <link rel="shortcut icon" href="http://localhost:9990/gtp/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/concision.css" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/prettify.css" />
-    <script type="text/javascript" src="http://localhost:9990/gtp/js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="http://localhost:9990/gtp/js/apu9.js"></script>
+    <script type="text/javascript" src="http://localhost:9990/gtp/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="http://localhost:9990/gtp/js/guitar.js"></script>
 </head>
 <body>
     <div class="header">
@@ -31,73 +31,94 @@
                 <?php if(!$_logined) { ?>
                 [<a href="http://localhost:9990/gtp/user/login">登录</a><a href="http://localhost:9990/gtp/user/register">注册</a>]
                 <?php } else { ?>
-                [ <?php echo (urldecode($_nick)); ?> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
+                [ <?php echo (urldecode($_nick)); ?> <a href="http://localhost:9990/gtp/user/settings">设置</a> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
                 <?php } ?>
             </p>
         </div>
     </div>
-
-<div class="contaier wp cf">
-<div class="ident">注册</div>
-    <div class="register">
-        <div class="head">
-            <strong>用户注册</strong><span>已有帐号？点击<a href="http://localhost:9990/gtp/user/login">登录</a></span>
-            <?php if (!empty($err)): ?><span style="color: red"><?php echo ($err); ?></span><?php endif; ?>
-        </div>
+     
+<div class="contaier wp">
+    <div class="add">
         <div class="body form">
-            <form action="http://localhost:9990/gtp/user/register" method="post" class="login">
+            <form action="http://localhost:9990/gtp/vedio/edit/<?php echo ($vedio["id"]); ?>" method="post">
                 <table>
+                    <?php if (!empty($err)): ?>
+                     <tr>
+                        <th></th>
+                        <td><span style="color: red"><?php echo ($err); ?></span></td>
+                    </tr>
+                    <?php endif; ?>
                     <tr>
-                        <th>用户名</th>
-                        <td>
-                            <input class="text" type="text" name="nick" value=""  />
+                        <th><i class="must">*</i>视频标题</th>
+                        <td><input class="text" type="text" name="title" id="title" value="<?php echo ($vedio["title"]); ?>" />
                         </td>
                     </tr>
                     <tr>
-                        <th>密码</th>
+                        <th><i class="must">*</i>视频截图</th>
                         <td>
-                            <input class="text" type="password" name="pwd" />
+                            <?php if (empty($vedio['thumb'])): ?>
+                            <img src="http://localhost:9990/gtp/upload/thumb/default.jpg" name="thumb" id="thumb" alt="上传视频缩略图" width="120" height="90" />
+                            <?php else: ?>
+                            <img src="<?php echo ($vedio["thumb"]); ?>" name="thumb" id="thumb" alt="上传视频缩略图" width="120" height="90" />
+                            <?php endif; ?>
                         </td>
                     </tr>
                     <tr>
-                        <th>确认密码</th>
-                        <td>
-                            <input class="text" type="password" name="re_pwd" />
+                        <th><i class="must">*</i>截图地址</th>
+                        <td><input class="text" type="text" name="thumb_value" id="thumb_value" value="<?php echo ($vedio["thumb"]); ?>" />
                         </td>
                     </tr>
                     <tr>
-                        <th>邮箱</th>
+                        <th><i class="must">*</i>视频swf</th>
+                        <td><input class="text" type="text" name="code" id="code" value="<?php echo ($vedio["code"]); ?>" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><i class="must">*</i>音乐人</th>
+                        <td><input class="text" type="text" name="artist_name" value="<?php echo ($vedio["artist_name"]); ?>" /></td>
+                    </tr>
+                    <tr>
+                        <th><i class="must">*</i>歌曲名称</th>
+                        <td><input class="text" type="text" name="song_title" value="<?php echo ($vedio["song_title"]); ?>" /></td>
+                    </tr>
+                    <tr>
+                        <th>标&#12288;&#12288;签</th>
+                        <td><input class="text" type="text" name="tags" value="<?php echo ($vedio["tags"]); ?>" /> 用空格分隔</td>
+                    </tr>
+                    <tr>
+                        <th>摘&#12288;&#12288;要</th>
                         <td>
-                            <input class="text" type="text" name="email" value="" />
+                            <div class="add-remark">
+                                <textarea name="description"><?php echo ($vedio["description"]); ?></textarea>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <th>&nbsp;</th>
-                        <td>
-                            <input class="submit" type="submit" value="完成" />
+                        <td> <input class="submit" type="submit" value="提交" />
                         </td>
                     </tr>
                 </table>
+                <input type="hidden" name="id" value="<?php echo ($vedio["id"]); ?>" />
             </form>
         </div>
     </div>
-    <div class="login-other">
-        <div class="head">
-            <strong>使用其他帐号直接登录</strong>
-        </div>
-        <div class="body">
-            <ul class="other-account">
-                <li><a class="qq" href="/oauth/index/type/qq.html">腾讯QQ登录</a></li><li><a class="tencent" href="/oauth/index/type/tencent.html">腾讯微博登录</a></li><li><a class="t163" href="/oauth/index/type/t163.html">网易微博登录</a></li><li><a class="sina" href="/oauth/index/type/sina.html">新浪微博登录</a></li>            </ul>
+            
+            
+    <div class="home-right">
+        <div class="fast">
+            <dl>
+                <dt>发布应用<sub>Publish</sub></dt>
+                <dd>应用标识、中文描述、应用主页（以http打头）、分类和应用LOGO（不超过50K 支持JPG PNG和GIF）必须，描述和标签可选，多个标签之间用空格分隔，案例发布需要审核。</dd>
+            </dl>
+            <dl>
+                <dt>快捷键<sub>Keyboard</sub></dt>
+                <dd>选中文字内容后使用键盘快捷键<br/>CTRL+B ：字体加粗<br/>ALT + U ：添加超链接<br/> ALT + C ：插入代码</dd>
+            </dl>
         </div>
     </div>
+        
 </div>
-<script type="text/javascript">
-    $(function(){
-        $('.reloadverify').click(function(){
-            $('.verifyimg').attr('src', "/member/verify.html?" + Math.random());
-        });
-    })
-</script>
 
 <div class="footer">
         <div class="wp">
@@ -106,6 +127,7 @@
             <p class="links"><a href="/donate/index.html">捐赠</a><a href="/rss/index.xml">订阅</a><a href="/about/attention.html">关注</a><a href="http://bbs.thinkphp.cn" target="_blank">论坛</a></p>
         </div>
     </div>
+    <input type="hidden" name="site" id="site" value="http://localhost:9990/gtp" />
 <div style="display:none">
     <script language="javascript" type="text/javascript" src="http://js.users.51.la/14961362.js"></script>
 <noscript><a href="http://www.51.la/?14961362" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/14961362.asp" style="border:none" /></a></noscript>

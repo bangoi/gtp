@@ -1,0 +1,82 @@
+<tagLib name="html" />
+<include file="Public:header" />
+
+<div class="contaier wp cf">
+<div class="ident">设置</div>
+    <div class="login" style="width: 660px;">
+        <div class="head" style="height: 0px;">
+            <?php if (!empty($err)): ?><span style="color: red">{$err}</span><?php endif; ?>
+            <?php if (!empty($notice)): ?><span style="color: #fff;background: green; padding: 3px 10px 3px 10px;">{$notice}</span><?php endif; ?>
+        </div>
+        <div class="body form ">
+            <form action="__SITE__/user/settings" method="post" class="login">
+                <table>
+                    <tr>
+                        <th>昵&#12288;称</th>
+                        <td>
+                            <input class="text" type="text" name="nick" value="{$user.nick}" disabled="true" style="width: 150px;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>头&#12288;像</th>
+                        <td>
+                            <img src="__SITE__/<?php get_imgPath($user['face'], 's'); ?>" class="face" /> <a href="__SITE__/user/face" style="line-height: 50px;">设置</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>域&#12288;名</th>
+                        <td>
+                            <?php if(empty($user['domain'])) { ?>
+                            <span class="c6">__SITE__/</span><input class="text" type="text" name="domain" style="width: 100px;" />
+                            <?php } else { ?>
+                            <span class="c6">__SITE__/</span><input class="text" type="text" name="domain" value="{$user.domain}" disabled="true" style="width: 100px;" />
+                            <?php } ?>
+                            <br/>
+                            <span class="c9 f14" style="line-height: 28px;">个性域名只能由4-20个字母或数字组成，且第一位不能为数字，只能修改一次！</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>所在地</th>
+                        <td>
+                            <select name="province_code" id="sltProvince">
+                                <option value="-1">-所在省-</option>
+                                <foreach name="province_list" item="item">
+                                    <option value="{$item.code}" <?php if($user["province_code"] == $item["code"]) { ?>selected="selected"<?php } ?>>{$item.name}</option>
+                                </foreach>
+                            </select>&nbsp;
+                            <select name="city_code" id="sltCity">
+                                <option value="-1">-所在市-</option>
+                                <?php if(!empty($city)){ ?>
+                                    <option value="{$city["code"]}" selected="selected">{$city["name"]}</option>
+                                <?php } ?>
+                                <?php if(!empty($city_list)){ ?>
+                                    <foreach name="city_list" item="item">
+                                        <option value="{$item.code}" <?php if($user["city_code"] == $item["code"]) { ?>selected="selected"<?php } ?>>{$item.name}</option>
+                                    </foreach>
+                                <?php } ?>    
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>签&#12288;名</th>
+                        <td>
+                            <textarea name="signature" class="textarea" rows="5" cols="50">{$user.signature}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <td>
+                            <input type="hidden" name="page" value="{$page}" />
+                            <input class="submit" type="submit" value="编辑" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="login-other" style="width: 230px;padding-left: 20px; min-width: 0px;">
+        <include file="Public:operate_panel" />
+    </div>
+</div>
+
+<include file="Public:footer" />

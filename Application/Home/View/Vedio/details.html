@@ -11,11 +11,11 @@
                 <div class="app-info">
                     <span class="date">{$vedio.add_time|toDate='Y-m-d H:i'}</span>
                     <a class="author" href="__SITE__/vedio/?artist_name={$vedio.artist_name|urlencode}">{$vedio.artist_name}吉他视频</a>
-                    <span class="version">{$vedio.nick}</span>
+                    <span class="version"><a href="__SITE__/user/<?php get_domain($user); ?>">{$user.nick}</a>发布</span>
                     <a class="class" href="__SITE__/vedio/">[ 吉他视频 ]</a>
-                    <?php if (empty($nick) == false): ?>
+                    <?php if ($can_edit) { ?>
                     <a href="__SITE__/vedio/edit/{$vedio.id}">[编辑]</a>
-                    <?php endif; ?>
+                    <?php } ?>
                     <div class="score">
                         <span record="37" class="score" model="45" score="0"></span>
                         <span class="total">(共<span id="score-count">{$vedio.view_num}</span>人看过)</span>
@@ -37,7 +37,7 @@
                     </div>
                     <ul>
                         <foreach name="gtps" item="gtp">
-                        <li><a href="__SITE__/gtp/{$gtp.id}">{$gtp.song_title}-{$gtp.artist_name}</a> {$gtp.add_time|toDate='Y-m-d H:i'}</li>
+                        <li><a href="__SITE__/gtp/{$gtp.id}">{$gtp.song_title}-{$gtp.artist_name}</a> 下载：{$gtp.download_num}次</li>
                         </foreach>
                     </ul>
                 </div>
@@ -69,6 +69,8 @@
                 </p>
                 
             </div>
+            
+            <!--
             <div class="foot">
                 <span class="fpage">
                     <a class="prev" href="/app/jdcms.html" title="上一篇"><span>上一篇</span></a>                <a class="dir" href="__SITE__/vedio/" title="返回目录">返回目录</a>
@@ -79,9 +81,12 @@
                     <a class="tencent" href="javascript:;">腾讯微博</a>
                 </span>
             </div>
+            -->
         </div>
         <!--/文章详细-->
         <!--文章评论-->
+        
+        <!--
         <div class="review">
     <div class="trhead">
         <a name="review"></a>
@@ -100,7 +105,7 @@
                 <input type="hidden" value="0" name="review_id" />
                 <input class="submit" type="submit" value="评论" />
                 <span class="strleng">评论支持使用[code][/code]标签添加代码</span>
-                <!-- <span class="syn">同步到：<a href="#">新浪微博</a><a href="#">腾讯微博</a></span> -->
+                <!-- <span class="syn">同步到：<a href="#">新浪微博</a><a href="#">腾讯微博</a></span>
             </form>
         </div>
         <div class="login-tip">
@@ -108,7 +113,7 @@
         </div>
     </div>
 </div>
-
+        -->
         <!--/文章评论-->
     </div>
     <!-- right begin --> 

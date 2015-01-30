@@ -11,11 +11,11 @@
                 <div class="app-info">
                     <span class="date">{$gtp.add_time|toDate='Y-m-d H:i'}</span>
                     <a class="author" href="__SITE__/gtp/?artist_name={$gtp.artist_name|urlencode}">{$gtp.artist_name}的吉他谱</a>
-                    <span class="version">{$gtp.nick}上传</span>
+                    <span class="version"><a href="__SITE__/user/<?php get_domain($user); ?>">{$user.nick}</a>上传</span>
                     <a class="class" href="__SITE__/gtp/">[ 吉他谱 ]</a>
-                    <?php if (empty($nick) == false): ?>
+                    <?php if ($can_edit) { ?>
                     <a href="__SITE__/gtp/edit/{$gtp.id}">[编辑]</a>
-                    <?php endif; ?>
+                    <?php } ?>
                     <div class="score">
                         <span record="37" class="score" model="45" score="0"></span>
                         <span class="total">(共<span id="score-count">{$gtp.download_num}</span>人下载)</span>
@@ -48,7 +48,7 @@
                     </div>
                     <ul>
                         <foreach name="artist_name_gtps" item="g">
-                        <li><a href="__SITE__/gtp/{$g.id}">{$g.song_title}-{$g.artist_name}</a> {$g.add_time|toDate='Y-m-d H:i'}</li>
+                        <li><a href="__SITE__/gtp/{$g.id}">{$g.song_title}-{$g.artist_name}</a> 下载：{$g.download_num}次</li>
                         </foreach>
                     </ul>
                 </div>
@@ -83,6 +83,7 @@
                 
             </div>
             
+            <!--
             <div class="foot">
                 <span class="fpage">
                     <a class="prev" href="/app/jdcms.html" title="上一篇"><span>上一篇</span></a>                <a class="dir" href="__SITE__/gtp/" title="返回目录">返回目录</a>
@@ -93,64 +94,41 @@
                     <a class="tencent" href="javascript:;">腾讯微博</a>
                 </span>
             </div>
+            -->
+            
         </div>
         <!--/文章详细-->
         <!--文章评论-->
+        
+        <!--
         <div class="review">
-    <div class="trhead">
-        <a name="review"></a>
-        <strong>评论</strong>共<span class="review-count">{$gtp.comment_num}</span>条
-    </div>
-    <div class="trbody">
-        <div class="review-users"></div>
-        <div class="review-more">
-            <a href="javascript:get_review();">查看更多评论↓</a>
+            <div class="trhead">
+                <a name="review"></a>
+                <strong>评论</strong>共<span class="review-count">{$gtp.comment_num}</span>条
+            </div>
+            <div class="trbody">
+                <div class="review-users"></div>
+                <div class="review-more">
+                    <a href="javascript:get_review();">查看更多评论↓</a>
+                </div>
+                <div class="review-form cf">
+                    <form action="/review/update.html" method="post">
+                        <span class="textarea"><textarea name="content"></textarea></span>
+                        <input type="hidden" value="45" name="model_id" />
+                        <input type="hidden" value="37" name="record_id" />
+                        <input type="hidden" value="0" name="review_id" />
+                        <input class="submit" type="submit" value="评论" />
+                        <span class="strleng">评论支持使用[code][/code]标签添加代码</span>
+                        <span class="syn">同步到：<a href="#">新浪微博</a><a href="#">腾讯微博</a></span>
+                    </form>
+                </div>
+                <div class="login-tip">
+                    您需要登录后才可以评论 <a href="/member/login.html">登录</a> | <a href="/member/register.html">立即注册</a>
+                </div>
+            </div>
         </div>
-        <div class="review-form cf">
-            <form action="/review/update.html" method="post">
-                <span class="textarea"><textarea name="content"></textarea></span>
-                <input type="hidden" value="45" name="model_id" />
-                <input type="hidden" value="37" name="record_id" />
-                <input type="hidden" value="0" name="review_id" />
-                <input class="submit" type="submit" value="评论" />
-                <span class="strleng">评论支持使用[code][/code]标签添加代码</span>
-                <!-- <span class="syn">同步到：<a href="#">新浪微博</a><a href="#">腾讯微博</a></span> -->
-            </form>
-        </div>
-        <div class="login-tip">
-            您需要登录后才可以评论 <a href="/member/login.html">登录</a> | <a href="/member/register.html">立即注册</a>
-        </div>
-    </div>
-</div>
-<script type="text/javascript">
-    var title,url;
-    $('.share a').click(function(){
-        var ele = $(this).closest('.info').find('.tihead h3 a');
-        title = encodeURIComponent("{$gtp.artist_name}-{$gtp.song_title} 吉他谱下载");
-        url   = encodeURIComponent(document.location);
-        window.open( eval($(this).attr('class') + '()') , "_blank" ,"width=680,height=430,scrollbars=no,location=no" ) ;
-    });
-    function tencent(){
-        var param = [
-            'c=share',
-            'a=index',
-            'url=' + url,
-            'appkey=801098607',
-            'title=' + title
-        ].join('&');
-        return 'http://share.v.t.qq.com/index.php?' + param;
-    }
-    function sina(){
-        var param = [
-            'url=' + url,
-            'appkey=3891435835',
-            'title=' + title
-        ].join('&');
-        return 'http://service.weibo.com/share/share.php?' + param;
-    }
-    $('textarea').focus(function(){if($(this).val() == '输入你的评论内容...') $(this).val('')});
-
-</script>
+        -->
+        
         <!--/文章评论-->
     </div>
     <!-- right begin --> 

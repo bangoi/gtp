@@ -15,8 +15,8 @@
     <link rel="shortcut icon" href="http://localhost:9990/gtp/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/concision.css" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/prettify.css" />
-    <script type="text/javascript" src="http://localhost:9990/gtp/js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="http://localhost:9990/gtp/js/apu9.js"></script>
+    <script type="text/javascript" src="http://localhost:9990/gtp/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="http://localhost:9990/gtp/js/guitar.js"></script>
 </head>
 <body>
     <div class="header">
@@ -31,7 +31,7 @@
                 <?php if(!$_logined) { ?>
                 [<a href="http://localhost:9990/gtp/user/login">登录</a><a href="http://localhost:9990/gtp/user/register">注册</a>]
                 <?php } else { ?>
-                [ <?php echo (urldecode($_nick)); ?> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
+                [ <?php echo (urldecode($_nick)); ?> <a href="http://localhost:9990/gtp/user/settings">设置</a> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
                 <?php } ?>
             </p>
         </div>
@@ -47,11 +47,11 @@
                 <div class="app-info">
                     <span class="date"><?php echo (todate($vedio["add_time"],'Y-m-d H:i')); ?></span>
                     <a class="author" href="http://localhost:9990/gtp/vedio/?artist_name=<?php echo (urlencode($vedio["artist_name"])); ?>"><?php echo ($vedio["artist_name"]); ?>吉他视频</a>
-                    <span class="version"><?php echo ($vedio["nick"]); ?></span>
+                    <span class="version"><a href="http://localhost:9990/gtp/user/<?php get_domain($user); ?>"><?php echo ($user["nick"]); ?></a>发布</span>
                     <a class="class" href="http://localhost:9990/gtp/vedio/">[ 吉他视频 ]</a>
-                    <?php if (empty($nick) == false): ?>
+                    <?php if ($can_edit) { ?>
                     <a href="http://localhost:9990/gtp/vedio/edit/<?php echo ($vedio["id"]); ?>">[编辑]</a>
-                    <?php endif; ?>
+                    <?php } ?>
                     <div class="score">
                         <span record="37" class="score" model="45" score="0"></span>
                         <span class="total">(共<span id="score-count"><?php echo ($vedio["view_num"]); ?></span>人看过)</span>
@@ -72,7 +72,7 @@
                         <b><?php echo ($vedio["song_title"]); ?> 吉他谱下载</b>
                     </div>
                     <ul>
-                        <?php if(is_array($gtps)): foreach($gtps as $key=>$gtp): ?><li><a href="http://localhost:9990/gtp/gtp/<?php echo ($gtp["id"]); ?>"><?php echo ($gtp["song_title"]); ?>-<?php echo ($gtp["artist_name"]); ?></a> <?php echo (todate($gtp["add_time"],'Y-m-d H:i')); ?></li><?php endforeach; endif; ?>
+                        <?php if(is_array($gtps)): foreach($gtps as $key=>$gtp): ?><li><a href="http://localhost:9990/gtp/gtp/<?php echo ($gtp["id"]); ?>"><?php echo ($gtp["song_title"]); ?>-<?php echo ($gtp["artist_name"]); ?></a> 下载：<?php echo ($gtp["download_num"]); ?>次</li><?php endforeach; endif; ?>
                     </ul>
                 </div>
                 <?php endif; ?>
@@ -101,6 +101,8 @@
                 </p>
                 
             </div>
+            
+            <!--
             <div class="foot">
                 <span class="fpage">
                     <a class="prev" href="/app/jdcms.html" title="上一篇"><span>上一篇</span></a>                <a class="dir" href="http://localhost:9990/gtp/vedio/" title="返回目录">返回目录</a>
@@ -111,9 +113,12 @@
                     <a class="tencent" href="javascript:;">腾讯微博</a>
                 </span>
             </div>
+            -->
         </div>
         <!--/文章详细-->
         <!--文章评论-->
+        
+        <!--
         <div class="review">
     <div class="trhead">
         <a name="review"></a>
@@ -132,7 +137,7 @@
                 <input type="hidden" value="0" name="review_id" />
                 <input class="submit" type="submit" value="评论" />
                 <span class="strleng">评论支持使用[code][/code]标签添加代码</span>
-                <!-- <span class="syn">同步到：<a href="#">新浪微博</a><a href="#">腾讯微博</a></span> -->
+                <!-- <span class="syn">同步到：<a href="#">新浪微博</a><a href="#">腾讯微博</a></span>
             </form>
         </div>
         <div class="login-tip">
@@ -140,7 +145,7 @@
         </div>
     </div>
 </div>
-
+        -->
         <!--/文章评论-->
     </div>
     <!-- right begin --> 
@@ -162,6 +167,7 @@
             <p class="links"><a href="/donate/index.html">捐赠</a><a href="/rss/index.xml">订阅</a><a href="/about/attention.html">关注</a><a href="http://bbs.thinkphp.cn" target="_blank">论坛</a></p>
         </div>
     </div>
+    <input type="hidden" name="site" id="site" value="http://localhost:9990/gtp" />
 <div style="display:none">
     <script language="javascript" type="text/javascript" src="http://js.users.51.la/14961362.js"></script>
 <noscript><a href="http://www.51.la/?14961362" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/14961362.asp" style="border:none" /></a></noscript>
