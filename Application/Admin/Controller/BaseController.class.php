@@ -39,13 +39,29 @@ class BaseController extends Controller {
 	
 	protected function permission_verifying() {
 		if(!$this->logined) {
-			$this->redirect("m/people/login");
+			$this->redirect("admin/user/login");
 		} else {
 			$user_id = $this->uid;
-			$people = M("People")->where("id={$user_id}")->find();
-			if($people["state"] != 100)
-				redirect(C("TMPL_PARSE_STRING.__SITE__")."/m/notice/?key=register");
+			$user = M("User")->where("id={$user_id}")->find();
+			if($user["state"] != 100 || $user["role"] != "admin")
+				redirect(C("TMPL_PARSE_STRING.__SITE__")."/admin/user/login");
 		}
+	}
+	
+	protected function is_admin() {
+		$is_verified = true;
+		if(!$this->logined) {
+			$is_verified = false;
+			echo "not logined";
+		} else {
+			$user_id = $this->uid;
+			$user = M("User")->where("id={$user_id}")->find();
+			if($user["state"] != 100 || $user["role"] != "admin") {
+				echo "not 100 or is not admin";
+				$is_verified = false;
+			}
+		}
+		return $is_verified;
 	}
 	
 }

@@ -53,7 +53,7 @@
     <div class="am-offcanvas-bar admin-offcanvas-bar">
         
       <ul class="am-list admin-sidebar-list">
-    <li><a href="http://localhost:9990/gtp"><span class="am-icon-home"></span>首页</a></li>
+    <li><a href="http://localhost:9990/gtp/admin"><span class="am-icon-home"></span>首页</a></li>
     <li class="admin-parent">
           <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}">
               <span class="am-icon-file"></span>内容管理 

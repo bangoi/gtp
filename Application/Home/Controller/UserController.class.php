@@ -53,7 +53,6 @@ class UserController extends BaseController {
 				}
 					
 			} catch (Exception $ex) {
-				dump($ex);
 				$this->assign("nick", I("post.nick"));
 				$this->assign("email", I("post.email"));
 				$this->assign("page", I("post.page"));

@@ -8,14 +8,14 @@ use Think\Page;
 class BlogController extends BaseController {
 	
 	public function _before_index() {
-		if($this->logined != true)
-			redirect($this->site_url."/user/login/?page=admin/blog/add");
+		if(!$this->is_admin())
+			redirect($this->site_url."/user/login/?page=admin/blog/index");
 	}
 	
     public function index() {
     	
 		$p = I("get.p") ? I("get.p") : 1;
-		$size = 2;
+		$size = 10;
     	
 		$blog_list = D("BlogView")->where($where)->order('add_time desc')->page($p.",{$size}")->select();
 		$count = D("BlogView")->where($where)->count();
@@ -30,7 +30,7 @@ class BlogController extends BaseController {
     }
 	
 	public function _before_add() {
-		if($this->logined != true)
+		if(!$this->is_admin())
 			redirect($this->site_url."/user/login/?page=admin/blog/add");
 	}
 	
@@ -54,8 +54,8 @@ class BlogController extends BaseController {
 	}
 	
 	public function _before_edit() {
-		if($this->logined != true)
-			redirect($this->site_url."/user/login/?page=admin/blog/edit");
+		if(!$this->is_admin())
+			redirect($this->site_url."/user/login/?page=admin/blog/edit/".I("get.id"));
 	}
 	
 	public function edit() {
@@ -66,8 +66,6 @@ class BlogController extends BaseController {
 				$content = trim(I("post.content"));
 				
 				if(empty($title)) E("必须输入标题");
-				
-				
 				if(empty($content)) E("必须输入内容");
 				
 				$id = I("post.id");

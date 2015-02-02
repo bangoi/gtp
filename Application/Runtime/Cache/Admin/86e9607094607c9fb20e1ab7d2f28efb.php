@@ -57,7 +57,7 @@
     <div class="am-offcanvas-bar admin-offcanvas-bar">
         
       <ul class="am-list admin-sidebar-list">
-    <li><a href="http://localhost:9990/gtp"><span class="am-icon-home"></span>首页</a></li>
+    <li><a href="http://localhost:9990/gtp/admin"><span class="am-icon-home"></span>首页</a></li>
     <li class="admin-parent">
           <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}">
               <span class="am-icon-file"></span>内容管理 
@@ -96,7 +96,7 @@
 <div class="admin-content">
 
   <div class="am-cf am-padding">
-    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">编辑Blog</strong> / <small>form</small></div>
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">编辑Blog信息</strong> / <small>form</small></div>
   </div>
 
   <div class="am-tabs am-margin" data-am-tabs>

@@ -38,6 +38,7 @@ return array(
 		'user/logout' => 'user/logout',
 		'user/get_city' => 'user/get_city',
 		'user/edit/:id' => 'user/edit',
+		'user/edit' => 'user/edit',
 		'user/delete/:id' => 'user/delete',
 		'user/:id\d$' => 'user/details',
 		'user/:domain\s$' => 'user/details',

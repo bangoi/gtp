@@ -319,3 +319,10 @@ gallery.html css
   width: 200px;
   margin: 0 auto;
 }
+
+.page{ padding: 12px 0; margin-bottom: 18px; }
+.page a,.page span{ display: inline-block; color: #333; height: 28px; line-height: 28px; vertical-align: top; padding: 0 10px; border: 1px solid #CDCDCD; margin: 0 3px; }
+.page span{ font-weight: 700; background-color: #1584D9; color: #fff; border-color: #1584D9; }
+.page a:hover{ border-color: #1584D9; text-decoration: none; color: #1584D9; }
+.page .prev,.page .next{ font-family: '宋体'; }
+.page { clear: both;}

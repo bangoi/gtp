@@ -2,26 +2,7 @@
 
 <div class="am-cf admin-main">
   <!-- sidebar start -->
-  <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
-    <div class="am-offcanvas-bar admin-offcanvas-bar">
-        
-      <include file="Public:navi" />
-
-      <div class="am-panel am-panel-default admin-sidebar-panel">
-        <div class="am-panel-bd">
-          <p><span class="am-icon-bookmark"></span> 公告</p>
-          <p>时光静好，与君语；细水流年，与君同。—— Amaze UI</p>
-        </div>
-      </div>
-
-      <div class="am-panel am-panel-default admin-sidebar-panel">
-        <div class="am-panel-bd">
-          <p><span class="am-icon-tag"></span> wiki</p>
-          <p>Welcome to the Amaze UI wiki!</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <include file="Public:sidebar" />
   <!-- sidebar end -->
 
   <!-- content start -->
@@ -96,21 +77,11 @@
             </foreach>
           </tbody>
         </table>
-          <div class="am-cf">
-              {$page}
-  共 15 条记录
-  <div class="am-fr">
-    <ul class="am-pagination">
-      <li class="am-disabled"><a href="#">«</a></li>
-      <li class="am-active"><a href="#">1</a></li>
-      <li><a href="#">2</a></li>
-      <li><a href="#">3</a></li>
-      <li><a href="#">4</a></li>
-      <li><a href="#">5</a></li>
-      <li><a href="#">»</a></li>
-    </ul>
-  </div>
-</div>
+        <div class="am-cf">
+            <div class="page" style="float: right;">
+            {$page}
+            </div>
+        </div>
           <hr />
           <p>注：.....</p>
         </form>
