@@ -1,0 +1,139 @@
+<tagLib name="html" />
+<include file="Public:header" />
+
+<div class="contaier thinkphp-app wp">
+    <div class="app-left">
+        <div class="ident">小组</div>
+        <!--文章详细-->
+        <div class="app-detail">
+            <div class="head">
+                <h1>Tommy Emmanuel</h1>
+                <div class="app-info">
+                        创建于：{$group.add_time|toDate}
+                    
+                    <?php if($_logined){ ?>
+                    <?php if (is_group_owner($group["id"], $_uid)) { ?>
+                    <a href="__SITE__/group/edit/{$group["id"]}">[编辑小组信息]</a> - 我是小组创建者
+                    <?php } else if (is_group_admin($group["id"], $_uid)) { ?>
+                    <a href="__SITE__/group/edit/{$group["id"]}">[编辑小组信息]</a> - 我是小组管理员
+                    <?php } else if (is_group_member($group["id"], $_uid)) { ?>
+                    - 我是小组成员
+                    <?php } ?>
+                    <?php } ?>
+                    <div class="score">
+                        <span record="37" class="score" model="45" score="0"></span>
+                        <span class="total">组员：<span id="score-count">{$group.user_num}</span>人</span> &nbsp;
+                        <?php if($_logined){ ?>
+                        <?php if (is_group_member($group["id"], $_uid)) { ?>
+                        <a href="__SITE__/group/join/{$group["id"]}?type=out">[退出小组]</a>
+                        <?php } else { ?>
+                        <a href="__SITE__/group/join/{$group["id"]}">[加入小组]</a>
+                        <?php } ?>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+            <div class="body" style="border: none;">
+                <div class="app-relative" style="margin-top: 0px; color: #999;">
+                    <img src="{$group.face|get_group_face}" class="face" />
+                    <br/>
+                    <br/>
+                    {$group.content|autolink}
+                    <br/>
+                    <br/>
+                    <p>
+                    组长：<a href="__SITE__/user/<?php get_user_domain($group['user_id']) ?>"><?php get_user_nick($group['user_id']) ?></a> &nbsp;|
+                         管理员：
+                         <a href="__SITE__/user/<?php get_user_domain($group['user_id']) ?>"><?php get_user_nick($group['user_id']) ?></a> &nbsp; 
+                         <a href="__SITE__/user/<?php get_user_domain($group['user_id']) ?>"><?php get_user_nick($group['user_id']) ?></a> &nbsp;
+                         <a href="__SITE__/user/<?php get_user_domain($group['user_id']) ?>"><?php get_user_nick($group['user_id']) ?></a>
+                    </p>
+                </div>
+                
+                <?php if (is_group_member($group["id"], $_uid)) { ?>
+                <br/>
+                <div style="float: right;">
+                    <form action="__SITE__/topic/add" method="get">
+                        <input type="hidden" name="group_id" value="{$group.id}" />
+                        <input type="submit" class="button" value="发表话题" />
+                    </form>
+                </div>
+                <br/>
+                <?php } ?>
+                
+                <?php if(count($topic_top_list) > 0 && count($topic_list) > 0) { ?>
+                <div class="cate">
+                    <ul class="item">
+                    <li>
+                        <div class="left">
+                        </div>
+                        <div class="middle">
+                            <b>话题列表：</b>
+                            <span class="author"></a></span>
+                        </div>
+                        <div class="right">
+                            <span class="date">{$gtp.add_time|firendlyTime}</span>
+                        </div>
+                    </li>
+                    <foreach name="topic_top_list" item="item">
+                    <li>
+                        <div class="left">
+                        </div>
+                        <div class="middle">
+                            <span class="title">[置顶] <a href="__SITE__/topic/{$item.id}">{$item.title}</a></span>
+                            <span class="author" style="font-size: 12px;"><a href="__SITE__/user/<?php get_user_domain($item['user_id']) ?>">{$item.nick}</a></span>
+                            <?php if($item[reply_num] > 0) { ?>
+                            <span>({$item.reply_num}回应)</span>
+                            <?php } ?>
+                        </div>
+                        <div class="right">
+                            <span class="date">{$item.add_time|firendlyTime}</span>
+                        </div>
+                    </li>
+                    </foreach>
+                    <foreach name="topic_list" item="item">
+                    <li>
+                        <div class="left">
+                        </div>
+                        <div class="middle">
+                            <span class="title"><a href="__SITE__/topic/{$item.id}">{$item.title}</a></span>
+                            <span class="author" style="font-size: 12px;"><a href="__SITE__/user/<?php get_user_domain($item['user_id']) ?>">{$item.nick}</a></span>
+                            <?php if($item[reply_num] > 0) { ?>
+                            <span>({$item.reply_num}回应)</span>
+                            <?php } ?>
+                        </div>
+                        <div class="right">
+                            <span class="date">{$item.add_time|firendlyTime}</span>
+                        </div>
+                    </li>
+                    </foreach>
+                    </ul>
+            </div>
+            <br class="clear" />
+            <!-- page begin -->
+            <div class="manu">{$page}</div>
+            <!-- page end -->
+            <p>
+                <br/>
+                <form action="__SITE__/group/{$group.id}" method="get">
+                    <b>搜索话题：</b> <input type="text" class="text" style="height: 32px;" name="k" value="{$k}" /> <input type="submit" class="button" value="查询" />
+                </form>
+            </p>
+            <?php } ?>
+            </div>
+        </div>
+        
+    </div>
+    <!-- right begin --> 
+    <div class="channel-right">
+        <script type="text/javascript"> 
+        alimama_pid="mm_10574926_3506959_11486840"; 
+        alimama_width=300; 
+        alimama_height=250; 
+        </script> 
+        <script src="http://a.alimama.cn/inf.js" type="text/javascript"> 
+        </script>
+    </div>
+    <!-- right end -->
+</div>
+<include file="Public:footer" />

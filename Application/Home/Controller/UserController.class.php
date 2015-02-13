@@ -161,7 +161,7 @@ class UserController extends BaseController {
 					$data['domain'] = trim($domain);
 				}
 				
-				$data['signature'] = trim($signature);
+				$data['signature'] = nl2br2(trim($signature));
 				$data['province_code'] = trim($province_code);
 				$data['city_code'] = trim($city_code);
 				
@@ -339,7 +339,7 @@ class UserController extends BaseController {
 				$this->display();
 			}
 		}
-	} 
+	}
 	
 	public function logout() {
 		cookie(null, $this->prefix);

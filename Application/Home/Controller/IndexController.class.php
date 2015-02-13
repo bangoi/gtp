@@ -20,7 +20,8 @@ class IndexController extends BaseController {
 		$this->assign("gtp_list", $gtps);
 		
 		$this->assign("channel", "home");
-		$this->display();
+		//$this->display();
+		$this->render();
     }
 	
 	public function search() {

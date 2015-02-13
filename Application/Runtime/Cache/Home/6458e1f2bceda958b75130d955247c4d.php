@@ -26,6 +26,7 @@
                 <li class="title <?php if(($channel == 'home')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp">首页</a></li>
                 <li class="title <?php if(($channel == 'gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
                 <li class="title <?php if(($channel == 'vedio')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/vedio/">吉他视频</a></li>
+                <li class="title <?php if(($channel == 'group')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/group/">小组</a></li>
             </ul>
             <p class="user">
                 <?php if(!$_logined) { ?>
@@ -206,13 +207,12 @@
         <div class="wp">
             <p class="copy">&copy;ThinkPHP 2012</p>
             <p class="navg"><a href="/about/index.html">关于我们</a><a href="/about/donate.html">捐赠我们</a><a href="/update/index.html">更新列表</a><a href="/bug/index.html">BUG反馈</a><a href="/suggest/index.html">功能建议</a><a href="/link/index.html">友情链接</a></p>
-            <p class="links"><a href="/donate/index.html">捐赠</a><a href="/rss/index.xml">订阅</a><a href="/about/attention.html">关注</a><a href="http://bbs.thinkphp.cn" target="_blank">论坛</a></p>
+            <p class="links"><a href="/donate/index.html">捐赠 <?php echo ($is_mobile ? "手机浏览" : "PC浏览"); ?></a><a href="/rss/index.xml">订阅</a><a href="/about/attention.html">关注</a><a href="http://bbs.thinkphp.cn" target="_blank">论坛</a></p>
         </div>
     </div>
     <input type="hidden" name="site" id="site" value="http://localhost:9990/gtp" />
 <div style="display:none">
-    <script language="javascript" type="text/javascript" src="http://js.users.51.la/14961362.js"></script>
-<noscript><a href="http://www.51.la/?14961362" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/14961362.asp" style="border:none" /></a></noscript>
+    
 </div>
 </body>
 </html>

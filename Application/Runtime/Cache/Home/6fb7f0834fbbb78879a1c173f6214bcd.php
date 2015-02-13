@@ -92,7 +92,7 @@
                     <tr>
                         <th>签&#12288;名</th>
                         <td>
-                            <textarea name="signature" class="textarea" rows="5" cols="50"><?php echo ($user["signature"]); ?></textarea>
+                            <textarea name="signature" class="textarea" rows="5" cols="50"><?php echo (br2nl($user["signature"])); ?></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -125,7 +125,7 @@
         <div class="wp">
             <p class="copy">&copy;ThinkPHP 2012</p>
             <p class="navg"><a href="/about/index.html">关于我们</a><a href="/about/donate.html">捐赠我们</a><a href="/update/index.html">更新列表</a><a href="/bug/index.html">BUG反馈</a><a href="/suggest/index.html">功能建议</a><a href="/link/index.html">友情链接</a></p>
-            <p class="links"><a href="/donate/index.html">捐赠</a><a href="/rss/index.xml">订阅</a><a href="/about/attention.html">关注</a><a href="http://bbs.thinkphp.cn" target="_blank">论坛</a></p>
+            <p class="links"><a href="/donate/index.html">捐赠 <?php echo ($is_mobile ? "手机浏览" : "PC浏览"); ?></a><a href="/rss/index.xml">订阅</a><a href="/about/attention.html">关注</a><a href="http://bbs.thinkphp.cn" target="_blank">论坛</a></p>
         </div>
     </div>
     <input type="hidden" name="site" id="site" value="http://localhost:9990/gtp" />

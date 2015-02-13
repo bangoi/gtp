@@ -1,0 +1,31 @@
+<?php if($_logined == true) { ?>
+<div id="commentPanel">
+<div class="trhead">
+    <a name="review"></a>
+    <strong>我的评论</strong> <span style="color: red;" id="lblErr"></span>
+</div>
+<ul>
+    <li style="border: none;">
+        <div class="comm_l">
+            <a href="__SITE__/user/<?php get_user_domain($_uid); ?>"><img src="<?php get_user_face($_uid, 's'); ?>" class="face" /></a>
+        </div>
+        <div class="comm_r">
+            <div id="comm_quote">
+                <div style="float: left; width: 95%;" id="quote_cnt_p">
+                    <a id="quote_nick"></a> : <p id="quote_cnt"></p>
+                </div>
+                <div style="float: right; width: 3%;"><a href="javascript:void(0);" id="quote_cancel">x</a></div>
+                <br class="clear" />
+            </div>
+            <form class="form">
+            <textarea name="content" id="txtContent" class="textarea"></textarea>
+            <input type="hidden" id="itemType" name="item_type" value="{$item_type}" />
+            <input type="hidden" id="itemId" name="item_id" value="{$item_id}" />
+            <input type="hidden" id="parentId" name="parent_id" value="-1" />
+            <input type="button" id="btnComment" class="button" style="margin-top: 5px;" value="回复" />
+            </form>
+        </div>
+    </li>
+</ul>
+</div>
+<?php } ?>

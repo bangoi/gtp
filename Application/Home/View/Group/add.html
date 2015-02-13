@@ -1,0 +1,63 @@
+<tagLib name="html" />
+<include file="Public:header" />
+
+<div class="contaier wp cf">
+<div class="ident">小组</div>
+    <div class="login">
+        <div class="head">
+            <strong>创建小组</strong>
+            <?php if (!empty($err)): ?><span style="color: red">{$err}</span><?php endif; ?>
+        </div>
+        <div class="body form ">
+            <form action="__SITE__/group/add" method="post" class="login">
+                <table>
+                    <tr>
+                        <th>名称</th>
+                        <td>
+                            <input class="text" type="text" name="title" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>描述</th>
+                        <td>
+                            <textarea name="content" class="textarea" rows="5" cols="50"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>类别</th>
+                        <td>
+                            <select name="type" id="slttype">
+                                <option value="-1">小组类别</option>
+                                <option value="1">公共小组</option>
+                                <option value="2">私密小组</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>标签</th>
+                        <td>
+                            <input class="text" type="text" name="tags" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <td>
+                            <input class="submit" type="submit" value="创建" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="login-other">
+        <div class="head">
+            <strong>使用其他帐号直接登录</strong>
+        </div>
+        <div class="body">
+            <ul class="other-account">
+                <li><a class="qq" href="/oauth/index/type/qq.html">腾讯QQ登录</a></li><li><a class="tencent" href="/oauth/index/type/tencent.html">腾讯微博登录</a></li><li><a class="t163" href="/oauth/index/type/t163.html">网易微博登录</a></li><li><a class="sina" href="/oauth/index/type/sina.html">新浪微博登录</a></li>            </ul>
+        </div>
+    </div>
+</div>
+
+<include file="Public:footer" />

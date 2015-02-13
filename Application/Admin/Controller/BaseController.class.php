@@ -4,6 +4,8 @@ namespace Admin\Controller;
 use Think\Controller;
 use Think\Exception;
 
+header('Content-Type: text/html; charset=utf-8');
+
 class BaseController extends Controller {
 	
 	protected $uid;

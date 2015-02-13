@@ -4,6 +4,8 @@ namespace Home\Controller;
 use Think\Controller;
 use Think\Exception;
 
+header('Content-Type: text/html; charset=utf-8');
+
 class BaseController extends Controller {
 	
 	protected $uid;
@@ -15,6 +17,7 @@ class BaseController extends Controller {
 	protected $cookie_parm;
 	
 	protected $site_url;
+	protected $is_mobile;
 	
 	public function _initialize() {
 		
@@ -36,7 +39,8 @@ class BaseController extends Controller {
 		}
 		
 		$this->site_url = C('TMPL_PARSE_STRING.__SITE__');
-		
+		$this->is_mobile = is_mobile();
+		$this->assign("is_mobile", $this->is_mobile);
 		//$this->authVerify($this->logined);
 	}
 	
@@ -95,6 +99,13 @@ class BaseController extends Controller {
 			header('Content-Disposition: attachment; filename="'.$file_name. '"');
 		
 		readfile($title);
+	}
+	
+	protected function render($templateFile='', $charset='', $contentType='', $content='', $prefix='') {
+		if(!$this->is_mobile)
+			$this->display();
+		else
+			$this->display(ACTION_NAME."_mobile");
 	}
 	
 }

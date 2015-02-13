@@ -52,6 +52,19 @@ return array(
 		'vedio/edit/:id' => 'vedio/edit',
 		'vedio/delete/:id' => 'vedio/delete',
 		
+		'group/:id\d$' => 'group/details',
+		'group/edit/:id' => 'group/edit',
+		'group/face/:id' => 'group/face',
+		'group/delete/:id' => 'group/delete',
+		'group/join/:id' => 'group/join',
+		
+		'topic/:id\d$' => 'topic/details',
+		'topic/edit/:id' => 'topic/edit',
+		'topic/top/:id' => 'topic/top',
+		'topic/delete/:id' => 'topic/delete',
+		
+		'comment/delete/:id' => 'comment/delete',
+		
 		'blog/:id\d$' => 'blog/details',
 		'blog/edit/:id' => 'blog/edit',
 		'blog/delete/:id' => 'blog/delete',

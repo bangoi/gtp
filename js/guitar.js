@@ -36,4 +36,99 @@ $(document).ready(function () {
         });
     });
     
+    $("#doLogin").click(function(event){
+        var e = window.event || event;
+        if(e.stopPropagation)
+            e.stopPropagation();
+        else
+            e.cancelBubble = true;
+        $("#loginForm").show();
+        
+        var docheight = $(document).height();
+        $("body").append("<div id='greybackground'></div>");
+        $("#greybackground").css({ "opacity": "0.5", "height": docheight });
+        
+    });
+    
+    $("#loginExit").click(function(event){
+        var e = window.event || event;
+        if(e.stopPropagation)
+            e.stopPropagation();
+        else
+            e.cancelBubble = true;
+        $("#loginForm").hide();
+        $("#greybackground").remove();
+    });
+    
+    $("#btnComment").click(function() {
+        var url = $("#site").val() + "/comment/add";
+        
+        var content = $("#txtContent").val();
+        if(content == "") {
+            $("#lblErr").html("评论内容必须填写");
+            $("#txtContent").focus();
+            return;
+        }
+            
+        var itemType = $("#itemType").val();
+        var itemId = $("#itemId").val();
+        var parentId = $("#parentId").val();
+        
+        var data = { item_type : itemType, item_id : itemId, parent_id : parentId, content : content };
+        $.post(url, data, function(result) {
+            try {
+                var json = jQuery.parseJSON(result);
+                if(json.code == -1) {
+                    $("#lblErr").html(json.data);
+                } else {
+                    $("#lblErr").html("回复失败");
+                }
+            } catch(e) {
+                $("#comment_list").append(result);
+                $("#commentPanel").slideUp();
+            }
+        });
+    });
+    
+    $(".doDelete").click(function() {
+        if(confirm("删除 ?")) {
+            var id = $(this).attr("cid");
+            var url = $("#site").val() + "/comment/delete/" + id;
+            var type = $(this).attr("type");
+            var data = { id : id, type : type }
+            $.get(url, data, function(result) {
+                var json = jQuery.parseJSON(result);
+                if(json.code == -1) {
+                    alert(json.data);
+                } else if(json.code == 100) {
+                    $("#comment-" + id).slideUp();
+                } else {
+                    alert("回复删除失败");
+                }
+            });
+        }
+    });
+    
+    $(".doQuote").click(function() {
+        var id = $(this).attr("cid");
+        var nick = $("#comm-nick-" + id).html();
+        var cnt = $("#comm-cnt-" + id).html();
+        $("#parentId").val(id);
+        $("#quote_nick").html(nick);
+        $("#comm_quote").show();
+        $("#quote_cnt").html(cnt);
+    });
+        
+    $("#quote_cancel").click(function() {
+        $("#parentId").val(-1);
+        $("#comm_quote").slideUp();
+    });
+    
+    jQuery.extend({
+        isJson:function(obj) {
+            var isJson = typeof(obj) == "object" && Object.prototype.toString.call(obj).toLowerCase() == "[object object]" && !obj.length;    
+            return isJson;
+        }
+    });
+    
 });

@@ -49,8 +49,7 @@ function IP($ip='',$file='UTFWry.dat') {
 }
 
 
-function toDate($time, $format='Y年m月d日 H:i:s')
-{
+function toDate($time, $format='Y年m月d日 H:i:s') {
 	$time = strtotime($time);
 	if( empty($time)) {
 		return '';
@@ -223,8 +222,7 @@ function highlight_code($str,$show=false)
     }
 }
 
-function color_txt($str)
-{
+function color_txt($str) {
     if(function_exists('iconv_strlen')) {
     	$len  = iconv_strlen($str);
     }else if(function_exists('mb_strlen')) {
@@ -237,6 +235,36 @@ function color_txt($str)
 
     return $colorTxt;
 }
+
+function is_mobile() { 
+    $user_agent = $_SERVER['HTTP_USER_AGENT']; 
+    $mobile_agents = array(
+	    "240x320","acer","acoon","acs-","abacho","ahong","airness","alcatel","amoi", 
+	    "android","anywhereyougo.com","applewebkit/525","applewebkit/532","asus","audio", 
+	    "au-mic","avantogo","becker","benq","bilbo","bird","blackberry","blazer","bleu", 
+	    "cdm-","compal","coolpad","danger","dbtel","dopod","elaine","eric","etouch","fly ", 
+	    "fly_","fly-","go.web","goodaccess","gradiente","grundig","haier","hedy","hitachi", 
+	    "htc","huawei","hutchison","inno","ipad","ipaq","iphone","ipod","jbrowser","kddi", 
+	    "kgt","kwc","lenovo","lg ","lg2","lg3","lg4","lg5","lg7","lg8","lg9","lg-","lge-","lge9","longcos","maemo", 
+	    "mercator","meridian","micromax","midp","mini","mitsu","mmm","mmp","mobi","mot-", 
+	    "moto","nec-","netfront","newgen","nexian","nf-browser","nintendo","nitro","nokia", 
+	    "nook","novarra","obigo","palm","panasonic","pantech","philips","phone","pg-", 
+	    "playstation","pocket","pt-","qc-","qtek","rover","sagem","sama","samu","sanyo", 
+	    "samsung","sch-","scooter","sec-","sendo","sgh-","sharp","siemens","sie-","softbank", 
+	    "sony","spice","sprint","spv","symbian","tablet","talkabout","tcl-","teleca","telit", 
+	    "tianyu","tim-","toshiba","tsm","up.browser","utec","utstar","verykool","virgin", 
+	    "vk-","voda","voxtel","vx","wap","wellco","wig browser","wii","windows ce", 
+	    "wireless","xda","xde","zte"); 
+    $is_mobile = false; 
+    foreach ($mobile_agents as $device) { 
+        if (stristr($user_agent, $device)) { 
+            $is_mobile = true; 
+            break; 
+        } 
+    } 
+    return $is_mobile; 
+}
+
 function showExt($ext,$pic=true) {
 	static $_extPic = array(
 		'dir'=>"folder.gif",
@@ -335,6 +363,16 @@ function rand_string($len=6,$type='',$addChars='') {
     return $str;
 }
 
+function nl2br2($string) { 
+	$string = str_replace(array("\r\n", "\r", "\n"), "<br />", $string); 
+	return $string;
+} 
+
+function br2nl ( $string, $separator = PHP_EOL ) {
+    $separator = in_array($separator, array("\n", "\r", "\r\n", "\n\r", chr(30), chr(155), PHP_EOL)) ? $separator : PHP_EOL;  // Checks if provided $separator is valid.
+    return preg_replace('/\<br(\s*)?\/?\>/i', $separator, $string);
+}
+
 function sec2time($sec){  
 	$sec = round($sec/600);  
     if ($sec >= 60){  
@@ -348,16 +386,6 @@ function sec2time($sec){
      return $res;  
 }
 
-function get_imgPath($img_url, $size = "m", $echo = true) {
-	//echo '/'.substr($img_url, 2);
-	$arr = explode("/", $img_url);
-	$arr[3] = $size.$arr[3];
-	if($echo)
-		echo join("/",$arr);
-	else
-		return join("/",$arr);
-}
-
 function url_set_value($url, $key, $value) { 
 	$a = explode('?',$url); 
 	$url_f = $a[0]; 
@@ -365,6 +393,11 @@ function url_set_value($url, $key, $value) {
 	parse_str($query,$arr); 
 	$arr[$key] = $value; 
 	return $url_f.'?'.http_build_query($arr); 
+}
+
+function get_user_nick($user_id) {
+	$user = M("User")->where("id=$user_id")->find();
+	echo $user["nick"];
 }
 
 function get_channel($channel) {
@@ -375,11 +408,114 @@ function get_channel($channel) {
 	echo $ret_val;
 }
 
+function get_user_domain($user_id) {
+	$user = M("User")->where("id=$user_id")->find();
+	get_domain($user);
+}
+
 function get_domain($user) {
 	$domain = $user["id"];
 	if(!empty($user["domain"]))
 		$domain = $user["domain"];
 	echo $domain;
+}
+
+function get_user_face($user_id, $size = "s") {
+	$user = M("User")->where("id={$user_id}")->find();
+	$face_url = C("TMPL_PARSE_STRING.__SITE__").'/img/default.jpg';
+	
+	if(!empty($user['face']))
+		$face_url = C("TMPL_PARSE_STRING.__SITE__").'/'.get_imgPath($user['face'], $size, false);
+	echo $face_url;
+}
+
+function get_group_face($face, $size = "s") {
+	$face_url = C("TMPL_PARSE_STRING.__SITE__").'/img/default.jpg';
+	if(!empty($face))
+		$face_url = C("TMPL_PARSE_STRING.__SITE__").'/'.get_imgPath($face, $size, false);
+	echo $face_url;
+}
+
+function get_imgPath($img_url, $size = "m", $echo = true) {
+	//echo '/'.substr($img_url, 2);
+	$arr = explode("/", $img_url);
+	$arr[3] = $size.$arr[3];
+	if($echo)
+		echo join("/",$arr);
+	else
+		return join("/",$arr);
+}
+
+function is_group_owner($group_id, $user_id) {
+	$map["group_id"] = $group_id;
+	$map["user_id"] = $user_id;
+	$userGrouop = M("UserGroup")->where($map)->find();
+	if(empty($userGrouop))
+		return false;
+	if($userGrouop["role"] == "owner")
+		return true;
+	return false;
+}
+
+function is_group_admin($group_id, $user_id) {
+	$map["group_id"] = $group_id;
+	$map["user_id"] = $user_id;
+	$userGrouop = M("UserGroup")->where($map)->find();
+	if(empty($userGrouop))
+		return false;
+	if($userGrouop["role"] == "admin" || $userGrouop["role"] == "owner")
+		return true;
+	return false;
+}
+
+function is_group_member($group_id, $user_id) {
+	$map["group_id"] = $group_id;
+	$map["user_id"] = $user_id;
+	$userGrouop = M("UserGroup")->where($map)->find();
+	if(empty($userGrouop))
+		return false;
+	if($userGrouop["role"] == "member")
+		return true;
+	return false;
+}
+
+function is_topic_owner($topic_id, $user_id) {
+	$map["id"] = $topic_id;
+	$map["user_id"] = $user_id;
+	$topic = M("Topic")->where($map)->find();
+	
+	if(empty($topic))
+		return false;
+	return true;
+}
+
+function is_comment_owner($comment_id, $user_id) {
+	$map["id"] = $comment_id;
+	$map["user_id"] = $user_id;
+	$comment = M("Comment")->where($map)->find();
+	if(empty($comment))
+		return false;
+	return true;
+}
+
+function get_parent_comment($parent_id) {
+	$comment = M("Comment")->find($parent_id);
+	echo $comment["content"];
+}
+
+function get_parent_user($parent_id) {
+	$comment = M("Comment")->find($parent_id);
+	$user_id = $comment['user_id'];
+	$user = M("User")->where("id=$user_id")->find();
+	$domain = $user['id'];
+	if(!empty($user['domain']))
+		$domain = $user['domain'];
+	echo "<a href='".C("TMPL_PARSE_STRING.__SITE__").'/user/'.$domain."'>".$user['nick']."</a>";
+}
+
+function is_top_topic($topic_id) {
+	$topic = M("Topic")->find($topic_id);
+	return $topic["state"] == 110;	
 }
 
 ?>

@@ -36,97 +36,74 @@
             </p>
         </div>
     </div>
-     
-<div class="contaier wp">
-    <div class="add">
+
+<div class="contaier wp cf">
+<div class="ident">注册</div>
+    <div class="register">
+        <div class="head">
+            <strong>用户注册</strong><span>已有帐号？点击<a href="http://localhost:9990/gtp/user/login">登录</a></span>
+            <?php if (!empty($err)): ?><span style="color: red"><?php echo ($err); ?></span><?php endif; ?>
+        </div>
         <div class="body form">
-            <form action="http://localhost:9990/gtp/vedio/add" method="post">
+            <form action="http://localhost:9990/gtp/user/register" method="post" class="login">
                 <table>
-                    <?php if (!empty($err)): ?>
-                     <tr>
-                        <th></th>
-                        <td><span style="color: red"><?php echo ($err); ?></span></td>
-                    </tr>
-                    <?php endif; ?>
                     <tr>
-                        <th>视频地址</th>
-                        <td><input class="text" type="text" name="vedio_url" id="vedio_url" value="<?php echo ($vedio_url); ?>" /> &nbsp; <input class="submit" id="btnVedioUrl" type="button" style="height: 32px; margin-top: -4px;" value="获取" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><i class="must">*</i>视频标题</th>
-                        <td><input class="text" type="text" name="title" id="title" value="<?php echo ($vedio_title); ?>" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><i class="must">*</i>视频截图</th>
+                        <th>用户名</th>
                         <td>
-                            <?php if(!empty($thumb_value)) { ?>
-                            <img src="<?php echo ($thumb_value); ?>" name="thumb" id="thumb"
-                                alt="上传视频缩略图" width="120" height="90" />
-                            <?php } else { ?>
-                            <img src="http://localhost:9990/gtp/upload/thumb/default.jpg" name="thumb" id="thumb"
-                                alt="上传视频缩略图" width="120" height="90" />
-                            <?php } ?>
-                            <input type="hidden" name="thumb_value" id="thumb_value" value="<?php echo ($thumb_value); ?>" />
+                            <input class="text" type="text" name="nick" value="<?php echo ($nick); ?>"  />
                         </td>
                     </tr>
                     <tr>
-                        <th><i class="must">*</i>视频swf</th>
-                        <td><input class="text" type="text" name="code" id="code" value="<?php echo ($code); ?>" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th><i class="must">*</i>音乐人</th>
-                        <td><input class="text" type="text" name="artist_name" value="<?php echo ($artist_name); ?>" /></td>
-                    </tr>
-                    <tr>
-                        <th><i class="must">*</i>歌曲名称</th>
-                        <td><input class="text" type="text" name="song_title" value="<?php echo ($song_title); ?>" /></td>
-                    </tr>
-                    <tr>
-                        <th>标&#12288;&#12288;签</th>
-                        <td><input class="text" type="text" name="tags" value="<?php echo ($tags); ?>" /> 用空格分隔</td>
-                    </tr>
-                    <tr>
-                        <th>摘&#12288;&#12288;要</th>
+                        <th>密码</th>
                         <td>
-                            <div class="add-remark">
-                                <textarea name="description"><?php echo ($description); ?></textarea>
-                            </div>
+                            <input class="text" type="password" name="pwd" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>确认密码</th>
+                        <td>
+                            <input class="text" type="password" name="re_pwd" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>邮箱</th>
+                        <td>
+                            <input class="text" type="text" name="email" value="<?php echo ($email); ?>" />
                         </td>
                     </tr>
                     <tr>
                         <th>&nbsp;</th>
-                        <td> <input class="submit" type="submit" value="提交" />
+                        <td>
+                            <input class="submit" type="submit" value="完成" />
                         </td>
                     </tr>
                 </table>
             </form>
         </div>
     </div>
-            
-            
-    <div class="home-right">
-        <div class="fast">
-            <dl>
-                <dt>发布应用<sub>Publish</sub></dt>
-                <dd>应用标识、中文描述、应用主页（以http打头）、分类和应用LOGO（不超过50K 支持JPG PNG和GIF）必须，描述和标签可选，多个标签之间用空格分隔，案例发布需要审核。</dd>
-            </dl>
-            <dl>
-                <dt>快捷键<sub>Keyboard</sub></dt>
-                <dd>选中文字内容后使用键盘快捷键<br/>CTRL+B ：字体加粗<br/>ALT + U ：添加超链接<br/> ALT + C ：插入代码</dd>
-            </dl>
+    <div class="login-other">
+        <div class="head">
+            <strong>使用其他帐号直接登录</strong>
+        </div>
+        <div class="body">
+            <ul class="other-account">
+                <li><a class="qq" href="/oauth/index/type/qq.html">腾讯QQ登录</a></li><li><a class="tencent" href="/oauth/index/type/tencent.html">腾讯微博登录</a></li><li><a class="t163" href="/oauth/index/type/t163.html">网易微博登录</a></li><li><a class="sina" href="/oauth/index/type/sina.html">新浪微博登录</a></li>            </ul>
         </div>
     </div>
-        
 </div>
+<script type="text/javascript">
+    $(function(){
+        $('.reloadverify').click(function(){
+            $('.verifyimg').attr('src', "/member/verify.html?" + Math.random());
+        });
+    })
+</script>
 
 <div class="footer">
         <div class="wp">
             <p class="copy">&copy;ThinkPHP 2012</p>
             <p class="navg"><a href="/about/index.html">关于我们</a><a href="/about/donate.html">捐赠我们</a><a href="/update/index.html">更新列表</a><a href="/bug/index.html">BUG反馈</a><a href="/suggest/index.html">功能建议</a><a href="/link/index.html">友情链接</a></p>
-            <p class="links"><a href="/donate/index.html">捐赠</a><a href="/rss/index.xml">订阅</a><a href="/about/attention.html">关注</a><a href="http://bbs.thinkphp.cn" target="_blank">论坛</a></p>
+            <p class="links"><a href="/donate/index.html">捐赠 <?php echo ($is_mobile ? "手机浏览" : "PC浏览"); ?></a><a href="/rss/index.xml">订阅</a><a href="/about/attention.html">关注</a><a href="http://bbs.thinkphp.cn" target="_blank">论坛</a></p>
         </div>
     </div>
     <input type="hidden" name="site" id="site" value="http://localhost:9990/gtp" />

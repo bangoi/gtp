@@ -219,18 +219,17 @@ class VedioController extends BaseController {
 		$vedio_id = $_GET["_URL_"][2];
 		
 		if(IS_POST) {
-			
-			$title = I("post.title");
-			$code = I("post.code");
-			$artist_name = I("post.artist_name");
-			$song_title = I("post.song_title");
-				
-			if(empty($title)) E("必须输入视频标题");
-			if(empty($code)) E("必须输入视频swf");
-			if(empty($artist_name)) E("必须输入音乐人");
-			if(empty($song_title)) E("必须输入歌曲名称");
-			
 			try {
+				
+				$title = I("post.title");
+				$code = I("post.code");
+				$artist_name = I("post.artist_name");
+				$song_title = I("post.song_title");
+					
+				if(empty($title)) E("必须输入视频标题");
+				if(empty($code)) E("必须输入视频swf");
+				if(empty($artist_name)) E("必须输入音乐人");
+				if(empty($song_title)) E("必须输入歌曲名称");
 				
 				$data["title"] = trim($title);
 				$data["code"] = trim($code);

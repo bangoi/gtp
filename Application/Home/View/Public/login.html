@@ -1,0 +1,35 @@
+<div class="trbody">
+    <div class="login-tip">
+     您需要登录后才可以评论 <a href="javascript:void(0);" id="doLogin">登录</a> | <a href="__SITE__/user/register?page={$page}" id="doRegister">立即注册</a>
+    </div>
+</div>
+            
+<div class="body form " id="loginForm">
+<form action="__SITE__/user/login" method="post" class="login">
+<div style="float: right; margin-top: -40px; margin-right: -20px;">
+    <img src="__SITE__/img/cancel.png" id="loginExit" />        
+</div>
+<table>
+    <tr>
+        <th>用户名</th>
+        <td>
+            <input class="text" type="text" name="nick" />
+        </td>
+    </tr>
+    <tr>
+        <th>密&#12288;码</th>
+        <td>
+            <input class="text" type="password" name="pwd" />
+        </td>
+    </tr>
+    <tr>
+        <th>&nbsp;</th>
+            <td>
+                <input type="hidden" name="page" value="{$goto}" />
+                <input class="submit" type="submit" value="登录" /> &nbsp;
+                <a href="__SITE__/user/register?page={$page}">注册</a>
+            </td>
+    </tr>
+</table>
+</form>
+</div>
