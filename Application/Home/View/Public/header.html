@@ -26,10 +26,10 @@
         <div class="header-wrap wp cf">
             <h3 class="logo"><a href="__SITE__" title="返回首页">__TITLE__</a></h3>
             <ul class="navg">
-                <li class="title <if condition="($channel eq 'home')">selected</if>"><a class="show" href="__SITE__">首页</a></li>
-                <li class="title <if condition="($channel eq 'gtp')">selected</if>"><a class="show" href="__SITE__/gtp/">吉他谱</a></li>
-                <li class="title <if condition="($channel eq 'vedio')">selected</if>"><a class="show" href="__SITE__/vedio/">吉他视频</a></li>
-                <li class="title <if condition="($channel eq 'group')">selected</if>"><a class="show" href="__SITE__/group/">小组</a></li>
+                <li class="title <if condition="($channel eq 'Home')">selected</if>"><a class="show" href="__SITE__">首页</a></li>
+                <li class="title <if condition="($channel eq 'Gtp')">selected</if>"><a class="show" href="__SITE__/gtp/">吉他谱</a></li>
+                <li class="title <if condition="($channel eq 'Vedio')">selected</if>"><a class="show" href="__SITE__/vedio/">吉他视频</a></li>
+                <li class="title <?php if($channel == "Group" || $channel == "Topic") { ?>selected<?php } ?>"><a class="show" href="__SITE__/group/">小组</a></li>
             </ul>
             <p class="user">
                 <?php if(!$_logined) { ?>

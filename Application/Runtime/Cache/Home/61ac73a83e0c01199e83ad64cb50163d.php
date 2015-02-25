@@ -23,9 +23,10 @@
         <div class="header-wrap wp cf">
             <h3 class="logo"><a href="http://localhost:9990/gtp" title="返回首页">Guitar Pro</a></h3>
             <ul class="navg">
-                <li class="title <?php if(($channel == 'home')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp">首页</a></li>
-                <li class="title <?php if(($channel == 'gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
-                <li class="title <?php if(($channel == 'vedio')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/vedio/">吉他视频</a></li>
+                <li class="title <?php if(($channel == 'Home')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp">首页</a></li>
+                <li class="title <?php if(($channel == 'Gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
+                <li class="title <?php if(($channel == 'Vedio')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/vedio/">吉他视频</a></li>
+                <li class="title <?php if($channel == "Group" || $channel == "Topic") { ?>selected<?php } ?>"><a class="show" href="http://localhost:9990/gtp/group/">小组</a></li>
             </ul>
             <p class="user">
                 <?php if(!$_logined) { ?>
@@ -47,7 +48,7 @@
                 <div class="app-info">
                     <span class="date"><?php echo (todate($gtp["add_time"],'Y-m-d H:i')); ?></span>
                     <a class="author" href="http://localhost:9990/gtp/gtp/?artist_name=<?php echo (urlencode($gtp["artist_name"])); ?>"><?php echo ($gtp["artist_name"]); ?>的吉他谱</a>
-                    <span class="version"><a href="http://localhost:9990/gtp/user/<?php get_domain($user); ?>"><?php echo ($user["nick"]); ?></a>上传</span>
+                    <span class="version"><a href="http://localhost:9990/gtp/user/<?php getUserDomain($user); ?>"><?php echo ($user["nick"]); ?></a>上传</span>
                     <a class="class" href="http://localhost:9990/gtp/gtp/">[ 吉他谱 ]</a>
                     <?php if ($can_edit) { ?>
                     <a href="http://localhost:9990/gtp/gtp/edit/<?php echo ($gtp["id"]); ?>">[编辑]</a>
@@ -182,8 +183,7 @@
     </div>
     <input type="hidden" name="site" id="site" value="http://localhost:9990/gtp" />
 <div style="display:none">
-    <script language="javascript" type="text/javascript" src="http://js.users.51.la/14961362.js"></script>
-<noscript><a href="http://www.51.la/?14961362" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/14961362.asp" style="border:none" /></a></noscript>
+    
 </div>
 </body>
 </html>

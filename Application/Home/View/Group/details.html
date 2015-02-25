@@ -10,21 +10,20 @@
                 <h1>Tommy Emmanuel</h1>
                 <div class="app-info">
                         创建于：{$group.add_time|toDate}
-                    
                     <?php if($_logined){ ?>
-                    <?php if (is_group_owner($group["id"], $_uid)) { ?>
+                    <?php if (isGroupOwner($userGroup)) { ?>
                     <a href="__SITE__/group/edit/{$group["id"]}">[编辑小组信息]</a> - 我是小组创建者
-                    <?php } else if (is_group_admin($group["id"], $_uid)) { ?>
+                    <?php } else if (isGroupAdmin($userGroup)) { ?>
                     <a href="__SITE__/group/edit/{$group["id"]}">[编辑小组信息]</a> - 我是小组管理员
-                    <?php } else if (is_group_member($group["id"], $_uid)) { ?>
+                    <?php } else if (isGroupMember($userGroup)) { ?>
                     - 我是小组成员
                     <?php } ?>
                     <?php } ?>
                     <div class="score">
                         <span record="37" class="score" model="45" score="0"></span>
                         <span class="total">组员：<span id="score-count">{$group.user_num}</span>人</span> &nbsp;
-                        <?php if($_logined){ ?>
-                        <?php if (is_group_member($group["id"], $_uid)) { ?>
+                        <?php if($_logined && !isGroupOwner($userGroup)){ ?>
+                        <?php if (isGroupMember($userGroup)) { ?>
                         <a href="__SITE__/group/join/{$group["id"]}?type=out">[退出小组]</a>
                         <?php } else { ?>
                         <a href="__SITE__/group/join/{$group["id"]}">[加入小组]</a>
@@ -35,22 +34,24 @@
             </div>
             <div class="body" style="border: none;">
                 <div class="app-relative" style="margin-top: 0px; color: #999;">
-                    <img src="{$group.face|get_group_face}" class="face" />
+                    <img src="{$group.face|getGroupFace}" class="face" />
                     <br/>
                     <br/>
                     {$group.content|autolink}
                     <br/>
                     <br/>
                     <p>
-                    组长：<a href="__SITE__/user/<?php get_user_domain($group['user_id']) ?>"><?php get_user_nick($group['user_id']) ?></a> &nbsp;|
-                         管理员：
-                         <a href="__SITE__/user/<?php get_user_domain($group['user_id']) ?>"><?php get_user_nick($group['user_id']) ?></a> &nbsp; 
-                         <a href="__SITE__/user/<?php get_user_domain($group['user_id']) ?>"><?php get_user_nick($group['user_id']) ?></a> &nbsp;
-                         <a href="__SITE__/user/<?php get_user_domain($group['user_id']) ?>"><?php get_user_nick($group['user_id']) ?></a>
+                    组长：<a href="__SITE__/user/<?php getUserDomainById($group['user_id']) ?>"><?php getUserNick($group['user_id']) ?></a> &nbsp;
+                    <?php if(!empty($admin_list)) { ?>
+                    | 管理员：
+                    <foreach name="admin_list" item="item">
+                        <a href="__SITE__/user/<?php getUserDomain($item) ?>">{$item.nick}</a> &nbsp;
+                    </foreach>
                     </p>
+                    <?php } ?>
                 </div>
                 
-                <?php if (is_group_member($group["id"], $_uid)) { ?>
+                <?php if (isGroupMember($userGroup)) { ?>
                 <br/>
                 <div style="float: right;">
                     <form action="__SITE__/topic/add" method="get">
@@ -61,7 +62,7 @@
                 <br/>
                 <?php } ?>
                 
-                <?php if(count($topic_top_list) > 0 && count($topic_list) > 0) { ?>
+                <?php if(count($topic_top_list) > 0 || count($topic_list) > 0) { ?>
                 <div class="cate">
                     <ul class="item">
                     <li>
@@ -81,7 +82,7 @@
                         </div>
                         <div class="middle">
                             <span class="title">[置顶] <a href="__SITE__/topic/{$item.id}">{$item.title}</a></span>
-                            <span class="author" style="font-size: 12px;"><a href="__SITE__/user/<?php get_user_domain($item['user_id']) ?>">{$item.nick}</a></span>
+                            <span class="author" style="font-size: 12px;"><a href="__SITE__/user/<?php getUserDomain($item['user_id']) ?>">{$item.nick}</a></span>
                             <?php if($item[reply_num] > 0) { ?>
                             <span>({$item.reply_num}回应)</span>
                             <?php } ?>
@@ -97,7 +98,7 @@
                         </div>
                         <div class="middle">
                             <span class="title"><a href="__SITE__/topic/{$item.id}">{$item.title}</a></span>
-                            <span class="author" style="font-size: 12px;"><a href="__SITE__/user/<?php get_user_domain($item['user_id']) ?>">{$item.nick}</a></span>
+                            <span class="author" style="font-size: 12px;"><a href="__SITE__/user/<?php getUserDomain($item['user_id']) ?>">{$item.nick}</a></span>
                             <?php if($item[reply_num] > 0) { ?>
                             <span>({$item.reply_num}回应)</span>
                             <?php } ?>
@@ -115,8 +116,8 @@
             <!-- page end -->
             <p>
                 <br/>
-                <form action="__SITE__/group/{$group.id}" method="get">
-                    <b>搜索话题：</b> <input type="text" class="text" style="height: 32px;" name="k" value="{$k}" /> <input type="submit" class="button" value="查询" />
+                <form action="__SITE__/group/{$group.id}" class="form" method="get">
+                    <b>搜索话题：</b> <input type="text" class="text" name="k" value="{$k}" /> <input type="submit" class="button" value="查询" />
                 </form>
             </p>
             <?php } ?>

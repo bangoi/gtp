@@ -40,49 +40,83 @@
 
 <div class="contaier wp cf">
 <div class="ident">小组</div>
-    <div class="login" style="width: 580px;">
-        <div class="head">
-            <strong>编辑小组</strong>
-            <?php if (!empty($err)): ?><span style="color: red"><?php echo ($err); ?></span><?php endif; ?>
+    <div class="login" style="width: 580px; margin-top: 0px;">
+        
+        <div class="slogan"><p>违禁词</p></div>
+        <br/>
+        <form class="form" action="http://localhost:9990/gtp/dirty/add" method="post">
+            <input type="text" name="name" placeholder="添加违禁词" class="text" />
+            <input type="hidden" name="group_id" value="<?php echo ($group_id); ?>">
+            <input type="submit" class="button" value="添加" />
+        </form>
+        <div class="cate">
+            <ul class="item">
+            <li>
+                <div class="left">
+                    <span class="title" style="width: 150px;display: block; float: left;"><strong>违禁词</strong></span>
+                </div>
+                <div class="middle">
+                     <span class="title" style="width: 150px;display: block; float: left;"><strong>创建人</strong></span>
+                     <span class="title" style="width: 180px;display: block; float: left;"><strong>添加时间</strong></span>
+                </div>
+                <div class="right">
+                    <span class="date" style="display: block; float: left; color:#333;"><strong>删除</strong></span>
+                </div>
+            </li>
+            <?php if(is_array($dirty_list)): foreach($dirty_list as $key=>$item): ?><li>
+                <div class="left">
+                    <span class="title" style="width: 150px;display: block; float: left;"><?php echo ($item["name"]); ?></span>
+                </div>
+                <div class="middle">
+                     <span class="title" style="width: 150px;display: block; float: left;"><a href="http://localhost:9990/gtp/user/<?php echo (getuserdomain($item["user_id"])); ?>"><?php echo ($item["nick"]); ?></a></span>
+                     <span class="title" style="width: 180px;display: block; float: left;"><?php echo (todate($item["add_time"])); ?></span>
+                </div>
+                <div class="right">
+                    <span class="date" style="display: block; float: right;"><a onclick="return confirm('删除 ?');" href="http://localhost:9990/gtp/dirty/delete/<?php echo ($item["id"]); ?>?group_id=<?php echo ($group_id); ?>">[x]</a></span>
+                </div>
+            </li><?php endforeach; endif; ?>
+            </ul>
         </div>
-        <div class="body form ">
-            <form action="http://localhost:9990/gtp/group/edit" method="post" class="login">
-                <table style="width: 580px;>
-                    <tr>
-                        <th>名称</th>
-                        <td>
-                            <input class="text" type="text" name="title" value="<?php echo ($item["title"]); ?>" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>头像</th>
-                        <td>
-                            <img src="<?php echo (getgroupface($item["face"])); ?>" class="face" /> <a href="http://localhost:9990/gtp/group/face/<?php echo ($item["id"]); ?>" style="line-height: 50px;">设置</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>描述</th>
-                        <td>
-                            <textarea name="content" class="textarea" rows="5" cols="50"><?php echo (br2nl($item["content"])); ?></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>标签</th>
-                        <td>
-                            <input class="text" type="text" name="tags" value="<?php echo ($item["tags"]); ?>" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp;</th>
-                        <td>
-                            <input type="hidden" name="group_id" value="<?php echo ($item["id"]); ?>" />
-                            <input class="submit" type="submit" value="编辑" />
-                        </td>
-                    </tr>
-                </table>
-            </form>
+        
+        <br/>
+        <br/>
+        
+        <div class="slogan"><p>黑名单</p></div>
+        <br/>
+        <div class="cate">
+            <ul class="item">
+            <li>
+                <div class="left">
+                    <span class="title" style="width: 150px;display: block; float: left;"><strong>用户名</strong></span>
+                </div>
+                <div class="middle">
+                     <span class="title" style="width: 150px;display: block; float: left;"><strong></strong></span>
+                     <span class="title" style="width: 180px;display: block; float: right;"><strong>添加时间</strong></span>
+                </div>
+                <div class="right">
+                    <span class="date" style="display: block; float: left; color:#333;"><strong>解禁</strong></span>
+                </div>
+            </li>
+            <?php if(is_array($ban_list)): foreach($ban_list as $key=>$item): ?><li>
+                <div class="left">
+                    <span class="title" style="width: 150px;display: block; float: left;"><a href="http://localhost:9990/gtp/user/<?php echo (getuserdomain($item["user_id"])); ?>"><?php echo ($item["nick"]); ?></a></span>
+                </div>
+                <div class="middle">
+                     <span class="title" style="width: 150px;display: block; float: left;"></span>
+                     <span class="title" style="width: 180px;display: block; float: right;"><?php echo (todate($item["add_time"])); ?></span>
+                </div>
+                <div class="right">
+                    <span class="date" style="display: block; float: right;"><a onclick="return confirm('解禁 ?');" href="http://localhost:9990/gtp/group/role/<?php echo ($item["id"]); ?>?type=group_unban">[x]</a></span>
+                </div>
+            </li><?php endforeach; endif; ?>
+            </ul>
         </div>
+        
+        <br/>
+        
     </div>
+    
+    
     <div class="login-other">
         <div class="head">
             <strong>使用其他帐号直接登录</strong>

@@ -363,15 +363,7 @@ function rand_string($len=6,$type='',$addChars='') {
     return $str;
 }
 
-function nl2br2($string) { 
-	$string = str_replace(array("\r\n", "\r", "\n"), "<br />", $string); 
-	return $string;
-} 
 
-function br2nl ( $string, $separator = PHP_EOL ) {
-    $separator = in_array($separator, array("\n", "\r", "\r\n", "\n\r", chr(30), chr(155), PHP_EOL)) ? $separator : PHP_EOL;  // Checks if provided $separator is valid.
-    return preg_replace('/\<br(\s*)?\/?\>/i', $separator, $string);
-}
 
 function sec2time($sec){  
 	$sec = round($sec/600);  
@@ -395,11 +387,6 @@ function url_set_value($url, $key, $value) {
 	return $url_f.'?'.http_build_query($arr); 
 }
 
-function get_user_nick($user_id) {
-	$user = M("User")->where("id=$user_id")->find();
-	echo $user["nick"];
-}
-
 function get_channel($channel) {
 	if($channel != 'home')
 		$ret_val = $channel.'/';
@@ -408,35 +395,45 @@ function get_channel($channel) {
 	echo $ret_val;
 }
 
-function get_user_domain($user_id) {
+
+function getUserNick($user_id) {
 	$user = M("User")->where("id=$user_id")->find();
-	get_domain($user);
+	echo $user["nick"];
 }
 
-function get_domain($user) {
+
+function getUserDomain($user) {
 	$domain = $user["id"];
 	if(!empty($user["domain"]))
 		$domain = $user["domain"];
 	echo $domain;
 }
 
-function get_user_face($user_id, $size = "s") {
-	$user = M("User")->where("id={$user_id}")->find();
+function getUserDomainById($user_id) {
+	$user = M("User")->where("id=$user_id")->find();
+	getUserDomain($user);
+}
+
+function getUserFace($user, $size = "s") {
 	$face_url = C("TMPL_PARSE_STRING.__SITE__").'/img/default.jpg';
-	
 	if(!empty($user['face']))
-		$face_url = C("TMPL_PARSE_STRING.__SITE__").'/'.get_imgPath($user['face'], $size, false);
+		$face_url = C("TMPL_PARSE_STRING.__SITE__").'/'.getImgName($user['face'], $size, false);
 	echo $face_url;
 }
 
-function get_group_face($face, $size = "s") {
+function getUserFaceById($user_id, $size = "s") {
+	$user = M("User")->where("id=$user_id")->find();
+	getUserFace($user, $size = "s");
+}
+
+function getGroupFace($face, $size = "s") {
 	$face_url = C("TMPL_PARSE_STRING.__SITE__").'/img/default.jpg';
 	if(!empty($face))
-		$face_url = C("TMPL_PARSE_STRING.__SITE__").'/'.get_imgPath($face, $size, false);
+		$face_url = C("TMPL_PARSE_STRING.__SITE__").'/'.getImgName($face, $size, false);
 	echo $face_url;
 }
 
-function get_imgPath($img_url, $size = "m", $echo = true) {
+function getImgName($img_url, $size = "m", $echo = true) {
 	//echo '/'.substr($img_url, 2);
 	$arr = explode("/", $img_url);
 	$arr[3] = $size.$arr[3];
@@ -446,6 +443,80 @@ function get_imgPath($img_url, $size = "m", $echo = true) {
 		return join("/",$arr);
 }
 
+function isGroupOwner($userGrouop) {
+	return (!empty($userGrouop) && $userGrouop["role"] == "owner");
+}
+
+function isGroupAdmin($userGrouop) {
+	if(empty($userGrouop))
+		return false;
+	if($userGrouop["role"] == "admin" || $userGrouop["role"] == "owner")
+		return true;
+	return false;
+}
+
+function isGroupMember($userGrouop) {
+	if(empty($userGrouop))
+		return false;
+	if($userGrouop["role"] == "member")
+		return true;
+	return false;
+}
+
+function isTopicOwner($topic, $user_id) {
+	if(empty($topic))
+		return false;
+	if($topic['user_id'] == $user_id)
+		return true;
+	return false;
+}
+
+function isTopTopic($topic) {
+	return $topic["state"] == 110;	
+}
+
+// 在comments迭代中使用
+function isTopicOwnerById($topic_id, $user_id) {
+	$map["id"] = $topic_id;
+	$map["user_id"] = $user_id;
+	$topic = M("Topic")->where($map)->find();
+	
+	if(empty($topic))
+		return false;
+	return true;
+}
+
+// 在comments迭代中使用
+function isCommentOwner($comment_id, $user_id) {
+	$map["id"] = $comment_id;
+	$map["user_id"] = $user_id;
+	$comment = M("Comment")->where($map)->find();
+	if(empty($comment))
+		return false;
+	return true;
+}
+
+function getParentCommentContent($parent_id) {
+	$comment = M("Comment")->find($parent_id);
+	echo $comment["content"];
+}
+
+function getCommentById($id) {
+	$comment = M("Comment")->find($id);
+	return $comment;
+}
+
+function getParentUser($parent_id) {
+	$comment = M("Comment")->find($parent_id);
+	$user_id = $comment['user_id'];
+	$user = M("User")->where("id=$user_id")->find();
+	$domain = $user['id'];
+	if(!empty($user['domain']))
+		$domain = $user['domain'];
+	echo "<a href='".C("TMPL_PARSE_STRING.__SITE__").'/user/'.$domain."'>".$user['nick']."</a>";
+}
+
+/*
 function is_group_owner($group_id, $user_id) {
 	$map["group_id"] = $group_id;
 	$map["user_id"] = $user_id;
@@ -497,25 +568,12 @@ function is_comment_owner($comment_id, $user_id) {
 		return false;
 	return true;
 }
+*/
 
-function get_parent_comment($parent_id) {
-	$comment = M("Comment")->find($parent_id);
-	echo $comment["content"];
-}
 
-function get_parent_user($parent_id) {
-	$comment = M("Comment")->find($parent_id);
-	$user_id = $comment['user_id'];
-	$user = M("User")->where("id=$user_id")->find();
-	$domain = $user['id'];
-	if(!empty($user['domain']))
-		$domain = $user['domain'];
-	echo "<a href='".C("TMPL_PARSE_STRING.__SITE__").'/user/'.$domain."'>".$user['nick']."</a>";
-}
-
-function is_top_topic($topic_id) {
-	$topic = M("Topic")->find($topic_id);
-	return $topic["state"] == 110;	
+function getCity($city_code) {
+	$city = M("City")->where("code = $city_code")->find();
+	echo $city["name"];
 }
 
 ?>

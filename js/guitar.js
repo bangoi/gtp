@@ -124,6 +124,44 @@ $(document).ready(function () {
         $("#comm_quote").slideUp();
     });
     
+    $(".adminCheck").click(function() {
+        var id = $(this).attr("id").split("-")[1];
+        if($("#imgAdmin-" + id).attr("state") == "0") {
+            $("#imgAdmin-" + id).addClass("face");
+            $("#imgAdmin-" + id).attr("state", "1");
+            $("#imgAdmin-" + id).attr("checked",'true');
+            $("#chkAdmin-" + id).val(id);
+        } else {
+            $("#imgAdmin-" + id).removeClass("face");
+            $("#imgAdmin-" + id).attr("state", "0");
+            $("#chkAdmin-" + id).removeAttr("checked");
+        }
+    });
+    
+    $(".memberCheck").click(function() {
+        var id = $(this).attr("id").split("-")[1];
+        if($("#imgMember-" + id).attr("state") == "0") {
+            $("#imgMember-" + id).addClass("face");
+            $("#imgMember-" + id).attr("state", "1");
+            $("#imgMember-" + id).attr("checked",'true');
+            $("#chkMember-" + id).val(id);
+        } else {
+            $("#imgMember-" + id).removeClass("face");
+            $("#imgMember-" + id).attr("state", "0");
+            $("#chkMember-" + id).removeAttr("checked");
+        }
+    });
+    
+    $("#btnAdmin").click(function() {
+        $("#groupRoleAction").val("add_admin");
+        $("#groupMemberForm").submit();
+    });
+    
+    $("#btnRemove").click(function() {
+        $("#groupRoleAction").val("group_remove");
+        $("#groupMemberForm").submit();
+    });
+    
     jQuery.extend({
         isJson:function(obj) {
             var isJson = typeof(obj) == "object" && Object.prototype.toString.call(obj).toLowerCase() == "[object object]" && !obj.length;    

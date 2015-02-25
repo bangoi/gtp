@@ -42,6 +42,8 @@ class BaseController extends Controller {
 		$this->is_mobile = is_mobile();
 		$this->assign("is_mobile", $this->is_mobile);
 		//$this->authVerify($this->logined);
+		
+		$this->assign("channel", CONTROLLER_NAME);
 	}
 	
 	private function authVerify($logined) {

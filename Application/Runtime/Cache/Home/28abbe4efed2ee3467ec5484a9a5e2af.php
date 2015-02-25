@@ -43,36 +43,23 @@
         <div class="ident">话题</div>
         <!--文章详细-->
         <div class="app-detail">
-            <h1><?php if($topic['state'] == 110) { ?>[置顶]<?php } ?> <?php echo ($topic["title"]); ?></h1>
+            <h1><?php echo ($blog["title"]); ?></h1>
             <div class="body">
                 <div style="margin-top: 0px; color: #999;">
                     <div style="width: 100%;">
                         <div style="float: left">
-                            <a href="http://localhost:9990/gtp/user/<?php getUserDomainById($topic['user_id']); ?>"><img src="<?php getUserFaceById($topic['user_id'], 's'); ?>" class="face" /></a>
+                            <a href="http://localhost:9990/gtp/user/<?php getUserDomainById($blog['user_id']); ?>"><img src="<?php getUserFaceById($blog['user_id'], 's'); ?>" class="face" /></a>
                         </div>
                         <div style="float: left; margin-left: 10px;">
-                                  来自：<a href="http://localhost:9990/gtp/user/<?php getUserDomainById($topic['user_id']); ?>"><?php echo ($topic["nick"]); ?></a>
-                           <p style="line-height: 30px;"><?php echo (totime($topic["add_time"])); ?></p>
+                                  来自：<a href="http://localhost:9990/gtp/user/<?php getUserDomainById($blog['user_id']); ?>"><?php echo ($blog["nick"]); ?></a>
+                           <p style="line-height: 30px;"><?php echo (totime($blog["add_time"])); ?></p>
                         </div>
                     </div>
                     <br class="clear" />
                     <br/>
                     <div style="line-height: 200%; color: #333;">
-                        <?php echo (autolink($topic["content"])); ?>    
+                        <?php echo (autolink($blog["content"])); ?>    
                     </div>
-                    <br/>
-                        来自：<a href="http://localhost:9990/gtp/group/<?php echo ($topic["group_id"]); ?>"><?php echo ($group["title"]); ?></a>  &nbsp; 
-                    <?php if(isGroupAdmin($userGroup)) { ?>
-                    <?php if(isTopTopic($topic)){ ?>
-                    &gt; <a href="http://localhost:9990/gtp/topic/top/<?php echo ($topic["id"]); ?>?opt=cancel">取消置顶</a> &nbsp;
-                    <?php } else { ?>
-                    &gt; <a href="http://localhost:9990/gtp/topic/top/<?php echo ($topic["id"]); ?>">置顶</a> &nbsp;
-                    <?php } ?> 
-                    &gt; <a href="http://localhost:9990/gtp/topic/delete/<?php echo ($topic["id"]); ?>" onclick="return confirm('删除 ?');">删除</a> &nbsp;
-                    <?php } ?>
-                    <?php if(isTopicOwner($topic, $_uid)) { ?>
-                    &gt; <a href="http://localhost:9990/gtp/topic/edit/<?php echo ($topic["id"]); ?>">编辑</a> &nbsp;
-                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -80,9 +67,9 @@
         <!--文章评论-->
         
         <div class="review">
-            <br/>
+            
             <?php if($_logined == false) { ?>
-            <?php $goto = "topic/".$topic['id']."#comments"; ?>
+            <?php $goto = "blog/".$blog['id']."#comments"; ?>
             <div class="trbody">
     <div class="login-tip">
      您需要登录后才可以评论 <a href="javascript:void(0);" id="doLogin">登录</a> | <a href="http://localhost:9990/gtp/user/register?page=<?php echo ($page); ?>" id="doRegister">立即注册</a>
@@ -120,13 +107,7 @@
 </div>
             <?php } ?>
             
-            <br/>
-            <div class="trhead">
-                <a name="review"></a>
-                <strong>评论</strong>共<span class="review-count"><?php echo ($topic["reply_num"]); ?></span>条
-            </div>
-            
-            <?php  $item_type = "topic"; $item_id = $topic['id']; ?>
+            <?php  $item_type = "blog"; $item_id = $blog['id']; ?>
             
             <ul id="comment_list">
                 <?php if(is_array($comment_list)): foreach($comment_list as $key=>$comment): ?><li id="comment-<?php echo ($comment["id"]); ?>">
@@ -136,7 +117,12 @@
     <div class="comm_r">
         <a href="http://localhost:9990/gtp/user/<?php getUserDomainById($comment['user_id']) ?>" id="comm-nick-<?php echo ($comment["id"]); ?>"><?php echo ($comment["nick"]); ?></a> &nbsp; <span class="c7"><?php echo (firendlytime($comment["add_time"])); ?></span>
         <?php if(!empty($comment['parent_id']) && $comment['parent_id'] > 0) { ?>
-        <p class="quote_item"><?php getParentUser($comment['parent_id']); ?>：<br/><?php getParentComment($comment['parent_id']); ?></p>
+        <?php $p_comment = getCommentById($comment['parent_id']); ?>
+        <?php if(empty($p_comment) || $p_comment["state"] == -1) { ?>
+            <p class="quote_item" style="color: #999;">该评论已被删除</p>
+        <?php } else { ?>
+            <p class="quote_item"><?php getParentUser($comment['parent_id']); ?>：<?php echo $p_comment['content']; ?></p>
+        <?php } ?>
         <?php } ?>
         <p id="comm-cnt-<?php echo ($comment["id"]); ?>"><?php echo (autolink($comment["content"])); ?></p>
     </div>
@@ -192,13 +178,18 @@
     </div>
     <!-- right begin --> 
     <div class="channel-right">
-        <script type="text/javascript"> 
-        alimama_pid="mm_10574926_3506959_11486840"; 
-        alimama_width=300; 
-        alimama_height=250; 
-        </script> 
-        <script src="http://a.alimama.cn/inf.js" type="text/javascript"> 
-        </script>
+        
+        <div class="hot-rank thinkphp-box1">
+            <div class="head"><strong>更多日志</strong></div>
+            <div class="body">
+                <ul>
+                    <?php $i = 1; ?>
+                    <?php if(is_array($blog_list)): foreach($blog_list as $key=>$item): ?><li><?php echo $i; ?>、<a href="http://localhost:9990/gtp/blog/<?php echo ($item["id"]); ?>"><?php echo ($item["title"]); ?></a></li>
+                    <?php $i ++; endforeach; endif; ?>
+                </ul>
+            </div>
+        </div>
+        
     </div>
     <!-- right end -->
 </div>

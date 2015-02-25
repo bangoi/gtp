@@ -3,14 +3,14 @@
 
 <div class="contaier wp cf">
 <div class="ident">注册</div>
-    <div class="register">
+    <div class="register" style="width: 580px;">
         <div class="head">
             <strong>用户注册</strong><span>已有帐号？点击<a href="__SITE__/user/login">登录</a></span>
             <?php if (!empty($err)): ?><span style="color: red">{$err}</span><?php endif; ?>
         </div>
         <div class="body form">
             <form action="__SITE__/user/register" method="post" class="login">
-                <table>
+                <table style="width: 580px;">
                     <tr>
                         <th>用户名</th>
                         <td>
@@ -18,7 +18,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>密码</th>
+                        <th>密&#12288;码</th>
                         <td>
                             <input class="text" type="password" name="pwd" />
                         </td>
@@ -30,7 +30,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>邮箱</th>
+                        <th>邮&#12288;箱</th>
                         <td>
                             <input class="text" type="text" name="email" value="{$email}" />
                         </td>

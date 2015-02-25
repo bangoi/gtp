@@ -48,24 +48,22 @@
     </form>
 </div>
         
-        <div class="ident">吉他谱</div>
-        
-        <div class="slogan"><a class="post" href="http://localhost:9990/gtp/gtp/add">发布吉他谱</a><p><?php echo ($artist_name); ?> 吉他谱 <A href="http://localhost:9990/gtp/gtp/?p=2">More</A></p></div>
-        
-        <div class="cate">
-            <ul class="item">
-            <?php if(is_array($gtp_list)): foreach($gtp_list as $key=>$gtp): ?><li>
-                <div class="left">
-                </div>
-                <div class="middle">
-                    <span class="title"><a href="http://localhost:9990/gtp/gtp/<?php echo ($gtp["id"]); ?>"><?php echo ($gtp["song_title"]); ?></a></span>-
-                    <span class="author"><a href="http://localhost:9990/gtp/gtp/?artist_name=<?php echo (urlencode($gtp["artist_name"])); ?>"><?php echo ($gtp["artist_name"]); ?></a></span>
-                </div>
-                <div class="right">
-                    <span class="date"><?php echo (firendlytime($gtp["add_time"])); ?></span>
-                </div>
-            </li><?php endforeach; endif; ?>
+        <div class="ident">吉他视频</div>
+    
+    <div class="slogan"><a class="post" href="http://localhost:9990/gtp/vedio/add">发布吉他视频</a><p><?php echo ($artist_name); ?>吉他视频 <A href="http://localhost:9990/gtp/vedio/?p=2">More</A></p></div>
+
+    <div class="app-summary v_list">
+    <br />
+    <ul>
+    <?php if(is_array($vedio_list)): foreach($vedio_list as $key=>$vedio): ?><li class="vitem">
+            <ul>
+                <li><a href="http://localhost:9990/gtp/vedio/<?php echo ($vedio["id"]); ?>"><img src="<?php echo ($vedio["thumb"]); ?>" alt="<?php echo ($vedio["song_title"]); ?>" /></a></li>
+                <li><a href="http://localhost:9990/gtp/vedio/<?php echo ($vedio["id"]); ?>"><?php echo ($vedio["song_title"]); ?></a></li>
+                <li>发布：<?php echo (firendlytime($vedio["add_time"])); ?></li>
+                <li>播放：<?php echo ($vedio["view_num"]); ?></li>
             </ul>
+        </li><?php endforeach; endif; ?>
+    </ul>
     </div>
     
     <!-- page begin -->
@@ -111,7 +109,7 @@
         
         <div class="fast" style="background: #F1F1F1; margin-top: -10px">
             
-           <dl>
+            <dl>
     <dt>首字母<sub>Initial</sub></dt>
     <dd>
     <?php $letters = array("#", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"); ?>
@@ -126,24 +124,24 @@
             <dl>
             <dt>音乐人<sub>Musician</sub></dt>
             <dd>
-                <a href="http://localhost:9990/gtp/gtp/?artist_name=陈绮贞">陈绮贞</a>
-                <a href="http://localhost:9990/gtp/gtp/?artist_name=张震岳">张震岳</a>
-                <a href="http://localhost:9990/gtp/gtp/?artist_name=曹方">曹方</a>
-                <a href="http://localhost:9990/gtp/gtp/?artist_name=卢广仲">卢广仲</a>
-                <a href="http://localhost:9990/gtp/gtp/?artist_name=方大同">方大同</a>
-                <a href="http://localhost:9990/gtp/gtp/?artist_name=蔡健雅">蔡健雅</a>
-                <a href="http://localhost:9990/gtp/gtp/?artist_name=张悬">张悬</a>
+                <a href="http://localhost:9990/gtp/vedio/?artist_name=陈绮贞">陈绮贞</a>
+                <a href="http://localhost:9990/gtp/vedio/?artist_name=张震岳">张震岳</a>
+                <a href="http://localhost:9990/gtp/vedio/?artist_name=曹方">曹方</a>
+                <a href="http://localhost:9990/gtp/vedio/?artist_name=卢广仲">卢广仲</a>
+                <a href="http://localhost:9990/gtp/vedio/?artist_name=方大同">方大同</a>
+                <a href="http://localhost:9990/gtp/vedio/?artist_name=蔡健雅">蔡健雅</a>
+                <a href="http://localhost:9990/gtp/vedio/?artist_name=张悬">张悬</a>
             </dd>
             </dl>
             
             <dl>
             <dt>指弹大师<sub>Master</sub></dt>
             <dd>
-                <a href="http://localhost:9990/gtp/gtp/?artist_name=Tommy+Emmanuel">Tommy Emmanuel</a>
-                <a href="http://localhost:9990/gtp/gtp/?artist_name=押尾桑">押尾桑</a>
-                <a href="http://localhost:9990/gtp/gtp/?artist_name=Andy+McKee">Andy McKee</a>
-                <a href="http://localhost:9990/gtp/gtp/?artist_name=Antoine+Dufour">Antoine Dufour</a>
-                <a href="http://localhost:9990/gtp/gtp/?artist_name=岸部真明">岸部真明</a>
+                <a href="http://localhost:9990/gtp/vedio/?artist_name=Tommy+Emmanuel">Tommy Emmanuel</a>
+                <a href="http://localhost:9990/gtp/vedio/?artist_name=押尾桑">押尾桑</a>
+                <a href="http://localhost:9990/gtp/vedio/?artist_name=Andy+McKee">Andy McKee</a>
+                <a href="http://localhost:9990/gtp/vedio/?artist_name=Antoine+Dufour">Antoine Dufour</a>
+                <a href="http://localhost:9990/gtp/vedio/?artist_name=岸部真明">岸部真明</a>
             </dd>
             </dl>
             

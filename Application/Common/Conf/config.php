@@ -57,6 +57,9 @@ return array(
 		'group/face/:id' => 'group/face',
 		'group/delete/:id' => 'group/delete',
 		'group/join/:id' => 'group/join',
+		'group/member/:id' => 'group/member',
+		'group/topic/:id' => 'group/topic',
+		'group/role/:id' => 'group/role',
 		
 		'topic/:id\d$' => 'topic/details',
 		'topic/edit/:id' => 'topic/edit',
@@ -68,6 +71,8 @@ return array(
 		'blog/:id\d$' => 'blog/details',
 		'blog/edit/:id' => 'blog/edit',
 		'blog/delete/:id' => 'blog/delete',
+		
+		'dirty/delete/:id' => 'dirty/delete',
     ),
     
 	'TMPL_PARSE_STRING'  =>	array(

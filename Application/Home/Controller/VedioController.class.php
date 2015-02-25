@@ -44,7 +44,6 @@ class VedioController extends BaseController {
 		
 		$this->assign('vedio_list', $vedio_list);
 		$this->assign('page', $page);
-		$this->assign("channel", "vedio");
 		$this->display();
 	}
 	
@@ -53,17 +52,14 @@ class VedioController extends BaseController {
 		$p = I("get.p") ? I("get.p") : 1;
 		$size = 20;
 		
-		$order = "add_time desc";
-		
 		$k = urldecode(I("get.k"));
 		$artist_name = urldecode(I("get.artist_name"));
+		$order = "add_time desc";
 		
 		$map["state"] = 100;
 		
 		if(!empty($k)) {
-			
 			$map["title"] = array('like', "%{$k}%");
-			
 			$this->assign('k', $k);
 			$this->assign("title", $k."吉他视频"." 第{$p}页");
 		}
@@ -76,13 +72,14 @@ class VedioController extends BaseController {
 		
 		$this->assign('vedio_list', $vedio_list);
 		$this->assign('page', $page);
-		$this->assign("channel", "vedio");
 		$this->display("index");
 	}
 
 	public function details() {
 		
 		$id = I("get.id");
+		$p = I("get.p") ? I("get.p") : 1;
+		$size = 25;
 		
 		$map["id"] = $id;
 		$map["state"] = 100;
@@ -104,17 +101,26 @@ class VedioController extends BaseController {
 		$video_map["state"] = 100;
 				
 		$vedio_list = M("VedioView")	->where($video_map)->order('view_num DESC')->limit(10)->select();
-				
+		
+		$comment_map["comment.state"] = 100;
+		$comment_map["comment.item_type"] = "vedio";
+		$comment_map["comment.item_id"] = $id;
+
+		$comment_list = M("Comment")
+			->join("user on user.id=comment.user_id")
+			->field("comment.id, comment.item_type, comment.item_id, comment.parent_id, comment.user_id, comment.content, comment. add_time, user.nick, user.face")
+			->where($comment_map)->order("add_time")->page($p.",{$size}")->select();
+			
 		$this->assign("vedio", $vedio);
 		$this->assign("user", $user);
 		$this->assign("gtps", $gtp_list);
 		$this->assign("vedioes", $vedioes);
+		$this->assign("comment_list", $comment_list);
 		
 		$this->assign("title", $vedio['title']);
 		$this->assign("page_title", $vedio['title']);
 		$this->assign("description", $vedio['title'].",".$vedio['song_title'].",".$vedio['artist_name'].",".'吉他视频');
 		$this->assign("can_edit", $this->can_edit("vedio", $vedio['id']));
-		$this->assign("channel", "vedio");
 		$this->display();
 	}
 	
@@ -136,20 +142,15 @@ class VedioController extends BaseController {
 				$artist_name = I("post.artist_name");
 				$song_title = I("post.song_title");
 				
-				if(empty($title))
-					throw new Exception("必须输入视频标题");
+				if(empty($title)) E("必须输入视频标题");
 				
-				if(empty($thumb_value))
-					throw new Exception("必须输入截图地址");
+				if(empty($thumb_value)) E("必须输入截图地址");
 					
-				if(empty($code))
-					throw new Exception("必须输入视频swf");
+				if(empty($code)) E("必须输入视频swf");
 					
-				if(empty($artist_name))
-					throw new Exception("必须输入音乐人");
+				if(empty($artist_name)) E("必须输入音乐人");
 					
-				if(empty($song_title))
-					throw new Exception("必须输入歌曲名称");
+				if(empty($song_title)) E("必须输入歌曲名称");
 				
 				$vedio = D("Vedio");
 		        if($vedio->create()) {
@@ -187,7 +188,6 @@ class VedioController extends BaseController {
 		} else {
 			$this->assign("title", '发布吉他视频');
 			$this->assign("page_title", '发布吉他视频');
-			$this->assign("channel", "vedio");
 			$this->display();
 		}
 	}
@@ -243,7 +243,7 @@ class VedioController extends BaseController {
 				M("Vedio")->where("id={$id}")->data($data)->save();
 				$this->redirect('/vedio/'.$id);
 				
-			}catch(Exception $ex){
+			}catch(Exception $ex) {
 				
 				$this->assign("vedio_title", I("post.title"));
 				$this->assign("thumb", I("post.thumb"));
@@ -257,7 +257,6 @@ class VedioController extends BaseController {
 				$this->display();
 			}
 		} else {
-			
 			$map["state"] = 100;
 			$map["id"] = I("get.id");
 			$vedio = M('Vedio')->where($map)->find();
@@ -265,7 +264,6 @@ class VedioController extends BaseController {
 			$this->assign('vedio', $vedio);
 			$this->assign("title", '编辑吉他视频 '.$vedio['title']);
 			$this->assign("page_title", '编辑吉他视频 '.$vedio['title']);
-			$this->assign("channel", "vedio");
 			$this->display();
 		}
 	}

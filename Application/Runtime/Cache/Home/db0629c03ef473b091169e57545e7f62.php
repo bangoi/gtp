@@ -23,9 +23,10 @@
         <div class="header-wrap wp cf">
             <h3 class="logo"><a href="http://localhost:9990/gtp" title="返回首页">Guitar Pro</a></h3>
             <ul class="navg">
-                <li class="title <?php if(($channel == 'home')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp">首页</a></li>
-                <li class="title <?php if(($channel == 'gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
-                <li class="title <?php if(($channel == 'vedio')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/vedio/">吉他视频</a></li>
+                <li class="title <?php if(($channel == 'Home')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp">首页</a></li>
+                <li class="title <?php if(($channel == 'Gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
+                <li class="title <?php if(($channel == 'Vedio')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/vedio/">吉他视频</a></li>
+                <li class="title <?php if($channel == "Group" || $channel == "Topic") { ?>selected<?php } ?>"><a class="show" href="http://localhost:9990/gtp/group/">小组</a></li>
             </ul>
             <p class="user">
                 <?php if(!$_logined) { ?>
@@ -127,7 +128,7 @@
 
 <div class="contaier wp cf">
 <div class="ident">头像</div>
-    <div class="login" style="width: 660px;">
+    <div class="login" style="width: 580px;">
         <div class="head">
             <strong>1. 添加或更改你的头像</strong>
             <?php if (!empty($err)): ?><span style="color: red"><?php echo ($err); ?></span><?php endif; ?>
@@ -137,7 +138,7 @@
             <form action="http://localhost:9990/gtp/user/face" method="post" class="login" enctype="multipart/form-data">
             
             <div style="width: 230px; float: left;">
-                <img src="http://localhost:9990/gtp/<?php get_imgPath($face, 'm'); ?>" style="width:200px; height: 200px;" class="jcrop-preview" id="target" alt="Preview" />
+                <img src="http://localhost:9990/gtp/<?php getImgName($face, 'm'); ?>" style="width:200px; height: 200px;" class="jcrop-preview" id="target" alt="Preview" />
             </div>
             <div style="width: 330px; float: left;">
                 <span class="c9 f14">从电脑中选择你喜欢的照片:</span>
@@ -158,7 +159,7 @@
             </div>
             <div id="preview-pane" style="margin-top: 15px; float: left;">
                 <div class="preview-container" >
-                    <img src="http://localhost:9990/gtp/<?php get_imgPath($face, 'm'); ?>" class="jcrop-preview" alt="Preview" />
+                    <img src="http://localhost:9990/gtp/<?php getImgName($face, 'm'); ?>" class="jcrop-preview" alt="Preview" />
                 </div>
             </div>
             <div style="margin: 13px; float: left;">
@@ -184,10 +185,8 @@
 </div>
 <div class="body">
     <ul class="other-account">
-        <li><a class="qq" href="/oauth/index/type/qq.html">腾讯QQ登录</a></li>
-        <li><a class="tencent" href="/oauth/index/type/tencent.html">腾讯微博登录</a></li>
-        <li><a class="t163" href="/oauth/index/type/t163.html">网易微博登录</a></li>
-        <li><a class="sina" href="/oauth/index/type/sina.html">新浪微博登录</a></li>
+        <li><a href="http://localhost:9990/gtp/user/settings">用户信息设置</a></li>
+        <li><a href="http://localhost:9990/gtp/user/face">用户头像设置</a></li>
     </ul>
 </div>
     </div>
@@ -202,8 +201,7 @@
     </div>
     <input type="hidden" name="site" id="site" value="http://localhost:9990/gtp" />
 <div style="display:none">
-    <script language="javascript" type="text/javascript" src="http://js.users.51.la/14961362.js"></script>
-<noscript><a href="http://www.51.la/?14961362" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/14961362.asp" style="border:none" /></a></noscript>
+    
 </div>
 </body>
 </html>

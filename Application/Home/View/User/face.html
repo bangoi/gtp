@@ -91,7 +91,7 @@
 
 <div class="contaier wp cf">
 <div class="ident">头像</div>
-    <div class="login" style="width: 660px;">
+    <div class="login" style="width: 580px;">
         <div class="head">
             <strong>1. 添加或更改你的头像</strong>
             <?php if (!empty($err)): ?><span style="color: red">{$err}</span><?php endif; ?>
@@ -101,7 +101,7 @@
             <form action="__SITE__/user/face" method="post" class="login" enctype="multipart/form-data">
             
             <div style="width: 230px; float: left;">
-                <img src="__SITE__/<?php get_imgPath($face, 'm'); ?>" style="width:200px; height: 200px;" class="jcrop-preview" id="target" alt="Preview" />
+                <img src="__SITE__/<?php getImgName($face, 'm'); ?>" style="width:200px; height: 200px;" class="jcrop-preview" id="target" alt="Preview" />
             </div>
             <div style="width: 330px; float: left;">
                 <span class="c9 f14">从电脑中选择你喜欢的照片:</span>
@@ -122,7 +122,7 @@
             </div>
             <div id="preview-pane" style="margin-top: 15px; float: left;">
                 <div class="preview-container" >
-                    <img src="__SITE__/<?php get_imgPath($face, 'm'); ?>" class="jcrop-preview" alt="Preview" />
+                    <img src="__SITE__/<?php getImgName($face, 'm'); ?>" class="jcrop-preview" alt="Preview" />
                 </div>
             </div>
             <div style="margin: 13px; float: left;">

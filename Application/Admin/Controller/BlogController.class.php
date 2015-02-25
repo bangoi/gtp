@@ -40,6 +40,7 @@ class BlogController extends BaseController {
 				$blog = D("Blog");
 				if($blog->create()) {
 					$blog->user_id = $this->uid;
+					$blog->content = nl2br2(I("post.content"));
 					$blog->add();
 					
 					$this->redirect("/admin/blog/");
@@ -72,7 +73,7 @@ class BlogController extends BaseController {
 				
 				$data['title'] = $title;
 				$data['description'] = trim(I("post.description"));
-				$data['content'] = $content;
+				$data["content"] = nl2br2($content);
 				$data['tags'] = trim(I("post.tags"));
 		
 				M("Blog")->where("id={$id}")->data($data)->save();

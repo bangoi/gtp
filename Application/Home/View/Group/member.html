@@ -1,0 +1,187 @@
+<tagLib name="html" />
+<include file="Public:header" />
+
+<div class="contaier wp cf">
+<div class="ident">小组</div>
+    <div class="login" style="width: 580px;margin-top: 0px;">
+        
+        
+        <div class="slogan"><p>成员管理</p></div>
+        <br/>
+        <form class="form" action="__SITE__/group/member/{$group_id}" method="get">
+            <input type="text" name="nick" placeholder="输入小组成员昵称" value="{$nick}" class="text" />
+            <input type="submit" class="button" value="查找" />
+        </form>
+        <div class="cate">
+            <ul class="item">
+            <!-- title -->
+            <li>
+                <div class="left">
+                    <span class="title" style="width: 150px;display: block; float: left;"><strong>用户名</strong></span>
+                </div>
+                <div class="middle">
+                     <span class="title" style="width: 100px;display: block; float: left;"><strong>角色</strong></span>
+                     <span class="title" style="width: 180px;display: block; float: left;"><strong>加入时间</strong></span>
+                </div>
+                <div class="right">
+                    <span class="date" style="display: block; float: left; color:#333;"><strong>操作</strong></span>
+                </div>
+            </li>
+            <!-- owner -->
+            <?php if(!empty($owner)) { ?>
+            <li>
+                <div class="left">
+                    <span class="title" style="width: 150px;display: block; float: left;"><a href="__SITE__/user/{$owner|getUserDomain}">{$owner.nick}</a></span>
+                </div>
+                <div class="middle">
+                     <span class="title" style="width: 100px;display: block; float: left;">创建人</span>
+                     <span class="title" style="width: 180px;display: block; float: left;">{$group.add_time|toDate}</span>
+                </div>
+                <div class="right">
+                    <span class="date" style="display: block; float: right;"></span>
+                </div>
+            </li>
+            <?php } ?>
+            <!-- admin -->
+            <foreach name="admin_list" item="item">
+            <li>
+                <div class="left">
+                    <span class="title" style="width: 150px;display: block; float: left;"><a href="__SITE__/user/{$item|getUserDomain}">{$item.nick}</a></span>
+                </div>
+                <div class="middle">
+                     <span class="title" style="width: 100px;display: block; float: left;">管理员</span>
+                     <span class="title" style="width: 180px;display: block; float: left;">{$item.add_time|toDate}</span>
+                </div>
+                <div class="right">
+                    <span class="date" style="display: block; float: right;"><a onclick="return confirm('取消管理员 ?');" href="__SITE__/group/role/{$item.ug_id}?type=admin_cancel">[取消]</a></span>
+                </div>
+            </li>
+            </foreach>
+            <!-- member -->
+            
+            <foreach name="member_list" item="item">
+            <li>
+                <div class="left">
+                    <span class="title" style="width: 150px;display: block; float: left;"><a href="__SITE__/user/{$item|getUserDomain}">{$item.nick}</a></span>
+                </div>
+                <div class="middle">
+                     <span class="title" style="width: 100px;display: block; float: left;">成员</span>
+                     <span class="title" style="width: 180px;display: block; float: left;">{$item.add_time|toDate}</span>
+                </div>
+                <div class="right">
+                    <span class="date" style="display: block; float: right;">
+                        <a onclick="return confirm('提升为管理员 ?');" href="__SITE__/group/role/{$item.ug_id}?type=admin_add">[管理员]</a>
+                        <a onclick="return confirm('加入黑名单 ?');" href="__SITE__/group/role/{$item.ug_id}?type=group_ban">[黑名单]</a>
+                    </span>
+                </div>
+            </li>
+            </foreach>
+            </ul>
+        </div>
+        
+        <br/>
+        <br/>
+        
+        
+        
+        
+        
+         <div class="head">
+            <strong>创建人</strong>
+        </div>
+        <br />
+        <ul class="member-list">
+            <li>
+                <div class="pic">
+                <a href="__SITE__/user/<?php getUserDomain($owner);  ?>"><img src="<?php getUserFace($owner, 's'); ?>" /></a>
+                </div>
+                <div class="name">
+                    <a href="__SITE__/user/<?php getUserDomain($owner);  ?>" class="">{$owner.nick}</a>
+                </div>
+            </li>
+        </ul>
+        
+        <br class="clear" />
+        <br/>
+        <br/>
+        <br/>
+        
+        <div class="head">
+            <strong>版主</strong>
+        </div>
+        <br />
+        <form action="__SITE__/group/role" method="post">
+        <ul class="member-list">
+            <foreach name="admin_list" item="item">
+            <li>
+                <div class="pic">
+                <img id="imgAdmin-{$item.id}" src="<?php getUserFace($item, 's'); ?>" state="0" class="adminCheck" />
+                <input type="checkbox" name="member_id[]" class="chk" id="chkAdmin-{$item.id}" checked="true" value="-1" />
+                </div>
+                <div class="name">
+                    <a href="__SITE__/user/<?php getUserDomain($item);  ?>" class="">{$item.nick}</a>
+                </div>
+            </li>
+            </foreach>
+        </ul>
+        <br class="clear" />
+        <br/>
+        <input type="hidden" name="group_id" value="{$group_id}" />
+        <input type="hidden" name="type" value="cancel_admin" />
+        <input type="submit" value="取消版主" class="button" />
+        </form>
+        <br class="clear" />
+        <br/>
+        <br/>
+        <br/>
+        
+        <div class="head">
+            <strong>小组成员</strong>
+        </div>
+        <br />
+        <form id="groupMemberForm" action="__SITE__/group/role" method="post">
+        <ul class="member-list">
+            <foreach name="member_list" item="item">
+            <li>
+                <div class="pic">
+                    <img id="imgMember-{$item.id}" src="<?php getUserFace($item, 's'); ?>" state="0" class="memberCheck" />
+                    <input type="checkbox" name="member_id[]" class="chk" id="chkMember-{$item.id}" checked="true" value="-1" />
+                </div>
+                <div class="name">
+                    <a href="__SITE__/user/<?php getUserDomain($item);  ?>" class="">{$item.nick}</a>
+                </div>
+            </li>
+            </foreach>
+        </ul>
+        <br class="clear" />
+        <br/>
+        
+        <input type="hidden" name="group_id" value="{$group_id}" />
+        <input type="hidden" id="groupRoleAction" name="type" value="" />
+        
+        <input type="button" id="btnAdmin" value="设为版主" class="button" /> &nbsp;
+        <input type="button" id="btnRemove" value="加入黑名单" class="button" /> &nbsp;
+        </form>
+        
+        <br class="clear" />
+        <br/>
+        <br/>
+        
+        <br class="clear" />
+        <br />
+        
+       
+    </div>
+    
+    
+    <div class="login-other">
+        <div class="head">
+            <strong>使用其他帐号直接登录</strong>
+        </div>
+        <div class="body">
+            <include file="Public:group_edit" />
+        </div>
+    </div>
+</div>
+
+<include file="Public:footer" />

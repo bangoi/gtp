@@ -1,0 +1,79 @@
+<tagLib name="html" />
+<include file="Public:header" />
+
+<div class="contaier thinkphp-app wp">
+    <div class="app-left">
+        <div class="ident">话题</div>
+        <!--文章详细-->
+        <div class="app-detail">
+            <h1>{$blog.title}</h1>
+            <div class="body">
+                <div style="margin-top: 0px; color: #999;">
+                    <div style="width: 100%;">
+                        <div style="float: left">
+                            <a href="__SITE__/user/<?php getUserDomainById($blog['user_id']);  ?>"><img src="<?php getUserFaceById($blog['user_id'], 's'); ?>" class="face" /></a>
+                        </div>
+                        <div style="float: left; margin-left: 10px;">
+                                  来自：<a href="__SITE__/user/<?php getUserDomainById($blog['user_id']);  ?>">{$blog.nick}</a>
+                           <p style="line-height: 30px;">{$blog.add_time|toTime}</p>
+                        </div>
+                    </div>
+                    <br class="clear" />
+                    <br/>
+                    <div style="line-height: 200%; color: #333;">
+                        {$blog.content|autolink}    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/文章详细-->
+        <!--文章评论-->
+        
+        <div class="review">
+            
+            <?php if($_logined == false) { ?>
+            <?php $goto = "blog/".$blog['id']."#comments"; ?>
+            <include file="Public:login" />
+            <?php } ?>
+            
+            <?php 
+                $item_type = "blog";
+                $item_id = $blog['id'];
+            ?>
+            
+            <ul id="comment_list">
+                <foreach name="comment_list" item="comment">
+                <include file="Public:comment" />
+                </foreach>
+            </ul>
+            
+            <!-- page begin -->
+            <div class="manu">{$page}</div>
+            <!-- page end -->
+            
+            <br/>
+            <include file="Public:add_comment" />
+            
+        </div>
+        <!--/文章评论-->
+    </div>
+    <!-- right begin --> 
+    <div class="channel-right">
+        
+        <div class="hot-rank thinkphp-box1">
+            <div class="head"><strong>更多日志</strong></div>
+            <div class="body">
+                <ul>
+                    <?php $i = 1; ?>
+                    <foreach name="blog_list" item="item">
+                    <li><?php echo $i; ?>、<a href="__SITE__/blog/{$item.id}">{$item.title}</a></li>
+                    <?php $i ++; ?>
+                    </foreach>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <!-- right end -->
+</div>
+<include file="Public:footer" />

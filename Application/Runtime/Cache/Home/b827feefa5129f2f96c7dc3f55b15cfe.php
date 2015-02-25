@@ -48,21 +48,28 @@
     </form>
 </div>
         
-        <div class="ident">吉他谱</div>
+        <div class="ident">小组</div>
         
-        <div class="slogan"><a class="post" href="http://localhost:9990/gtp/gtp/add">发布吉他谱</a><p><?php echo ($artist_name); ?> 吉他谱 <A href="http://localhost:9990/gtp/gtp/?p=2">More</A></p></div>
+        <div class="slogan">
+            <?php if($type=="mine"){ ?>
+                <p>我的话题 <a href="http://localhost:9990/gtp/group/">小组话题</a></p>
+            <?php } else { ?>
+                <p>小组话题 <a href="http://localhost:9990/gtp/group/mine">我的话题</a></p>
+            <?php } ?>
+        </div>
         
         <div class="cate">
             <ul class="item">
-            <?php if(is_array($gtp_list)): foreach($gtp_list as $key=>$gtp): ?><li>
+            <?php if(is_array($topic_list)): foreach($topic_list as $key=>$item): ?><li>
                 <div class="left">
                 </div>
                 <div class="middle">
-                    <span class="title"><a href="http://localhost:9990/gtp/gtp/<?php echo ($gtp["id"]); ?>"><?php echo ($gtp["song_title"]); ?></a></span>-
-                    <span class="author"><a href="http://localhost:9990/gtp/gtp/?artist_name=<?php echo (urlencode($gtp["artist_name"])); ?>"><?php echo ($gtp["artist_name"]); ?></a></span>
+                    <span class="author"><a href="http://localhost:9990/gtp/group/<?php echo ($item["group_id"]); ?>">[<?php echo ($item["group_title"]); ?>]</a></span>
+                    <span class="title"><a href="http://localhost:9990/gtp/topic/<?php echo ($item["id"]); ?>"><?php echo ($item["title"]); ?></a></span>
+                    <span class="author"><?php if($item["reply_num"] > 0) { ?>(<?php echo ($item["reply_num"]); ?>回复)<?php } ?></span>
                 </div>
                 <div class="right">
-                    <span class="date"><?php echo (firendlytime($gtp["add_time"])); ?></span>
+                    <span class="date"><?php echo (firendlytime($item["last_reply_time"])); ?></span>
                 </div>
             </li><?php endforeach; endif; ?>
             </ul>

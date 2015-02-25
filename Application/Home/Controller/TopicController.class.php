@@ -5,12 +5,6 @@ use Think\Exception;
 
 class TopicController extends BaseController {
 	
-    public function index() {
-    	
-		$this->assign("channel", "group");
-		$this->display();
-    }
-	
 	public function details() {
 		
 		$p = I("get.p") ? I("get.p") : 1;
@@ -32,10 +26,14 @@ class TopicController extends BaseController {
 			->field("comment.id, comment.item_type, comment.item_id, comment.parent_id, comment.user_id, comment.content, comment. add_time, user.nick, user.face")
 			->where($map)->order("add_time")->page($p.",{$size}")->select();
 		
+		$ug_map["user_id"] = $this->uid;
+		$ug_map["group_id"] = $group["id"];	
+		$userGroup = M("UserGroup")->where($ug_map)->find();
+		
 		$this->assign("topic", $topic);
 		$this->assign("group", $group);
 		$this->assign("comment_list", $comment_list);
-		$this->assign("channel", "group");
+		$this->assign("userGroup", $userGroup);
 		$this->display();
 	}
 	
@@ -74,7 +72,6 @@ class TopicController extends BaseController {
 		} else {
 			$group_id = I("get.group_id");
 			$this->assign("group_id", $group_id);
-			$this->assign("channel", "group");
 			$this->display();	
 		}
 	}
@@ -113,7 +110,6 @@ class TopicController extends BaseController {
 			$id = I("get.id");
 			$topic = M("Topic")->where("id={$id}")->find();
 			$this->assign("topic", $topic);
-			$this->assign("channel", "group");
 			$this->display();	
 		}
 	}

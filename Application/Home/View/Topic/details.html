@@ -11,10 +11,10 @@
                 <div style="margin-top: 0px; color: #999;">
                     <div style="width: 100%;">
                         <div style="float: left">
-                            <a href="__SITE__/user/<?php get_user_domain($topic['user_id']);  ?>"><img src="<?php get_user_face($topic['user_id'], 's'); ?>" class="face" /></a>
+                            <a href="__SITE__/user/<?php getUserDomainById($topic['user_id']);  ?>"><img src="<?php getUserFaceById($topic['user_id'], 's'); ?>" class="face" /></a>
                         </div>
                         <div style="float: left; margin-left: 10px;">
-                                  来自：<a href="__SITE__/user/<?php get_user_domain($topic['user_id']);  ?>">{$topic.nick}</a>
+                                  来自：<a href="__SITE__/user/<?php getUserDomainById($topic['user_id']);  ?>">{$topic.nick}</a>
                            <p style="line-height: 30px;">{$topic.add_time|toTime}</p>
                         </div>
                     </div>
@@ -25,15 +25,15 @@
                     </div>
                     <br/>
                         来自：<a href="__SITE__/group/{$topic.group_id}">{$group.title}</a>  &nbsp; 
-                    <?php if(is_group_admin($topic['group_id'], $_uid)) { ?>
-                    <?php if(is_top_topic($topic['id'])){ ?>
+                    <?php if(isGroupAdmin($userGroup)) { ?>
+                    <?php if(isTopTopic($topic)){ ?>
                     &gt; <a href="__SITE__/topic/top/{$topic.id}?opt=cancel">取消置顶</a> &nbsp;
                     <?php } else { ?>
                     &gt; <a href="__SITE__/topic/top/{$topic.id}">置顶</a> &nbsp;
                     <?php } ?> 
                     &gt; <a href="__SITE__/topic/delete/{$topic.id}" onclick="return confirm('删除 ?');">删除</a> &nbsp;
                     <?php } ?>
-                    <?php if(is_topic_owner($topic['id'], $_uid)) { ?>
+                    <?php if(isTopicOwner($topic, $_uid)) { ?>
                     &gt; <a href="__SITE__/topic/edit/{$topic.id}">编辑</a> &nbsp;
                     <?php } ?>
                 </div>
@@ -43,7 +43,7 @@
         <!--文章评论-->
         
         <div class="review">
-            
+            <br/>
             <?php if($_logined == false) { ?>
             <?php $goto = "topic/".$topic['id']."#comments"; ?>
             <include file="Public:login" />

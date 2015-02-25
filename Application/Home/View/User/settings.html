@@ -3,14 +3,14 @@
 
 <div class="contaier wp cf">
 <div class="ident">设置</div>
-    <div class="login" style="width: 660px;">
+    <div class="login" style="width: 580px;">
         <div class="head" style="height: 0px;">
             <?php if (!empty($err)): ?><span style="color: red">{$err}</span><?php endif; ?>
             <?php if (!empty($notice)): ?><span style="color: #fff;background: green; padding: 3px 10px 3px 10px;">{$notice}</span><?php endif; ?>
         </div>
         <div class="body form ">
             <form action="__SITE__/user/settings" method="post" class="login">
-                <table>
+                <table style="width: 580px;">
                     <tr>
                         <th>昵&#12288;称</th>
                         <td>
@@ -20,7 +20,7 @@
                     <tr>
                         <th>头&#12288;像</th>
                         <td>
-                            <img src="__SITE__/<?php get_imgPath($user['face'], 's'); ?>" class="face" /> <a href="__SITE__/user/face" style="line-height: 50px;">设置</a>
+                            <img src="__SITE__/<?php getImgName($user['face'], 's'); ?>" class="face" /> <a href="__SITE__/user/face" style="line-height: 50px;">设置</a>
                         </td>
                     </tr>
                     <tr>

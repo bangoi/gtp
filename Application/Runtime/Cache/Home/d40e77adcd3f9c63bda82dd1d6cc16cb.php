@@ -41,28 +41,55 @@
 <div class="contaier wp">
     <div class="channel-left">
         
-        <div class="search cf">
-    <form action="http://localhost:9990/gtp/<?php echo get_channel($channel); ?>search" method="get">
-        <input class="text" type="text" name="k" value="<?php echo ($k); ?>" placeholder="输入关键字..." value="" />
-        <input class="submit" type="submit" value="搜索" />
-    </form>
-</div>
+        <div class="ident">用户</div>
         
-        <div class="ident">吉他谱</div>
+        <div class="user-panel">
+            <div class="uinfo">
+                <div class="uleft">
+                    <a href="http://localhost:9990/gtp/user/<?php getUserDomain($user); ?>"><img style="float: left;" src="<?php getUserFace($user); ?>" class="face" /></a>    
+                </div>
+                <div class="uright">
+                    <ul style="padding-left: 10px;">
+                        <li><strong><a href="http://localhost:9990/gtp/user/<?php getUserDomain($user); ?>"><?php echo ($user["nick"]); ?></a></strong></li>
+                        <li class="sign"><?php echo (strip_tags($user["signature"])); ?></li>
+                    </ul>
+                </div>
+            </div>
+            <ul class="uchannel">
+                <li><a href="http://localhost:9990/gtp/user/<?php getUserDomain($user); ?>" <?php if(empty($tab)){ ?>class="current"<?php } ?>>首页</a></li>
+                <li><a href="http://localhost:9990/gtp/user/<?php getUserDomain($user); ?>?tab=gtp" <?php if($tab == "gtp"){ ?>class="current"<?php } ?>>吉他谱</a></li>
+                <li><a href="http://localhost:9990/gtp/user/<?php getUserDomain($user); ?>?tab=vedio" <?php if($tab == "vedio"){ ?>class="current"<?php } ?>>吉他视频</a></li>
+                <li><a href="http://localhost:9990/gtp/user/<?php getUserDomain($user); ?>?tab=group" <?php if($tab == "group"){ ?>class="current"<?php } ?>>小组</a></li>
+            </ul>
+        </div>
         
-        <div class="slogan"><a class="post" href="http://localhost:9990/gtp/gtp/add">发布吉他谱</a><p><?php echo ($artist_name); ?> 吉他谱 <A href="http://localhost:9990/gtp/gtp/?p=2">More</A></p></div>
+        <div class="slogan">
+              <p>
+                  <?php if($tab == "gtp"){ ?>
+                      <a href="http://localhost:9990/gtp/group/">发布</a>&nbsp;
+                      练习中
+                      <a href="http://localhost:9990/gtp/group/">练习过</a>&nbsp;
+                  <?php } else if($tab == "vedio") { ?>
+                       <a href="http://localhost:9990/gtp/group/">发布</a>&nbsp;收藏
+                  <?php } else if ($tab == "group") {?>
+                      <a href="http://localhost:9990/gtp/group/">发布</a>&nbsp;回复
+                  <?php } else { ?>
+                  <?php } ?>
+              </p>
+        </div>
         
         <div class="cate">
             <ul class="item">
-            <?php if(is_array($gtp_list)): foreach($gtp_list as $key=>$gtp): ?><li>
+            <?php if(is_array($topic_list)): foreach($topic_list as $key=>$item): ?><li>
                 <div class="left">
                 </div>
                 <div class="middle">
-                    <span class="title"><a href="http://localhost:9990/gtp/gtp/<?php echo ($gtp["id"]); ?>"><?php echo ($gtp["song_title"]); ?></a></span>-
-                    <span class="author"><a href="http://localhost:9990/gtp/gtp/?artist_name=<?php echo (urlencode($gtp["artist_name"])); ?>"><?php echo ($gtp["artist_name"]); ?></a></span>
+                    <span class="author"><a href="http://localhost:9990/gtp/group/<?php echo ($item["group_id"]); ?>">[<?php echo ($item["group_title"]); ?>]</a></span>
+                    <span class="title"><a href="http://localhost:9990/gtp/topic/<?php echo ($item["id"]); ?>"><?php echo ($item["title"]); ?></a></span>
+                    <span class="author"><?php if($item["reply_num"] > 0) { ?>(<?php echo ($item["reply_num"]); ?>回复)<?php } ?></span>
                 </div>
                 <div class="right">
-                    <span class="date"><?php echo (firendlytime($gtp["add_time"])); ?></span>
+                    <span class="date"><?php echo (firendlytime($item["last_reply_time"])); ?></span>
                 </div>
             </li><?php endforeach; endif; ?>
             </ul>

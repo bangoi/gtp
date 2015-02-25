@@ -65,18 +65,11 @@ class GtpController extends BaseController
 		}
 		
 		$Page = new Page($count, $size);
-
-		//$Page = new Page($count, $size);
-		//if(!empty($k)) $Page->parameter .= "$k=".urlencode(I("get.k"))."&";
-		
-		//dump($Page);
 		$page = $Page->show();
 
 		
 		$this->assign('gtp_list', $gtp_list);
 		$this->assign('page', $page);
-		$this->assign("channel", "gtp");
-		
 		$this->display();
     }
 
@@ -98,7 +91,6 @@ class GtpController extends BaseController
 		$this->assign("title", $k."吉他谱"." 第{$p}页");
 		$this->assign('gtp_list', $gtp_list);
 		$this->assign('page', $page);
-		$this->assign("channel", "gtp");
 		
 		$this->display("index");
 	}
@@ -145,8 +137,6 @@ class GtpController extends BaseController
 		$this->assign("description", $gtp['title']. ",".$gtp['song_title'].",".$gtp['artist_name'].",".'吉他谱,Guitar-Pro吉他谱');
 		$this->assign("can_edit", $this->can_edit("gtp", $gtp['id']));
 		
-		$this->assign("channel", "gtp");
-		
 		$this->display();
 	}
 	
@@ -185,18 +175,14 @@ class GtpController extends BaseController
 			try {
 				
 				$artist_name = I("post.artist_name");
-				if(empty($artist_name))
-					E("必须输入音乐人");
+				if(empty($artist_name)) E("必须输入音乐人");
 				
 				$song_title = I("post.song_title");
-				if(empty($song_title))
-					E("必须输入音乐名称");
+				if(empty($song_title)) E("必须输入音乐名称");
 				
-				if(empty($_FILES["file_name"]))
-					E("必须上传Guitar Pro文件");
+				if(empty($_FILES["file_name"])) E("必须上传Guitar Pro文件");
 				
-				if($_FILES["file_name"]['size'] <= 0)
-					E("必须上传正确的Guitar Pro附件");
+				if($_FILES["file_name"]['size'] <= 0) E("必须上传正确的Guitar Pro附件");
 				
 				$gtp = D("Gtp");
 		        if($gtp->create()) {
@@ -257,7 +243,6 @@ class GtpController extends BaseController
 				
 			$this->assign("title", '上传吉他谱');
 			$this->assign("page_title", '上传吉他谱');
-			$this->assign("channel", "gtp");
 			$this->display();
 		}
 		
@@ -287,17 +272,13 @@ class GtpController extends BaseController
 				$artist_name = I("post.artist_name");
 				$song_title = I("post.song_title");
 				
-				if(empty($artist_name))
-					E("必须输入音乐人");
+				if(empty($artist_name)) E("必须输入音乐人");
 				
-				if(empty($song_title))
-					E("必须输入音乐名称");
+				if(empty($song_title)) E("必须输入音乐名称");
 				
-				if(empty($_FILES["file_name"]))
-					E("必须上传Guitar Pro附件");
+				if(empty($_FILES["file_name"])) E("必须上传Guitar Pro附件");
 				
-				if($_FILES["file_name"]['size'] <= 0)
-					E("必须上传正确的Guitar Pro附件");
+				if($_FILES["file_name"]['size'] <= 0) E("必须上传正确的Guitar Pro附件");
 				
 				$data['artist_name'] = trim($artist_name);
 				$data['song_title'] = trim($song_title);

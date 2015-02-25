@@ -3,14 +3,14 @@
 
 <div class="contaier wp cf">
 <div class="ident">小组</div>
-    <div class="login">
+    <div class="login" style="width: 580px;">
         <div class="head">
             <strong>编辑小组</strong>
             <?php if (!empty($err)): ?><span style="color: red">{$err}</span><?php endif; ?>
         </div>
         <div class="body form ">
             <form action="__SITE__/group/edit" method="post" class="login">
-                <table>
+                <table style="width: 580px;>
                     <tr>
                         <th>名称</th>
                         <td>
@@ -20,7 +20,7 @@
                     <tr>
                         <th>头像</th>
                         <td>
-                            <img src="{$item.face|get_group_face}" class="face" /> <a href="__SITE__/group/face/{$item.id}" style="line-height: 50px;">设置</a>
+                            <img src="{$item.face|getGroupFace}" class="face" /> <a href="__SITE__/group/face/{$item.id}" style="line-height: 50px;">设置</a>
                         </td>
                     </tr>
                     <tr>
@@ -51,8 +51,7 @@
             <strong>使用其他帐号直接登录</strong>
         </div>
         <div class="body">
-            <ul class="other-account">
-                <li><a class="qq" href="/oauth/index/type/qq.html">腾讯QQ登录</a></li><li><a class="tencent" href="/oauth/index/type/tencent.html">腾讯微博登录</a></li><li><a class="t163" href="/oauth/index/type/t163.html">网易微博登录</a></li><li><a class="sina" href="/oauth/index/type/sina.html">新浪微博登录</a></li>            </ul>
+            <include file="Public:group_edit" />
         </div>
     </div>
 </div>

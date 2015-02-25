@@ -7,8 +7,6 @@ use Org\Util\JsonResult;
 
 class CommentController extends BaseController {
 	
-    
-	
 	public function _before_add() {
 		if($this->logined != true) {
 			$item_type = I("post.item_type");
@@ -44,6 +42,9 @@ class CommentController extends BaseController {
 						
 					if($item_type == "topic") {
 						M("Topic")->where("id={$item_id}")->setInc('reply_num', 1);
+						
+						$data["last_reply_time"] = $this->get_now();
+						M("Topic")->where("id={$item_id}")->save($data);
 					}
 						
 					$this->assign("comment", $comment);

@@ -11,7 +11,7 @@
                 <div class="app-info">
                     <span class="date">{$gtp.add_time|toDate='Y-m-d H:i'}</span>
                     <a class="author" href="__SITE__/gtp/?artist_name={$gtp.artist_name|urlencode}">{$gtp.artist_name}的吉他谱</a>
-                    <span class="version"><a href="__SITE__/user/<?php get_domain($user); ?>">{$user.nick}</a>上传</span>
+                    <span class="version"><a href="__SITE__/user/<?php getUserDomain($user); ?>">{$user.nick}</a>上传</span>
                     <a class="class" href="__SITE__/gtp/">[ 吉他谱 ]</a>
                     <?php if ($can_edit) { ?>
                     <a href="__SITE__/gtp/edit/{$gtp.id}">[编辑]</a>

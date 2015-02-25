@@ -23,10 +23,10 @@
         <div class="header-wrap wp cf">
             <h3 class="logo"><a href="http://localhost:9990/gtp" title="返回首页">Guitar Pro</a></h3>
             <ul class="navg">
-                <li class="title <?php if(($channel == 'home')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp">首页</a></li>
-                <li class="title <?php if(($channel == 'gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
-                <li class="title <?php if(($channel == 'vedio')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/vedio/">吉他视频</a></li>
-                <li class="title <?php if(($channel == 'group')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/group/">小组</a></li>
+                <li class="title <?php if(($channel == 'Home')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp">首页</a></li>
+                <li class="title <?php if(($channel == 'Gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
+                <li class="title <?php if(($channel == 'Vedio')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/vedio/">吉他视频</a></li>
+                <li class="title <?php if($channel == "Group" || $channel == "Topic") { ?>selected<?php } ?>"><a class="show" href="http://localhost:9990/gtp/group/">小组</a></li>
             </ul>
             <p class="user">
                 <?php if(!$_logined) { ?>
@@ -47,21 +47,20 @@
                 <h1>Tommy Emmanuel</h1>
                 <div class="app-info">
                         创建于：<?php echo (todate($group["add_time"])); ?>
-                    
                     <?php if($_logined){ ?>
-                    <?php if (is_group_owner($group["id"], $_uid)) { ?>
+                    <?php if (isGroupOwner($userGroup)) { ?>
                     <a href="http://localhost:9990/gtp/group/edit/<?php echo ($group["id"]); ?>">[编辑小组信息]</a> - 我是小组创建者
-                    <?php } else if (is_group_admin($group["id"], $_uid)) { ?>
+                    <?php } else if (isGroupAdmin($userGroup)) { ?>
                     <a href="http://localhost:9990/gtp/group/edit/<?php echo ($group["id"]); ?>">[编辑小组信息]</a> - 我是小组管理员
-                    <?php } else if (is_group_member($group["id"], $_uid)) { ?>
+                    <?php } else if (isGroupMember($userGroup)) { ?>
                     - 我是小组成员
                     <?php } ?>
                     <?php } ?>
                     <div class="score">
                         <span record="37" class="score" model="45" score="0"></span>
                         <span class="total">组员：<span id="score-count"><?php echo ($group["user_num"]); ?></span>人</span> &nbsp;
-                        <?php if($_logined){ ?>
-                        <?php if (is_group_member($group["id"], $_uid)) { ?>
+                        <?php if($_logined && !isGroupOwner($userGroup)){ ?>
+                        <?php if (isGroupMember($userGroup)) { ?>
                         <a href="http://localhost:9990/gtp/group/join/<?php echo ($group["id"]); ?>?type=out">[退出小组]</a>
                         <?php } else { ?>
                         <a href="http://localhost:9990/gtp/group/join/<?php echo ($group["id"]); ?>">[加入小组]</a>
@@ -72,23 +71,22 @@
             </div>
             <div class="body" style="border: none;">
                 <div class="app-relative" style="margin-top: 0px; color: #999;">
-                    <img src="<?php echo (get_group_face($group["face"])); ?>" class="face" />
+                    <img src="<?php echo (getgroupface($group["face"])); ?>" class="face" />
                     <br/>
                     <br/>
                     <?php echo (autolink($group["content"])); ?>
                     <br/>
                     <br/>
                     <p>
-                    组长：<a href="http://localhost:9990/gtp/user/<?php get_user_domain($group['user_id']) ?>"><?php get_user_nick($group['user_id']) ?></a> &nbsp;|
-                         管理员：
-                         <a href="http://localhost:9990/gtp/user/<?php get_user_domain($group['user_id']) ?>"><?php get_user_nick($group['user_id']) ?></a> &nbsp; 
-                         <a href="http://localhost:9990/gtp/user/<?php get_user_domain($group['user_id']) ?>"><?php get_user_nick($group['user_id']) ?></a> &nbsp;
-                         <a href="http://localhost:9990/gtp/user/<?php get_user_domain($group['user_id']) ?>"><?php get_user_nick($group['user_id']) ?></a>
+                    组长：<a href="http://localhost:9990/gtp/user/<?php getUserDomainById($group['user_id']) ?>"><?php getUserNick($group['user_id']) ?></a> &nbsp;
+                    <?php if(!empty($admin_list)) { ?>
+                    | 管理员：
+                    <?php if(is_array($admin_list)): foreach($admin_list as $key=>$item): ?><a href="http://localhost:9990/gtp/user/<?php getUserDomain($item) ?>"><?php echo ($item["nick"]); ?></a> &nbsp;<?php endforeach; endif; ?>
                     </p>
-                    
+                    <?php } ?>
                 </div>
                 
-                <?php if (is_group_member($group["id"], $_uid)) { ?>
+                <?php if (isGroupMember($userGroup)) { ?>
                 <br/>
                 <div style="float: right;">
                     <form action="http://localhost:9990/gtp/topic/add" method="get">
@@ -99,7 +97,7 @@
                 <br/>
                 <?php } ?>
                 
-                <?php if(count($topic_top_list) > 0 && count($topic_list) > 0) { ?>
+                <?php if(count($topic_top_list) > 0 || count($topic_list) > 0) { ?>
                 <div class="cate">
                     <ul class="item">
                     <li>
@@ -118,7 +116,7 @@
                         </div>
                         <div class="middle">
                             <span class="title">[置顶] <a href="http://localhost:9990/gtp/topic/<?php echo ($item["id"]); ?>"><?php echo ($item["title"]); ?></a></span>
-                            <span class="author" style="font-size: 12px;"><a href="http://localhost:9990/gtp/user/<?php get_user_domain($item['user_id']) ?>"><?php echo ($item["nick"]); ?></a></span>
+                            <span class="author" style="font-size: 12px;"><a href="http://localhost:9990/gtp/user/<?php getUserDomain($item['user_id']) ?>"><?php echo ($item["nick"]); ?></a></span>
                             <?php if($item[reply_num] > 0) { ?>
                             <span>(<?php echo ($item["reply_num"]); ?>回应)</span>
                             <?php } ?>
@@ -132,7 +130,7 @@
                         </div>
                         <div class="middle">
                             <span class="title"><a href="http://localhost:9990/gtp/topic/<?php echo ($item["id"]); ?>"><?php echo ($item["title"]); ?></a></span>
-                            <span class="author" style="font-size: 12px;"><a href="http://localhost:9990/gtp/user/<?php get_user_domain($item['user_id']) ?>"><?php echo ($item["nick"]); ?></a></span>
+                            <span class="author" style="font-size: 12px;"><a href="http://localhost:9990/gtp/user/<?php getUserDomain($item['user_id']) ?>"><?php echo ($item["nick"]); ?></a></span>
                             <?php if($item[reply_num] > 0) { ?>
                             <span>(<?php echo ($item["reply_num"]); ?>回应)</span>
                             <?php } ?>
@@ -149,8 +147,8 @@
             <!-- page end -->
             <p>
                 <br/>
-                <form action="http://localhost:9990/gtp/group/<?php echo ($group["id"]); ?>" method="get">
-                    <b>搜索话题：</b> <input type="text" class="text" style="height: 32px;" name="k" value="<?php echo ($k); ?>" /> <input type="submit" class="button" value="查询" />
+                <form action="http://localhost:9990/gtp/group/<?php echo ($group["id"]); ?>" class="form" method="get">
+                    <b>搜索话题：</b> <input type="text" class="text" name="k" value="<?php echo ($k); ?>" /> <input type="submit" class="button" value="查询" />
                 </form>
             </p>
             <?php } ?>

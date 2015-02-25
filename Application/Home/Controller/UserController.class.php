@@ -123,13 +123,18 @@ class UserController extends BaseController {
 	public function details() {
 		$id = I("get.id");
 		$domain = I("get.domain");
+		$tab = I("get.tab");
 		
 		if(!empty($id))
 			$user = M("User")->where("id={$id}")->find();
 		if(!empty($domain))
 			$user = M("User")->where("domain='{$domain}'")->find();
 		
-		dump($user);
+		
+		
+		$this->assign("user", $user);
+		$this->assign("tab", $tab);
+		$this->display();
 	}
 	
 	public function _before_settings() {

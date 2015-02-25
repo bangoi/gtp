@@ -1,0 +1,97 @@
+<tagLib name="html" />
+<include file="Public:header" />
+
+<div class="contaier wp cf">
+<div class="ident">小组</div>
+    <div class="login" style="width: 580px; margin-top: 0px;">
+        
+        <div class="slogan"><p>违禁词</p></div>
+        <br/>
+        <form class="form" action="__SITE__/dirty/add" method="post">
+            <input type="text" name="name" placeholder="添加违禁词" class="text" />
+            <input type="hidden" name="group_id" value="{$group_id}">
+            <input type="submit" class="button" value="添加" />
+        </form>
+        <div class="cate">
+            <ul class="item">
+            <li>
+                <div class="left">
+                    <span class="title" style="width: 150px;display: block; float: left;"><strong>违禁词</strong></span>
+                </div>
+                <div class="middle">
+                     <span class="title" style="width: 150px;display: block; float: left;"><strong>创建人</strong></span>
+                     <span class="title" style="width: 180px;display: block; float: left;"><strong>添加时间</strong></span>
+                </div>
+                <div class="right">
+                    <span class="date" style="display: block; float: left; color:#333;"><strong>删除</strong></span>
+                </div>
+            </li>
+            <foreach name="dirty_list" item="item">
+            <li>
+                <div class="left">
+                    <span class="title" style="width: 150px;display: block; float: left;">{$item.name}</span>
+                </div>
+                <div class="middle">
+                     <span class="title" style="width: 150px;display: block; float: left;"><a href="__SITE__/user/{$item.user_id|getUserDomain}">{$item.nick}</a></span>
+                     <span class="title" style="width: 180px;display: block; float: left;">{$item.add_time|toDate}</span>
+                </div>
+                <div class="right">
+                    <span class="date" style="display: block; float: right;"><a onclick="return confirm('删除 ?');" href="__SITE__/dirty/delete/{$item.id}?group_id={$group_id}">[x]</a></span>
+                </div>
+            </li>
+            </foreach>
+            </ul>
+        </div>
+        
+        <br/>
+        <br/>
+        
+        <div class="slogan"><p>黑名单</p></div>
+        <br/>
+        <div class="cate">
+            <ul class="item">
+            <li>
+                <div class="left">
+                    <span class="title" style="width: 150px;display: block; float: left;"><strong>用户名</strong></span>
+                </div>
+                <div class="middle">
+                     <span class="title" style="width: 150px;display: block; float: left;"><strong></strong></span>
+                     <span class="title" style="width: 180px;display: block; float: right;"><strong>添加时间</strong></span>
+                </div>
+                <div class="right">
+                    <span class="date" style="display: block; float: left; color:#333;"><strong>解禁</strong></span>
+                </div>
+            </li>
+            <foreach name="ban_list" item="item">
+            <li>
+                <div class="left">
+                    <span class="title" style="width: 150px;display: block; float: left;"><a href="__SITE__/user/{$item.user_id|getUserDomain}">{$item.nick}</a></span>
+                </div>
+                <div class="middle">
+                     <span class="title" style="width: 150px;display: block; float: left;"></span>
+                     <span class="title" style="width: 180px;display: block; float: right;">{$item.add_time|toDate}</span>
+                </div>
+                <div class="right">
+                    <span class="date" style="display: block; float: right;"><a onclick="return confirm('解禁 ?');" href="__SITE__/group/role/{$item.id}?type=group_unban">[x]</a></span>
+                </div>
+            </li>
+            </foreach>
+            </ul>
+        </div>
+        
+        <br/>
+        
+    </div>
+    
+    
+    <div class="login-other">
+        <div class="head">
+            <strong>使用其他帐号直接登录</strong>
+        </div>
+        <div class="body">
+            <include file="Public:group_edit" />
+        </div>
+    </div>
+</div>
+
+<include file="Public:footer" />

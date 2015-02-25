@@ -40,49 +40,76 @@
 
 <div class="contaier thinkphp-app wp">
     <div class="app-left">
-        <div class="ident">话题</div>
+        <div class="ident">吉他视频</div>
         <!--文章详细-->
         <div class="app-detail">
-            <h1><?php if($topic['state'] == 110) { ?>[置顶]<?php } ?> <?php echo ($topic["title"]); ?></h1>
-            <div class="body">
-                <div style="margin-top: 0px; color: #999;">
-                    <div style="width: 100%;">
-                        <div style="float: left">
-                            <a href="http://localhost:9990/gtp/user/<?php getUserDomainById($topic['user_id']); ?>"><img src="<?php getUserFaceById($topic['user_id'], 's'); ?>" class="face" /></a>
-                        </div>
-                        <div style="float: left; margin-left: 10px;">
-                                  来自：<a href="http://localhost:9990/gtp/user/<?php getUserDomainById($topic['user_id']); ?>"><?php echo ($topic["nick"]); ?></a>
-                           <p style="line-height: 30px;"><?php echo (totime($topic["add_time"])); ?></p>
-                        </div>
-                    </div>
-                    <br class="clear" />
-                    <br/>
-                    <div style="line-height: 200%; color: #333;">
-                        <?php echo (autolink($topic["content"])); ?>    
-                    </div>
-                    <br/>
-                        来自：<a href="http://localhost:9990/gtp/group/<?php echo ($topic["group_id"]); ?>"><?php echo ($group["title"]); ?></a>  &nbsp; 
-                    <?php if(isGroupAdmin($userGroup)) { ?>
-                    <?php if(isTopTopic($topic)){ ?>
-                    &gt; <a href="http://localhost:9990/gtp/topic/top/<?php echo ($topic["id"]); ?>?opt=cancel">取消置顶</a> &nbsp;
-                    <?php } else { ?>
-                    &gt; <a href="http://localhost:9990/gtp/topic/top/<?php echo ($topic["id"]); ?>">置顶</a> &nbsp;
-                    <?php } ?> 
-                    &gt; <a href="http://localhost:9990/gtp/topic/delete/<?php echo ($topic["id"]); ?>" onclick="return confirm('删除 ?');">删除</a> &nbsp;
+            <div class="head">
+                <h1><?php echo ($vedio["title"]); ?></h1>
+                <div class="app-info">
+                    <span class="date"><?php echo (todate($vedio["add_time"],'Y-m-d H:i')); ?></span>
+                    <a class="author" href="http://localhost:9990/gtp/vedio/?artist_name=<?php echo (urlencode($vedio["artist_name"])); ?>"><?php echo ($vedio["artist_name"]); ?>吉他视频</a>
+                    <span class="version"><a href="http://localhost:9990/gtp/user/<?php getUserDomain($user); ?>"><?php echo ($user["nick"]); ?></a>发布</span>
+                    <a class="class" href="http://localhost:9990/gtp/vedio/">[ 吉他视频 ]</a>
+                    <?php if ($can_edit) { ?>
+                    <a href="http://localhost:9990/gtp/vedio/edit/<?php echo ($vedio["id"]); ?>">[编辑]</a>
                     <?php } ?>
-                    <?php if(isTopicOwner($topic, $_uid)) { ?>
-                    &gt; <a href="http://localhost:9990/gtp/topic/edit/<?php echo ($topic["id"]); ?>">编辑</a> &nbsp;
-                    <?php } ?>
+                    <div class="score">
+                        <span record="37" class="score" model="45" score="0"></span>
+                        <span class="total">(共<span id="score-count"><?php echo ($vedio["view_num"]); ?></span>人看过)</span>
+                    </div>
                 </div>
+            </div>
+            <div class="body">
+                
+                <div class="app-summary">
+                    <embed src="<?php echo ($vedio["code"]); ?>" quality="high" width="540" height="450" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></embed>
+                </div>
+                
+                <br />
+                
+                <?php if(count($gtps) > 0): ?>
+                <div class="relation">
+                    <div class="trhead">
+                        <b><?php echo ($vedio["song_title"]); ?> 吉他谱下载</b>
+                    </div>
+                    <ul>
+                        <?php if(is_array($gtps)): foreach($gtps as $key=>$gtp): ?><li><a href="http://localhost:9990/gtp/gtp/<?php echo ($gtp["id"]); ?>"><?php echo ($gtp["song_title"]); ?>-<?php echo ($gtp["artist_name"]); ?></a> 下载：<?php echo ($gtp["download_num"]); ?>次</li><?php endforeach; endif; ?>
+                    </ul>
+                </div>
+                <?php endif; ?>
+                
+                <?php if(count($vedioes) > 0): ?>
+                <div class="app-summary v_list">
+                    <b>更多<?php echo ($vedio["artist_name"]); ?>吉他视频</b>
+                    <br />
+                    <br />
+                    <ul>
+                        <?php if(is_array($vedioes)): foreach($vedioes as $key=>$vedio): ?><li class="item">
+                        <ul>
+                            <li><a href="http://localhost:9990/gtp/vedio/<?php echo ($vedio["id"]); ?>"><img src="<?php echo ($vedio["thumb"]); ?>" alt="<?php echo ($vedio["song_title"]); ?>" /></a></li>
+                            <li><a href="http://localhost:9990/gtp/vedio/<?php echo ($vedio["id"]); ?>"><?php echo ($vedio["song_title"]); ?></a></li>
+                            <li>发布：<?php echo (firendlytime($vedio["add_time"])); ?></li>
+                            <li>播放：<?php echo ($vedio["view_num"]); ?></li>
+                        </ul>
+                        </li><?php endforeach; endif; ?>
+                    </ul>
+                </div>
+                <?php endif; ?>
+                
+                <p>
+                        <br/>
+                        <b>搜索更多：</b> <a href="http://localhost:9990/gtp/vedio/?artist_name=<?php echo (urlencode($vedio["artist_name"])); ?>"><?php echo ($vedio["artist_name"]); ?>吉他视频</a>
+                </p>
+                
             </div>
         </div>
         <!--/文章详细-->
         <!--文章评论-->
         
         <div class="review">
-            <br/>
+            
             <?php if($_logined == false) { ?>
-            <?php $goto = "topic/".$topic['id']."#comments"; ?>
+            <?php $goto = "vedio/".$blog['id']."#comments"; ?>
             <div class="trbody">
     <div class="login-tip">
      您需要登录后才可以评论 <a href="javascript:void(0);" id="doLogin">登录</a> | <a href="http://localhost:9990/gtp/user/register?page=<?php echo ($page); ?>" id="doRegister">立即注册</a>
@@ -120,13 +147,7 @@
 </div>
             <?php } ?>
             
-            <br/>
-            <div class="trhead">
-                <a name="review"></a>
-                <strong>评论</strong>共<span class="review-count"><?php echo ($topic["reply_num"]); ?></span>条
-            </div>
-            
-            <?php  $item_type = "topic"; $item_id = $topic['id']; ?>
+            <?php  $item_type = "vedio"; $item_id = $vedio['id']; ?>
             
             <ul id="comment_list">
                 <?php if(is_array($comment_list)): foreach($comment_list as $key=>$comment): ?><li id="comment-<?php echo ($comment["id"]); ?>">
@@ -136,7 +157,13 @@
     <div class="comm_r">
         <a href="http://localhost:9990/gtp/user/<?php getUserDomainById($comment['user_id']) ?>" id="comm-nick-<?php echo ($comment["id"]); ?>"><?php echo ($comment["nick"]); ?></a> &nbsp; <span class="c7"><?php echo (firendlytime($comment["add_time"])); ?></span>
         <?php if(!empty($comment['parent_id']) && $comment['parent_id'] > 0) { ?>
-        <p class="quote_item"><?php getParentUser($comment['parent_id']); ?>：<br/><?php getParentComment($comment['parent_id']); ?></p>
+        <?php $comment = getCommentById($comment['parent_id']); ?>
+        <?php if(empty($comment) || $comment["state"] == -1) { ?>
+            <p class="quote_item"><?php getParentUser($comment['parent_id']); ?>：<br/><?php getParentCommentContent($comment['parent_id']); ?></p>
+        <?php } else { ?>
+            <p class="quote_item" style="color: #999;">该评论已被删除</p>
+        <?php } ?>
+        
         <?php } ?>
         <p id="comm-cnt-<?php echo ($comment["id"]); ?>"><?php echo (autolink($comment["content"])); ?></p>
     </div>
