@@ -19,6 +19,8 @@ class BaseController extends Controller {
 	protected $site_url;
 	protected $is_mobile;
 	
+	protected $msg_num = 0;
+	
 	public function _initialize() {
 		
 		$this->cookie_parm = array(
@@ -33,6 +35,8 @@ class BaseController extends Controller {
 			$this->assign("_uid", cookie($this->prefix."uid"));
 			$this->assign("_nick", cookie($this->prefix."nick"));
 			$this->assign("_role", cookie($this->prefix."role"));
+			
+			$this->assign("_msgNum", $this->get_msg_num($this->uid));
 		} else {
 			$this->logined = false;
 			$this->assign("_logined", false);
@@ -108,6 +112,12 @@ class BaseController extends Controller {
 			$this->display();
 		else
 			$this->display(ACTION_NAME."_mobile");
+	}
+	
+	protected function get_msg_num($user_id) {
+		$map["to_id"] = $user_id;
+		$map["state"] = 100;
+		return M("Message")->where($map)->count();
 	}
 	
 }

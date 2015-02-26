@@ -27,12 +27,15 @@
                 <li class="title <?php if(($channel == 'Gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
                 <li class="title <?php if(($channel == 'Vedio')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/vedio/">吉他视频</a></li>
                 <li class="title <?php if($channel == "Group" || $channel == "Topic") { ?>selected<?php } ?>"><a class="show" href="http://localhost:9990/gtp/group/">小组</a></li>
+                <?php if($_logined) { ?>
+                    <li class="title <?php if(($channel == 'user')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/user/<?php echo (getuserdomainbyid($_uid)); ?>">我的空间</a></li>
+                <?php } ?>
             </ul>
             <p class="user">
                 <?php if(!$_logined) { ?>
                 [<a href="http://localhost:9990/gtp/user/login">登录</a><a href="http://localhost:9990/gtp/user/register">注册</a>]
                 <?php } else { ?>
-                [ <?php echo (urldecode($_nick)); ?> <a href="http://localhost:9990/gtp/user/settings">设置</a> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
+                [ <?php echo (urldecode($_nick)); ?> &nbsp; <a href="http://localhost:9990/gtp/message/" class="mlr0">邮件<?php if($_msgNum > 0) { ?><span id="msg">(<?php echo ($_msgNum); ?>)</span><?php } ?></a><a href="http://localhost:9990/gtp/user/settings">设置</a> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
                 <?php } ?>
             </p>
         </div>
@@ -72,7 +75,7 @@
                 </div>
                 <div class="middle">
                      <span class="title" style="width: 100px;display: block; float: left;">创建人</span>
-                     <span class="title" style="width: 180px;display: block; float: left;"><?php echo (todate($group["add_time"])); ?></span>
+                     <span class="title" style="width: 180px;display: block; float: left;"><?php echo (totime($group["add_time"])); ?></span>
                 </div>
                 <div class="right">
                     <span class="date" style="display: block; float: right;"></span>
@@ -86,7 +89,7 @@
                 </div>
                 <div class="middle">
                      <span class="title" style="width: 100px;display: block; float: left;">管理员</span>
-                     <span class="title" style="width: 180px;display: block; float: left;"><?php echo (todate($item["add_time"])); ?></span>
+                     <span class="title" style="width: 180px;display: block; float: left;"><?php echo (totime($item["add_time"])); ?></span>
                 </div>
                 <div class="right">
                     <span class="date" style="display: block; float: right;"><a onclick="return confirm('取消管理员 ?');" href="http://localhost:9990/gtp/group/role/<?php echo ($item["ug_id"]); ?>?type=admin_cancel">[取消]</a></span>
@@ -100,7 +103,7 @@
                 </div>
                 <div class="middle">
                      <span class="title" style="width: 100px;display: block; float: left;">成员</span>
-                     <span class="title" style="width: 180px;display: block; float: left;"><?php echo (todate($item["add_time"])); ?></span>
+                     <span class="title" style="width: 180px;display: block; float: left;"><?php echo (totime($item["add_time"])); ?></span>
                 </div>
                 <div class="right">
                     <span class="date" style="display: block; float: right;">

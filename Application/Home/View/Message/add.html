@@ -2,22 +2,28 @@
 <include file="Public:header" />
 
 <div class="contaier wp cf">
-<div class="ident">话题</div>
+<div class="ident">邮件</div>
     <div class="login" style="width: 580px;">
         <div class="head">
-            <strong>发表话题</strong>
+            <strong>给{$user.nick}发邮件</strong>
             <?php if (!empty($err)): ?><span style="color: red">{$err}</span><?php endif; ?>
         </div>
         <div class="body form ">
-            <form action="__SITE__/topic/add" method="post" class="login">
+            <form action="__SITE__/message/add" method="post" class="login" >
                 <table style="width: 580px;">
+                    <tr>
+                        <th>收件人</th>
+                        <td>
+                            <img src="<?php getUserFace($user['face'], 's'); ?>" class="face" />
+                        </td>
+                    </tr>
                     <tr>
                         <th>标题</th>
                         <td>
                             <input class="text" type="text" name="title" value="{$title}" style="width: 417px;" />
                         </td>
                     </tr>
-                  
+                    
                     <tr>
                         <th>内容</th>
                         <td>
@@ -28,9 +34,8 @@
                     <tr>
                         <th>&nbsp;</th>
                         <td>
-                            <input type="hidden" name="group_id" value="{$group_id}" />
-                            <input class="submit" type="submit" value="发布" /> &nbsp;
-                            <a href="__SITE__/group/{$group_id}">回到小组</a>
+                            <input type="hidden" name="to_id" value="{$to_id}" />
+                            <input class="submit" type="submit" value="发送" /> &nbsp;
                         </td>
                     </tr>
                 </table>

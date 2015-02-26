@@ -68,7 +68,14 @@ return array(
 		
 		'comment/delete/:id' => 'comment/delete',
 		
+		'message/:id\d$' => 'message/details',
+		'message/add/:id' => 'message/add',
+		'message/edit/:id' => 'message/edit',
+		'message/reply/:id' => 'message/reply',
+		'message/delete/:id' => 'message/delete',
+		
 		'blog/:id\d$' => 'blog/details',
+		'blog/add/:id' => 'blog/add',
 		'blog/edit/:id' => 'blog/edit',
 		'blog/delete/:id' => 'blog/delete',
 		

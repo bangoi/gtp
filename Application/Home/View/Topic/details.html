@@ -59,13 +59,11 @@
                 $item_type = "topic";
                 $item_id = $topic['id'];
             ?>
-            
             <ul id="comment_list">
-                <foreach name="comment_list" item="comment">
+                <foreach name="message_list" item="comment">
                 <include file="Public:comment" />
                 </foreach>
             </ul>
-            
             <!-- page begin -->
             <div class="manu">{$page}</div>
             <!-- page end -->

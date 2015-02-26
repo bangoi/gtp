@@ -13,7 +13,7 @@
                 </div>
                 <div class="uright">
                     <ul style="padding-left: 10px;">
-                        <li><strong><a href="__SITE__/user/<?php getUserDomain($user); ?>">{$user.nick}</a></strong></li>
+                        <li><strong><a href="__SITE__/user/<?php getUserDomain($user); ?>">{$user.nick}</a></strong> &nbsp; <a href="__SITE__/message/add/{$user.id}" style="color: #007DDB;">[发送邮件]</a></li>
                         <li class="sign">{$user.signature|strip_tags}</li>
                     </ul>
                 </div>

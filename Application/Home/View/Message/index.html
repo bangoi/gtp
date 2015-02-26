@@ -1,0 +1,78 @@
+<tagLib name="html" />
+<include file="Public:header" />
+
+<div class="contaier wp cf">
+<div class="ident">邮件</div>
+    <div class="login" style="width: 580px;margin-top: 0px;">
+        
+        <?php if($type=="mine"){ ?>
+            <div class="slogan"><p><a href="__SITE__/message/">收件箱</a> 已发送</p></div>
+        <?php } else { ?>
+            <div class="slogan"><p>收件箱 <a href="__SITE__/message/mine">已发送</a></p></div>
+        <?php } ?>
+        
+        <br/>
+        <div class="cate">
+            <ul class="item">
+            <!-- title -->
+            <li style="height: 35px;">
+                <div class="left">
+                    <span class="title" style="width: 350px;display: block; float: left;"><strong>邮件</strong></span>
+                </div>
+                <div class="middle">
+                     <span class="title" style="width: 140px;display: block; float: right; text-align: right;"><strong>发布时间</strong></span>
+                </div>
+                <div class="right">
+                    <span class="date" style="display: block; float: right; color:#333;"><strong>操作</strong></span>
+                </div>
+            </li>
+            <!-- member -->
+            
+            <foreach name="message_list" item="item">
+            <li style="height: 55px; line-height: 28px;overflow: hidden; <?php if($item['state'] == 100 && $_uid != $item['user_id']) { ?>background: #c7c7c7;<?php } ?>">
+                <div class="left">
+                    <span class="title" style="width: 350px;display: block; float: left;">
+                        <?php if($type=="mine"){ ?>
+                            收件人：{$item.to_id|getUserNick}
+                        <?php } else { ?>
+                            发件人：{$item.nick}
+                        <?php } ?>
+                        
+                        <br />
+                        <input type="checkbox" name="id[]" /><a href="__SITE__/message/{$item.id}" >{$item.title}</a>
+                    </span>
+                </div>
+                <div class="middle">
+                     <span class="title c6" style="width: 140px;display: block; float: right; text-align: right;">{$item.add_time|toTime}</span>
+                </div>
+                <div class="right">
+                    <span class="date" style="display: block; float: right;">
+                        <a onclick="return confirm('删除邮件 ?');" href="__SITE__/message/operate/{$item.id}?type=delete">[x]</a>
+                    </span>
+                </div>
+            </li>
+            </foreach>
+            
+            </ul>
+        </div>
+        
+        <br/>
+        <br/>
+        
+        
+        <br class="clear" />
+        <br/>
+        <br/>
+        
+        <br class="clear" />
+        <br />
+       
+    </div>
+    
+    
+    <div class="login-other">
+        
+    </div>
+</div>
+
+<include file="Public:footer" />

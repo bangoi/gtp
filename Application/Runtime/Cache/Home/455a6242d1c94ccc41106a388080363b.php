@@ -42,49 +42,74 @@
     </div>
 
 <div class="contaier wp cf">
-<div class="ident">话题</div>
-    <div class="login" style="width: 580px;">
-        <div class="head">
-            <strong>发表话题</strong>
-            <?php if (!empty($err)): ?><span style="color: red"><?php echo ($err); ?></span><?php endif; ?>
+<div class="ident">邮件</div>
+    <div class="login" style="width: 580px;margin-top: 0px;">
+        
+        <?php if($type=="mine"){ ?>
+            <div class="slogan"><p><a href="http://localhost:9990/gtp/message/">收件箱</a> 已发送</p></div>
+        <?php } else { ?>
+            <div class="slogan"><p>收件箱 <a href="http://localhost:9990/gtp/message/mine">已发送</a></p></div>
+        <?php } ?>
+        
+        <br/>
+        <div class="cate">
+            <ul class="item">
+            <!-- title -->
+            <li style="height: 35px;">
+                <div class="left">
+                    <span class="title" style="width: 350px;display: block; float: left;"><strong>邮件</strong></span>
+                </div>
+                <div class="middle">
+                     <span class="title" style="width: 140px;display: block; float: right; text-align: right;"><strong>发布时间</strong></span>
+                </div>
+                <div class="right">
+                    <span class="date" style="display: block; float: right; color:#333;"><strong>操作</strong></span>
+                </div>
+            </li>
+            <!-- member -->
+            
+            <?php if(is_array($message_list)): foreach($message_list as $key=>$item): ?><li style="height: 55px; line-height: 28px;overflow: hidden; <?php if($item['state'] == 100 && $_uid != $item['user_id']) { ?>background: #c7c7c7;<?php } ?>">
+                <div class="left">
+                    <span class="title" style="width: 350px;display: block; float: left;">
+                        <?php if($type=="mine"){ ?>
+                            收件人：<?php echo (getusernick($item["to_id"])); ?>
+                        <?php } else { ?>
+                            发件人：<?php echo ($item["nick"]); ?>
+                        <?php } ?>
+                        
+                        <br />
+                        <input type="checkbox" name="id[]" /><a href="http://localhost:9990/gtp/message/<?php echo ($item["id"]); ?>" ><?php echo ($item["title"]); ?></a>
+                    </span>
+                </div>
+                <div class="middle">
+                     <span class="title c6" style="width: 140px;display: block; float: right; text-align: right;"><?php echo (totime($item["add_time"])); ?></span>
+                </div>
+                <div class="right">
+                    <span class="date" style="display: block; float: right;">
+                        <a onclick="return confirm('删除邮件 ?');" href="http://localhost:9990/gtp/message/operate/<?php echo ($item["id"]); ?>?type=delete">[x]</a>
+                    </span>
+                </div>
+            </li><?php endforeach; endif; ?>
+            
+            </ul>
         </div>
-        <div class="body form ">
-            <form action="http://localhost:9990/gtp/topic/add" method="post" class="login">
-                <table style="width: 580px;">
-                    <tr>
-                        <th>标题</th>
-                        <td>
-                            <input class="text" type="text" name="title" value="<?php echo ($title); ?>" style="width: 417px;" />
-                        </td>
-                    </tr>
-                  
-                    <tr>
-                        <th>内容</th>
-                        <td>
-                            <textarea name="content" class="textarea" rows="10" cols="50"><?php echo ($content); ?></textarea>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <th>&nbsp;</th>
-                        <td>
-                            <input type="hidden" name="group_id" value="<?php echo ($group_id); ?>" />
-                            <input class="submit" type="submit" value="发布" /> &nbsp;
-                            <a href="http://localhost:9990/gtp/group/<?php echo ($group_id); ?>">回到小组</a>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </div>
+        
+        <br/>
+        <br/>
+        
+        
+        <br class="clear" />
+        <br/>
+        <br/>
+        
+        <br class="clear" />
+        <br />
+       
     </div>
+    
+    
     <div class="login-other">
-        <div class="head">
-            <strong>使用其他帐号直接登录</strong>
-        </div>
-        <div class="body">
-            <ul class="other-account">
-                <li><a class="qq" href="/oauth/index/type/qq.html">腾讯QQ登录</a></li><li><a class="tencent" href="/oauth/index/type/tencent.html">腾讯微博登录</a></li><li><a class="t163" href="/oauth/index/type/t163.html">网易微博登录</a></li><li><a class="sina" href="/oauth/index/type/sina.html">新浪微博登录</a></li>            </ul>
-        </div>
+        
     </div>
 </div>
 

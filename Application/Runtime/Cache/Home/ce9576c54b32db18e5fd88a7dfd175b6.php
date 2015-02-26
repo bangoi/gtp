@@ -42,22 +42,28 @@
     </div>
 
 <div class="contaier wp cf">
-<div class="ident">话题</div>
+<div class="ident">邮件</div>
     <div class="login" style="width: 580px;">
         <div class="head">
-            <strong>发表话题</strong>
+            <strong>给<?php echo ($user["nick"]); ?>发邮件</strong>
             <?php if (!empty($err)): ?><span style="color: red"><?php echo ($err); ?></span><?php endif; ?>
         </div>
         <div class="body form ">
-            <form action="http://localhost:9990/gtp/topic/add" method="post" class="login">
+            <form action="http://localhost:9990/gtp/message/add" method="post" class="login" >
                 <table style="width: 580px;">
+                    <tr>
+                        <th>收件人</th>
+                        <td>
+                            <img src="<?php getUserFace($user['face'], 's'); ?>" class="face" />
+                        </td>
+                    </tr>
                     <tr>
                         <th>标题</th>
                         <td>
                             <input class="text" type="text" name="title" value="<?php echo ($title); ?>" style="width: 417px;" />
                         </td>
                     </tr>
-                  
+                    
                     <tr>
                         <th>内容</th>
                         <td>
@@ -68,9 +74,8 @@
                     <tr>
                         <th>&nbsp;</th>
                         <td>
-                            <input type="hidden" name="group_id" value="<?php echo ($group_id); ?>" />
-                            <input class="submit" type="submit" value="发布" /> &nbsp;
-                            <a href="http://localhost:9990/gtp/group/<?php echo ($group_id); ?>">回到小组</a>
+                            <input type="hidden" name="to_id" value="<?php echo ($to_id); ?>" />
+                            <input class="submit" type="submit" value="发送" /> &nbsp;
                         </td>
                     </tr>
                 </table>

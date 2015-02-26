@@ -27,12 +27,15 @@
                 <li class="title <?php if(($channel == 'Gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
                 <li class="title <?php if(($channel == 'Vedio')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/vedio/">吉他视频</a></li>
                 <li class="title <?php if($channel == "Group" || $channel == "Topic") { ?>selected<?php } ?>"><a class="show" href="http://localhost:9990/gtp/group/">小组</a></li>
+                <?php if($_logined) { ?>
+                    <li class="title <?php if(($channel == 'user')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/user/<?php echo (getuserdomainbyid($_uid)); ?>">我的空间</a></li>
+                <?php } ?>
             </ul>
             <p class="user">
                 <?php if(!$_logined) { ?>
                 [<a href="http://localhost:9990/gtp/user/login">登录</a><a href="http://localhost:9990/gtp/user/register">注册</a>]
                 <?php } else { ?>
-                [ <?php echo (urldecode($_nick)); ?> <a href="http://localhost:9990/gtp/user/settings">设置</a> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
+                [ <?php echo (urldecode($_nick)); ?> &nbsp; <a href="http://localhost:9990/gtp/message/" class="mlr0">邮件<?php if($_msgNum > 0) { ?><span id="msg">(<?php echo ($_msgNum); ?>)</span><?php } ?></a><a href="http://localhost:9990/gtp/user/settings">设置</a> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
                 <?php } ?>
             </p>
         </div>
@@ -51,10 +54,16 @@
         <div class="ident">小组</div>
         
         <div class="slogan">
+            <?php if($_logined) {?>
             <?php if($type=="mine"){ ?>
-                <p>我的话题 <a href="http://localhost:9990/gtp/group/">小组话题</a></p>
+                <p><a href="http://localhost:9990/gtp/group/">小组话题</a> 我的话题 <a href="http://localhost:9990/gtp/group/comment">我回应的</a></p>
+            <?php } else if($type=="comment") { ?>
+                <p><a href="http://localhost:9990/gtp/group/">小组话题</a> <a href="http://localhost:9990/gtp/group/mine">我的话题</a> 我回应的</p>
             <?php } else { ?>
-                <p>小组话题 <a href="http://localhost:9990/gtp/group/mine">我的话题</a></p>
+                <p>小组话题 <a href="http://localhost:9990/gtp/group/mine">我的话题</a> <a href="http://localhost:9990/gtp/group/comment">我回应的</a></p>
+            <?php } ?>
+            <?php } else { ?>
+                <p>小组话题</p>
             <?php } ?>
         </div>
         

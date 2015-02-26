@@ -9,10 +9,16 @@
         <div class="ident">小组</div>
         
         <div class="slogan">
+            <?php if($_logined) {?>
             <?php if($type=="mine"){ ?>
-                <p>我的话题 <a href="__SITE__/group/">小组话题</a></p>
+                <p><a href="__SITE__/group/">小组话题</a> 我的话题 <a href="__SITE__/group/comment">我回应的</a></p>
+            <?php } else if($type=="comment") { ?>
+                <p><a href="__SITE__/group/">小组话题</a> <a href="__SITE__/group/mine">我的话题</a> 我回应的</p>
             <?php } else { ?>
-                <p>小组话题 <a href="__SITE__/group/mine">我的话题</a></p>
+                <p>小组话题 <a href="__SITE__/group/mine">我的话题</a> <a href="__SITE__/group/comment">我回应的</a></p>
+            <?php } ?>
+            <?php } else { ?>
+                <p>小组话题</p>
             <?php } ?>
         </div>
         

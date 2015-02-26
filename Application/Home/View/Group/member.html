@@ -35,7 +35,7 @@
                 </div>
                 <div class="middle">
                      <span class="title" style="width: 100px;display: block; float: left;">创建人</span>
-                     <span class="title" style="width: 180px;display: block; float: left;">{$group.add_time|toDate}</span>
+                     <span class="title" style="width: 180px;display: block; float: left;">{$group.add_time|toTime}</span>
                 </div>
                 <div class="right">
                     <span class="date" style="display: block; float: right;"></span>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="middle">
                      <span class="title" style="width: 100px;display: block; float: left;">管理员</span>
-                     <span class="title" style="width: 180px;display: block; float: left;">{$item.add_time|toDate}</span>
+                     <span class="title" style="width: 180px;display: block; float: left;">{$item.add_time|toTime}</span>
                 </div>
                 <div class="right">
                     <span class="date" style="display: block; float: right;"><a onclick="return confirm('取消管理员 ?');" href="__SITE__/group/role/{$item.ug_id}?type=admin_cancel">[取消]</a></span>
@@ -66,7 +66,7 @@
                 </div>
                 <div class="middle">
                      <span class="title" style="width: 100px;display: block; float: left;">成员</span>
-                     <span class="title" style="width: 180px;display: block; float: left;">{$item.add_time|toDate}</span>
+                     <span class="title" style="width: 180px;display: block; float: left;">{$item.add_time|toTime}</span>
                 </div>
                 <div class="right">
                     <span class="date" style="display: block; float: right;">

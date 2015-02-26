@@ -40,52 +40,90 @@
             </p>
         </div>
     </div>
-
-<div class="contaier wp cf">
-<div class="ident">话题</div>
-    <div class="login" style="width: 580px;">
-        <div class="head">
-            <strong>发表话题</strong>
-            <?php if (!empty($err)): ?><span style="color: red"><?php echo ($err); ?></span><?php endif; ?>
-        </div>
-        <div class="body form ">
-            <form action="http://localhost:9990/gtp/topic/add" method="post" class="login">
-                <table style="width: 580px;">
+     
+<div class="contaier wp">
+    <div class="add">
+        <div class="body form">
+            <form action="http://localhost:9990/gtp/vedio/add" method="post">
+                <table>
+                    <?php if (!empty($err)): ?>
+                     <tr>
+                        <th></th>
+                        <td><span style="color: red"><?php echo ($err); ?></span></td>
+                    </tr>
+                    <?php endif; ?>
                     <tr>
-                        <th>标题</th>
-                        <td>
-                            <input class="text" type="text" name="title" value="<?php echo ($title); ?>" style="width: 417px;" />
+                        <th>视频地址</th>
+                        <td><input class="text" type="text" name="vedio_url" id="vedio_url" value="<?php echo ($vedio_url); ?>" /> &nbsp; <input class="submit" id="btnVedioUrl" type="button" style="height: 32px; margin-top: -4px;" value="获取" />
                         </td>
                     </tr>
-                  
                     <tr>
-                        <th>内容</th>
-                        <td>
-                            <textarea name="content" class="textarea" rows="10" cols="50"><?php echo ($content); ?></textarea>
+                        <th><i class="must">*</i>视频标题</th>
+                        <td><input class="text" type="text" name="title" id="title" value="<?php echo ($vedio_title); ?>" />
                         </td>
                     </tr>
-                    
+                    <tr>
+                        <th><i class="must">*</i>视频截图</th>
+                        <td>
+                            <?php if(!empty($thumb_value)) { ?>
+                            <img src="<?php echo ($thumb_value); ?>" name="thumb" id="thumb"
+                                alt="上传视频缩略图" width="120" height="90" />
+                            <?php } else { ?>
+                            <img src="http://localhost:9990/gtp/upload/thumb/default.jpg" name="thumb" id="thumb"
+                                alt="上传视频缩略图" width="120" height="90" />
+                            <?php } ?>
+                            <input type="hidden" name="thumb_value" id="thumb_value" value="<?php echo ($thumb_value); ?>" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><i class="must">*</i>视频swf</th>
+                        <td><input class="text" type="text" name="code" id="code" value="<?php echo ($code); ?>" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><i class="must">*</i>音乐人</th>
+                        <td><input class="text" type="text" name="artist_name" value="<?php echo ($artist_name); ?>" /></td>
+                    </tr>
+                    <tr>
+                        <th><i class="must">*</i>歌曲名称</th>
+                        <td><input class="text" type="text" name="song_title" value="<?php echo ($song_title); ?>" /></td>
+                    </tr>
+                    <tr>
+                        <th>标&#12288;&#12288;签</th>
+                        <td><input class="text" type="text" name="tags" value="<?php echo ($tags); ?>" /> 用空格分隔</td>
+                    </tr>
+                    <tr>
+                        <th>摘&#12288;&#12288;要</th>
+                        <td>
+                            <div class="add-remark">
+                                <textarea name="description"><?php echo ($description); ?></textarea>
+                            </div>
+                        </td>
+                    </tr>
                     <tr>
                         <th>&nbsp;</th>
-                        <td>
-                            <input type="hidden" name="group_id" value="<?php echo ($group_id); ?>" />
-                            <input class="submit" type="submit" value="发布" /> &nbsp;
-                            <a href="http://localhost:9990/gtp/group/<?php echo ($group_id); ?>">回到小组</a>
+                        <td> <input class="submit" type="submit" value="提交" />
                         </td>
                     </tr>
                 </table>
             </form>
         </div>
     </div>
-    <div class="login-other">
-        <div class="head">
-            <strong>使用其他帐号直接登录</strong>
-        </div>
-        <div class="body">
-            <ul class="other-account">
-                <li><a class="qq" href="/oauth/index/type/qq.html">腾讯QQ登录</a></li><li><a class="tencent" href="/oauth/index/type/tencent.html">腾讯微博登录</a></li><li><a class="t163" href="/oauth/index/type/t163.html">网易微博登录</a></li><li><a class="sina" href="/oauth/index/type/sina.html">新浪微博登录</a></li>            </ul>
+            
+            
+    <div class="home-right">
+        <div class="fast">
+            <dl>
+                <dt>发布应用<sub>Publish</sub></dt>
+                <dd>应用标识、中文描述、应用主页（以http打头）、分类和应用LOGO（不超过50K 支持JPG PNG和GIF）必须，描述和标签可选，多个标签之间用空格分隔，案例发布需要审核。</dd>
+            </dl>
+            <dl>
+                <dt>快捷键<sub>Keyboard</sub></dt>
+                <dd>选中文字内容后使用键盘快捷键<br/>CTRL+B ：字体加粗<br/>ALT + U ：添加超链接<br/> ALT + C ：插入代码</dd>
+            </dl>
         </div>
     </div>
+        
 </div>
 
 <div class="footer">

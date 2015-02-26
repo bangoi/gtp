@@ -30,12 +30,15 @@
                 <li class="title <if condition="($channel eq 'Gtp')">selected</if>"><a class="show" href="__SITE__/gtp/">吉他谱</a></li>
                 <li class="title <if condition="($channel eq 'Vedio')">selected</if>"><a class="show" href="__SITE__/vedio/">吉他视频</a></li>
                 <li class="title <?php if($channel == "Group" || $channel == "Topic") { ?>selected<?php } ?>"><a class="show" href="__SITE__/group/">小组</a></li>
+                <?php if($_logined) { ?>
+                    <li class="title <if condition="($channel eq 'user')">selected</if>"><a class="show" href="__SITE__/user/{$_uid|getUserDomainById}">我的空间</a></li>
+                <?php } ?>
             </ul>
             <p class="user">
                 <?php if(!$_logined) { ?>
                 [<a href="__SITE__/user/login">登录</a><a href="__SITE__/user/register">注册</a>]
                 <?php } else { ?>
-                [ {$_nick|urldecode} <a href="__SITE__/user/settings">设置</a> <a href="__SITE__/user/logout">退出</a>]
+                [ {$_nick|urldecode} &nbsp; <a href="__SITE__/message/" class="mlr0">邮件<?php if($_msgNum > 0) { ?><span id="msg">({$_msgNum})</span><?php } ?></a><a href="__SITE__/user/settings">设置</a> <a href="__SITE__/user/logout">退出</a>]
                 <?php } ?>
             </p>
         </div>

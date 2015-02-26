@@ -80,6 +80,35 @@ class GroupController extends BaseController {
 		$this->display("index");
 	}
 	
+	public function comment() {
+		
+		$p = I("get.p") ? I("get.p") : 1;
+		$size = 25;
+		
+		$k = urldecode(I("get.k"));
+		$map["topic.state"] = array('gt', 0);
+		$map["comment.state"] = array('gt', 0);
+		$map["comment.user_id"] = $this->uid;
+		if(!empty($k)) {
+			$map["topic.title"] = array('like', "%{$k}%");
+			$this->assign('k', $k);
+		}
+		
+		$topic_list = M("Group")->Distinct(true)
+			->join("topic on topic.group_id=group.id")
+			->join("comment on comment.item_id = topic.id")
+			->field("topic.id, topic.group_id, topic.user_id, topic.title, topic.reply_num, topic.last_reply_time, topic.state, group.title as group_title")
+			->where($map)->order("topic.last_reply_time desc")->page($p.",{$size}")->select();
+
+		$Page = new Page($count, $size);
+		$page = $Page->show();
+		
+		$this->assign("topic_list", $topic_list);
+		$this->assign("page", $page);
+		$this->assign("type", "comment");
+		$this->display("index");
+	}
+	
 	public function details() {
 		
 		$id = I("get.id");
