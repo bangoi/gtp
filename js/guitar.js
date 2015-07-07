@@ -162,6 +162,109 @@ $(document).ready(function () {
         $("#groupMemberForm").submit();
     });
     
+    $("#gtpForm").submit(function() {
+        
+        var artistName = $("#artist_name").val();
+        var songTitle = $("#song_title").val();
+        var fileName = $("#file_name").val();
+        
+        if(artistName == "") {
+            $("#err").html("必须填写音乐人");
+            $("#artist_name").focus();
+            return false;
+        }
+        
+        if(songTitle == "") {
+            $("#err").html("必须填写音乐名称");
+            $("#song_title").focus();
+            return false;
+        }
+        
+        if(fileName == "") {
+            $("#err").html("必须上传Guitar Pro文件");
+            $("#file_name").focus();
+            return false;
+        }
+        
+        return true;
+    });
+    
+    $("#artist_name, #song_title, #file_name").keyup(function() {
+        if($("#artist_name") != "") {
+            $("#err").html("");
+        }
+        if($("#song_title") != "") {
+            $("#err").html("");
+        }
+        if($("#file_name") != "") {
+            $("#err").html("");
+        }
+    });
+    
+    $("#loginFrm").submit(function() {
+        var nick = $("#txtNick").val();
+        var pwd = $("#txtPwd").val();
+        
+        if(nick == "") {
+            $("#err").html("必须填写登录名");
+            $("#txtNick").focus();
+            return false;
+        }
+        
+        if(pwd == "") {
+            $("#err").html("必须填写密码");
+            $("#txtPwd").focus();
+            return false;
+        }
+        
+        return true;
+    });
+    
+    $("#regFrm").submit(function() {
+        var nick = $("#txtNick").val();
+        var pwd = $("#txtPwd").val();
+        var repwd = $("#txtRePwd").val();
+        var email = $("#txtEmail").val();
+        
+        if(nick == "") {
+            $("#err").html("必须填写登录名");
+            $("#txtNick").focus();
+            return false;
+        }
+        
+        if (nick.match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)) { 
+            $("#err").html("用户名不能是Email");
+            $("#txtNick").focus(); 
+            return false; 
+        } 
+        
+        if(pwd == "") {
+            $("#err").html("必须填写密码");
+            $("#txtPwd").focus();
+            return false;
+        }
+        
+        if(repwd == "") {
+            $("#err").html("必须填写确认密码");
+            $("#txtRePwd").focus();
+            return false;
+        }
+        
+        if(pwd != repwd) {
+            $("#err").html("两次输入密码不匹配");
+            $("#txtRePwd").focus();
+            return false;
+        }
+        
+        if(email == "") {
+            $("#err").html("必须填写邮箱");
+            $("#txtEmail").focus();
+            return false;
+        }
+        
+        return true;
+    });
+    
     jQuery.extend({
         isJson:function(obj) {
             var isJson = typeof(obj) == "object" && Object.prototype.toString.call(obj).toLowerCase() == "[object object]" && !obj.length;    

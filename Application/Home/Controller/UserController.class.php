@@ -25,17 +25,23 @@ class UserController extends BaseController {
 				$encode = new Encode();
 				$pwd = $encode->encode($pwd);
 				
-				$map["nick"] = $nick;
+				$string = new String();
+				
+				if($string->isEmail($nick)) {
+					$map["email"] = $nick;	
+				} else {
+					$map["nick"] = $nick;
+				}
 				$map["pwd"] = $pwd;
 				
 				$user = M("User")->where($map)->find();
-				//dump($user);
+				//dump(M("User")->_sql());
 				if(!empty($user)) {
 					
 					$data["last_login_time"] = $this->get_now();
 					M("User")->where("id={$user['id']}")->data($data)->save();
 					
-					$this->add_cookie($user["id"], $nick, $user["role"]);
+					$this->add_cookie($user["id"], $user["nick"], $user["role"]);
 					$page = I("post.page");
 					
 					if(empty($page))
@@ -47,7 +53,6 @@ class UserController extends BaseController {
 					
 					$nick_count = M("User")->where("nick='{$nick}'")->count();
 					//dump(M("User")->_sql());
-					
 					if($nick_count > 0) E("用户名与密码不匹配");
 					else E("用户名不存在"); 
 				}
@@ -79,15 +84,15 @@ class UserController extends BaseController {
 				$re_pwd = trim(I("post.re_pwd"));
 				$email = trim(I("post.email"));
 				
+				$string = new String();
+				$encode = new Encode();
+				
 				if(empty($nick)) E("用户名不能为空");
 				if(empty($pwd)) E("密码不能为空");
 				if(empty($email)) E("邮箱不能为空");
 				if($pwd != $re_pwd)	E("两次输入密码必须相同");
-				$string = new String();
 				if(!$string->isEmail($email)) E("非法的Email格式");
-				
-				$encode = new Encode();
-				$pwd = $encode->encode($pwd);
+				if($string->isEmail($nick)) E("用户名不能是邮箱");
 				
 				$nick_count = M("User")->where("nick='{$nick}'")->count();
 				if($nick_count > 0) E("用户名已存在");
@@ -98,6 +103,7 @@ class UserController extends BaseController {
 				$user = D("User");
 				if($user->create()) {
 					
+					$pwd = $encode->encode($pwd);
 					$user->pwd = $pwd;
 					$id =$user->add();
 					
@@ -117,10 +123,10 @@ class UserController extends BaseController {
     	} else {
     		$this->display();
     	}
-		
 	}
 
 	public function details() {
+		
 		$id = I("get.id");
 		$domain = I("get.domain");
 		$tab = I("get.tab");
@@ -129,8 +135,6 @@ class UserController extends BaseController {
 			$user = M("User")->where("id={$id}")->find();
 		if(!empty($domain))
 			$user = M("User")->where("domain='{$domain}'")->find();
-		
-		
 		
 		$this->assign("user", $user);
 		$this->assign("tab", $tab);
@@ -196,14 +200,10 @@ class UserController extends BaseController {
 				$city_code = I("post.city_code");
 				$domain = I("post.domain");
 				
-				if(!empty($signature))
-					$user->signature = $signature;
-				if(!empty($province_code))
-					$user->province_code = $province_code;
-				if(!empty($city_code))
-					$user->city_code = $city_code;
-				if(!empty($domain))
-					$user->domain = $domain;
+				if(!empty($signature)) $user->signature = $signature;
+				if(!empty($province_code)) $user->province_code = $province_code;
+				if(!empty($city_code)) $user->city_code = $city_code;
+				if(!empty($domain)) $user->domain = $domain;
 				
 				$province_list = M("Province")->order("id")->select();
 				$this->assign("province_list", $province_list);
@@ -222,8 +222,8 @@ class UserController extends BaseController {
 				$this->display();
 			}
 		} else {
+			
 			$user = M("User")->where("id={$this->uid}")->find();
-		
 			$province_list = M("Province")->order("id")->select();
 			
 			if($user["city_code"] != "-1") {
@@ -296,8 +296,8 @@ class UserController extends BaseController {
 						$user = M("User")->where("id = {$user_id}")->find();
 						
 						$old_imgUrlpath = $user["face"];
-						unlink(get_imgPath($old_imgUrlpath, 'm', false));
-						unlink(get_imgPath($old_imgUrlpath, 's', false));
+						unlink(getImgName($old_imgUrlpath, 'm', false));
+						unlink(getImgName($old_imgUrlpath, 's', false));
 						unlink($thumb_file);
 						
 						$data['face'] = substr($thumb_file, 2);
@@ -330,13 +330,17 @@ class UserController extends BaseController {
 				
 				$crop = new ImageCrop();
 				$crop->initialize(
-					get_imgPath($user['face'], 'm', false),
-					get_imgPath($user['face'], 's', false),
+					getImgName($user['face'], 'm', false),
+					getImgName($user['face'], 's', false),
 					I("post.x"),
 					I("post.y"),
 					I("post.x") + I("post.w"),
 					I("post.y") + I("post.h")
 				);
+				//dump(I("post.x"));
+				//dump(I("post.y"));
+				//dump(I("post.x") + I("post.w"));
+				//dump(I("post.y") + I("post.h"));
 				$filename = $crop->generate();
 				$this->redirect("user/settings");
 			} catch (Exception $ex) {

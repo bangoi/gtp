@@ -12,7 +12,7 @@
     <?php else: ?>
     <meta name="description" content="Guitar-pro,收集分享Guitar-pro吉他谱,吉他视频,为吉他爱好者打造网上资源互动社区." /><?php endif; ?>
     <link rel="alternate" type="application/rss+xml" title="阿谱小站" href="http://localhost:9990/gtp/feed" />
-    <link rel="shortcut icon" href="http://localhost:9990/gtp/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="http://localhost:9990/gtp/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/concision.css" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/prettify.css" />
     <script type="text/javascript" src="http://localhost:9990/gtp/js/jquery-2.1.3.min.js"></script>
@@ -25,17 +25,23 @@
             <ul class="navg">
                 <li class="title <?php if(($channel == 'Home')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp">首页</a></li>
                 <li class="title <?php if(($channel == 'Gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
+                <!--
                 <li class="title <?php if(($channel == 'Vedio')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/vedio/">吉他视频</a></li>
                 <li class="title <?php if($channel == "Group" || $channel == "Topic") { ?>selected<?php } ?>"><a class="show" href="http://localhost:9990/gtp/group/">小组</a></li>
                 <?php if($_logined) { ?>
                     <li class="title <?php if(($channel == 'user')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/user/<?php echo (getuserdomainbyid($_uid)); ?>">我的空间</a></li>
                 <?php } ?>
+                -->
             </ul>
             <p class="user">
                 <?php if(!$_logined) { ?>
                 [<a href="http://localhost:9990/gtp/user/login">登录</a><a href="http://localhost:9990/gtp/user/register">注册</a>]
                 <?php } else { ?>
-                [ <?php echo (urldecode($_nick)); ?> &nbsp; <a href="http://localhost:9990/gtp/message/" class="mlr0">邮件<?php if($_msgNum > 0) { ?><span id="msg">(<?php echo ($_msgNum); ?>)</span><?php } ?></a><a href="http://localhost:9990/gtp/user/settings">设置</a> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
+                [ <?php echo (urldecode($_nick)); ?> &nbsp; 
+                <!--
+                <a href="http://localhost:9990/gtp/message/" class="mlr0">邮件<?php if($_msgNum > 0) { ?><span id="msg">(<?php echo ($_msgNum); ?>)</span><?php } ?></a>
+                -->
+                <a href="http://localhost:9990/gtp/user/settings">设置</a> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
                 <?php } ?>
             </p>
         </div>
@@ -52,46 +58,42 @@
         <?php } ?>
         
         <br/>
-        <div class="cate">
-            <ul class="item">
-            <!-- title -->
-            <li style="height: 35px;">
-                <div class="left">
-                    <span class="title" style="width: 350px;display: block; float: left;"><strong>邮件</strong></span>
-                </div>
-                <div class="middle">
-                     <span class="title" style="width: 140px;display: block; float: right; text-align: right;"><strong>发布时间</strong></span>
-                </div>
-                <div class="right">
-                    <span class="date" style="display: block; float: right; color:#333;"><strong>操作</strong></span>
-                </div>
-            </li>
-            <!-- member -->
-            
-            <?php if(is_array($message_list)): foreach($message_list as $key=>$item): ?><li style="height: 55px; line-height: 28px;overflow: hidden; <?php if($item['state'] == 100 && $_uid != $item['user_id']) { ?>background: #c7c7c7;<?php } ?>">
-                <div class="left">
-                    <span class="title" style="width: 350px;display: block; float: left;">
-                        <?php if($type=="mine"){ ?>
-                            收件人：<?php echo (getusernick($item["to_id"])); ?>
-                        <?php } else { ?>
-                            发件人：<?php echo ($item["nick"]); ?>
-                        <?php } ?>
-                        
-                        <br />
-                        <input type="checkbox" name="id[]" /><a href="http://localhost:9990/gtp/message/<?php echo ($item["id"]); ?>" ><?php echo ($item["title"]); ?></a>
-                    </span>
-                </div>
-                <div class="middle">
-                     <span class="title c6" style="width: 140px;display: block; float: right; text-align: right;"><?php echo (totime($item["add_time"])); ?></span>
-                </div>
-                <div class="right">
-                    <span class="date" style="display: block; float: right;">
-                        <a onclick="return confirm('删除邮件 ?');" href="http://localhost:9990/gtp/message/operate/<?php echo ($item["id"]); ?>?type=delete">[x]</a>
-                    </span>
-                </div>
-            </li><?php endforeach; endif; ?>
-            
-            </ul>
+        
+        <div class="tbl">
+            <?php if(!empty($message_list)) { ?>
+            <table>
+                <thead>
+                    <tr>
+                        <td style="width: 380px;">邮件</td>
+                        <td style="width: 128px; text-align: right;">时间</td>
+                        <td style="text-align: right;">操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if(is_array($message_list)): foreach($message_list as $key=>$item): ?><tr <?php if($item['state'] == 100 && $_uid != $item['user_id']) { ?>style="background: #c7c7c7;"<?php } ?>>
+                         <td style="width: 380px;">
+                             <?php if($type=="mine"){ ?>
+                                        收件人：<?php echo (getusernick($item["to_id"])); ?>
+                            <?php } else { ?>
+                                       发件人：<?php echo ($item["nick"]); ?>
+                            <?php } ?>
+                            <br />
+                            <input type="checkbox" name="id[]" />
+                            <a href="http://localhost:9990/gtp/message/<?php echo ($item["id"]); ?>" ><?php echo (msubstr($item["title"], 0, 20,'utf-8', false)); ?></a>
+                            <?php if($item['reply_num'] > 0) { ?>(<?php echo ($item["reply_num"]); ?>)<?php } ?>
+                         </td>
+                         <td class="c6">
+                             <?php echo (totime($item["last_reply_time"])); ?>
+                         </td>
+                         <td style="text-align: right;">
+                             <a onclick="return confirm('删除邮件 ?');" href="http://localhost:9990/gtp/message/operate/<?php echo ($item["id"]); ?>?type=delete">[x]</a>
+                         </td>
+                    </tr><?php endforeach; endif; ?>
+                </tbody>
+            </table>
+            <?php } else { ?>
+                暂无邮件
+            <?php } ?>
         </div>
         
         <br/>

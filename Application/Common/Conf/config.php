@@ -5,11 +5,19 @@ return array(
 	'URL_MODEL' => '2',
 	'SESSION_AUTO_START' => true,
 	 
+	//'DB_TYPE'=>'mysql',
+    //'DB_HOST'=>'114.215.131.58',
+    //'DB_NAME'=>'gtp',
+    //'DB_USER'=>'root',
+    //'DB_PWD'=>'6fa1fa1952',
+    //'DB_PORT'=>'3306',
+    //'DB_PREFIX'=>'',
+    
 	'DB_TYPE'=>'mysql',
-    'DB_HOST'=>'114.215.131.58',
+    'DB_HOST'=>'localhost',
     'DB_NAME'=>'gtp',
     'DB_USER'=>'root',
-    'DB_PWD'=>'6fa1fa1952',
+    'DB_PWD'=>'qeephp',
     'DB_PORT'=>'3306',
     'DB_PREFIX'=>'',
     

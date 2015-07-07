@@ -13,7 +13,6 @@ class BlogController extends BaseController {
 		
 		$p = I("get.p") ? I("get.p") : 1;
 		$size = 25;
-		
 		$id = I("get.id");
 		$blog = M("Blog")
 			->join("user on blog.user_id=user.id")

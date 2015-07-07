@@ -143,13 +143,9 @@ class VedioController extends BaseController {
 				$song_title = I("post.song_title");
 				
 				if(empty($title)) E("必须输入视频标题");
-				
 				if(empty($thumb_value)) E("必须输入截图地址");
-					
 				if(empty($code)) E("必须输入视频swf");
-					
 				if(empty($artist_name)) E("必须输入音乐人");
-					
 				if(empty($song_title)) E("必须输入歌曲名称");
 				
 				$vedio = D("Vedio");

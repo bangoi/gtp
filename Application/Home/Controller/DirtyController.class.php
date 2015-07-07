@@ -32,7 +32,7 @@ class DirtyController extends BaseController {
 	public function delete() {
 		$id = I("get.id");
 		$group_id = I("get.group_id");
-		M("Dirty")->where("id= $id")->delete();
+		M("Dirty")->where("id=$id")->delete();
 		
 		$this->redirect("/group/topic/".$group_id);
 	}

@@ -10,6 +10,7 @@ class BaseController extends Controller {
 	
 	protected $uid;
 	protected $logined;
+	protected $role;
 	
 	protected $prefix = "gtp_";
 	
@@ -28,6 +29,7 @@ class BaseController extends Controller {
 		$this->uid = cookie($this->prefix."uid");
 		if(!empty($this->uid)) {
 			$this->logined = true;
+			$this->$role = cookie($this->prefix."role");
 			$this->assign("_logined", true);
 			$this->assign("_uid", cookie($this->prefix."uid"));
 			$this->assign("_nick", cookie($this->prefix."nick"));

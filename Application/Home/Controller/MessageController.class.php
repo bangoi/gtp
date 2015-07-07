@@ -18,14 +18,18 @@ class MessageController extends BaseController {
 		$size = 25;
 		
 		$map["message.to_id"] = $user_id;
+		
+		$map['_logic'] = 'OR';
+		$map["message.user_id"] = $user_id;
+		$map["message.parent_id"] = -1;
 		$map["message.state"] = array("gt", 0);
 		
 		$message_list = M("Message")
 			->join("user on message.user_id=user.id")
-			->field("user.nick, message.id, message.user_id, message.to_id, message.title, message.add_time, message.state")
-			->where($map)
-			->order("add_time")->page($p.",{$size}")->select();
-		
+			->field("user.nick, message.id, message.parent_id, message.user_id, message.to_id, message.title, message.content, message.reply_num, message.last_reply_time, message.add_time, message.state")
+			->where($map)->order("last_reply_time desc")
+			->page($p.",{$size}")->select();
+			
 		$this->assign("message_list", $message_list);
 		$this->display();
 	}
@@ -40,10 +44,10 @@ class MessageController extends BaseController {
 		
 		$message_list = M("Message")
 			->join("user on message.user_id=user.id")
-			->field("user.nick, message.id, message.user_id, message.to_id, message.title, message.add_time, message.state")
+			->field("user.nick, message.id, message.parent_id, message.user_id, message.to_id, message.title, message.content, message.add_time, message.state")
 			->where($map)
 			->order("add_time")->page($p.",{$size}")->select();
-		
+			
 		$this->assign("message_list", $message_list);
 		$this->assign("type", "mine");
 		$this->display("index");
@@ -61,27 +65,21 @@ class MessageController extends BaseController {
 		$size = 25;
 		
 		$map["message.id"] = $id;
-		$message = M("Message")
-			->join("user on message.user_id=user.id")
-			->field("user.nick, message.id, message.user_id, message.title, message.content, message.add_time, message.state")
-			->where($map)
+	
+		$msg = M("Message")
+			//->join("user user.id = message.user_id")
+			//->field("user.nick, message.id, message.parent_id, message.user_id, message.to_id, message.title, message.content, message.add_time, message.repl_time, message.title")
+			->where("message.id = $id")
 			->find();
 			
-		if($this->uid != $message["user_id"]) {
+		if($msg["to_id"] == $this->uid) {
 			$data["state"] = 200;
-			M("Message")->where($map)->data($data)->save();	
+			$data["reply_num"] = $msg["reply_num"] + 1;
+			M("Message")->where("id={$id}")->data($data)->save();
 		}
-		
-		$message_map["message.state"] = 100;
-		$message_map["message.parent_id"] = $id;
-		
-		$message_list = M("Message")
-			->join("user on user.id=message.user_id")
-			->field("message.id, message.parent_id, message.user_id, message.to_id, message.add_time, user.nick, user.face")
-			->where($message_map)->order("add_time")->page($p.",{$size}")->select();
-		
-		$this->assign("message", $message);
-		$this->assign("message_list", $message_list);
+			
+		$this->assign("message", $msg);
+		$this->assign("to_id", $msg["user_id"]);
 		$this->display();
 	}
 	
@@ -101,6 +99,7 @@ class MessageController extends BaseController {
 		        	$message->user_id = $this->uid;
 		        	$message->add();
 		        }
+				$this->redirect("/message/mine");
 			} catch (Exception $ex) {
 				$this->assign("title", $title);
 				$this->assign("content", $content);
@@ -110,7 +109,7 @@ class MessageController extends BaseController {
 		} else {
 			$to_id = I("get.id");
 			$user = M("User")->find($to_id);
-			
+
 			$this->assign("to_id", $to_id);
 			$this->assign("user", $user);
 			$this->display();
@@ -120,14 +119,14 @@ class MessageController extends BaseController {
 	public function reply() {
 		if(IS_POST) {
 			try {
-				$message = D("Message");
-		        if($message->create()) {
-		        	$id = I("post.parent_id");
+				$comment = D("Comment");
+		        if($comment->create()) {
+		        	$parent_id = I("post.parent_id");
 		        	$message->user_id = $this->uid;
-					$message->parent_id = $id;
-		        	$message->add();
+					$message->parent_id = $parent_id;
+		        	$id = $message->add();
 					
-					$this->redirect("/message/".$id);
+					$this->redirect("/message/".$parent_id);
 					$this->display();
 		        }
 			} catch (Exception $ex) {

@@ -69,9 +69,10 @@
         <!--/文章详细-->
         
         <!-- reply list -->
+        <div class="review">
         <?php  $item_type = "topic"; $item_id = $topic['id']; ?>
         <ul id="comment_list">
-            <?php if(is_array($comment_list)): foreach($comment_list as $key=>$comment): ?><li id="comment-<?php echo ($comment["id"]); ?>">
+            <?php if(is_array($message_list)): foreach($message_list as $key=>$comment): ?><li id="comment-<?php echo ($comment["id"]); ?>">
                 <div class="comm_l">
                     <a href="http://localhost:9990/gtp/user/<?php getUserDomainById($comment['user_id']) ?>"><img src="<?php getUserFaceById($comment['user_id']); ?>" class="face" /></a>
                 </div>
@@ -80,10 +81,9 @@
                     <p id="comm-cnt-<?php echo ($comment["id"]); ?>"><?php echo (autolink($comment["content"])); ?></p>
                 </div>
                 <div class="c_opt">
-                    <?php if(isTopicOwnerById($item_id, $_uid) || isCommentOwner($comment['id'], $_uid)) { ?>
+                    <?php if($comment["user_id"] == $_uid) { ?>
                     <a href="javascript:void(0);" class="doDelete" cid="<?php echo ($comment["id"]); ?>">删除</a> &nbsp;
                     <?php } ?>
-                    <a href="javascript:void(0);" class="doQuote" cid="<?php echo ($comment["id"]); ?>">回应</a>
                 </div>
                 <br class="clear" />
             </li><?php endforeach; endif; ?>
@@ -91,9 +91,8 @@
         <!-- page begin -->
         <div class="manu"><?php echo ($page); ?></div>
         <!-- page end -->
-        
+        </div>
         <!-- add reply -->
-        <?php if($message["user_id"] != $_uid) { ?>
         <br/>
         <div class="review">
             <div id="commentPanel">
@@ -110,7 +109,7 @@
                         <form class="form" action="http://localhost:9990/gtp/message/reply" method="post">
                         <textarea name="content" id="txtContent" class="textarea"></textarea>
                         <input type="hidden" name="parent_id" value="<?php echo ($message["id"]); ?>" />
-                        <input type="hidden" name="to_id" value="<?php echo ($message["user_id"]); ?>" />
+                        <input type="hidden" name="to_id" value="<?php echo ($to_id); ?>" />
                         <input type="submit" class="button" style="margin-top: 5px;" value="回复" />
                         </form>
                     </div>
@@ -118,7 +117,6 @@
             </ul>
             </div>
         </div>
-        <?php } ?>
     </div>
     <!-- right begin --> 
     <div class="channel-right">

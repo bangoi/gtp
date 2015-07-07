@@ -15,16 +15,48 @@ class JsonResult{
 		return $instance;   
 	}
 		
-	static function error($msg) {
+	static function error($uri, $data) {
+		$result['data'] = array("result"=>$data, "uri"=>$uri);
+		$result['code'] = JsonResult::$r_err;
+		return json_encode($result);
+	}
+		
+	static function error_msg($msg) {
 		$result['data'] = $msg;
 		$result['code'] = JsonResult::$r_err;
-		return JsonResult::encode($result);
+		return json_encode($result);
 	}
 		
 	static function boolean($data) {
 		$result['data'] = array("result"=>$data);
 		$result['code'] = JsonResult::$r_common;
-		return JsonResult::encode($result);
+		return json_encode($result);
+	}
+		
+	static function model($data) {
+		if(!empty($data)) {
+			$result['data'] = $data;
+			$result['code'] = JsonResult::$r_common;
+			return JsonResult::encode($result);
+		} else {
+			$result['data'] = '';
+			$result['code'] = JsonResult::$r_null;
+				
+			return json_encode($result);
+		}
+	}
+		
+	static function apk_download($data) {
+		if(!empty($data)) {
+			$result['data'] = $data;
+			$result['code'] = 100;
+			return JsonResult::encode($result);
+		} else {
+			$result['data'] = '';
+			$result['code'] = JsonResult::$r_null;
+			
+			return json_encode($result);
+		}
 	}
 		
 	static function data($data) {
@@ -35,7 +67,7 @@ class JsonResult{
 		} else {
 			$result['data'] = '';
 			$result['code'] = JsonResult::$r_null;
-			return JsonResult::encode($result);
+			return json_encode($result);
 		}
 	}
 		

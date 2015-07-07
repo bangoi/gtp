@@ -12,7 +12,7 @@
     <?php else: ?>
     <meta name="description" content="Guitar-pro,收集分享Guitar-pro吉他谱,吉他视频,为吉他爱好者打造网上资源互动社区." /><?php endif; ?>
     <link rel="alternate" type="application/rss+xml" title="阿谱小站" href="http://localhost:9990/gtp/feed" />
-    <link rel="shortcut icon" href="http://localhost:9990/gtp/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="http://localhost:9990/gtp/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/concision.css" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/prettify.css" />
     <script type="text/javascript" src="http://localhost:9990/gtp/js/jquery-2.1.3.min.js"></script>
@@ -23,19 +23,25 @@
         <div class="header-wrap wp cf">
             <h3 class="logo"><a href="http://localhost:9990/gtp" title="返回首页">Guitar Pro</a></h3>
             <ul class="navg">
-                <li class="title <?php if(($channel == 'Home')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp">首页</a></li>
-                <li class="title <?php if(($channel == 'Gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
+                <li class="title <?php if((CONTROLLER_NAME == 'Index')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp">首页</a></li>
+                <li class="title <?php if((CONTROLLER_NAME == 'Gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
+                <!--
                 <li class="title <?php if(($channel == 'Vedio')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/vedio/">吉他视频</a></li>
                 <li class="title <?php if($channel == "Group" || $channel == "Topic") { ?>selected<?php } ?>"><a class="show" href="http://localhost:9990/gtp/group/">小组</a></li>
                 <?php if($_logined) { ?>
                     <li class="title <?php if(($channel == 'user')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/user/<?php echo (getuserdomainbyid($_uid)); ?>">我的空间</a></li>
                 <?php } ?>
+                -->
             </ul>
             <p class="user">
                 <?php if(!$_logined) { ?>
                 [<a href="http://localhost:9990/gtp/user/login">登录</a><a href="http://localhost:9990/gtp/user/register">注册</a>]
                 <?php } else { ?>
-                [ <?php echo (urldecode($_nick)); ?> &nbsp; <a href="http://localhost:9990/gtp/message/" class="mlr0">邮件<?php if($_msgNum > 0) { ?><span id="msg">(<?php echo ($_msgNum); ?>)</span><?php } ?></a><a href="http://localhost:9990/gtp/user/settings">设置</a> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
+                [ <?php echo (urldecode($_nick)); ?> &nbsp; 
+                <!--
+                <a href="http://localhost:9990/gtp/message/" class="mlr0">邮件<?php if($_msgNum > 0) { ?><span id="msg">(<?php echo ($_msgNum); ?>)</span><?php } ?></a>
+                -->
+                <a href="http://localhost:9990/gtp/user/settings">设置</a> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
                 <?php } ?>
             </p>
         </div>
@@ -44,14 +50,12 @@
 <div class="contaier wp">
     <div class="add">
         <div class="body form">
-            <form action="http://localhost:9990/gtp/gtp/edit/<?php echo ($gtp_id); ?>" method="post" id="gtpCreate" enctype="multipart/form-data">
+            <form action="http://localhost:9990/gtp/gtp/edit/<?php echo ($gtp_id); ?>" method="post" id="gtpForm" enctype="multipart/form-data">
                 <table>
-                    <?php if (!empty($err)): ?>
                      <tr>
                         <th></th>
-                        <td><span style="color: red"><?php echo ($err); ?></span></td>
+                        <td><span style="color: red" id="err"><?php echo ($err); ?></span></td>
                     </tr>
-                    <?php endif; ?>
                     <tr>
                         <th><i class="must">*</i>音乐人</th>
                         <td><input class="text" type="text" name="artist_name" id="artist_name" value="<?php echo ($gtp["artist_name"]); ?>" style="width:200px" /></td>
@@ -63,7 +67,7 @@
                     </tr>
                     <tr>
                         <th><i class="must">*</i>上传文件</th>
-                        <td><input id="upload_file1" type="file" name="file_name" id="file_name" /></td>
+                        <td><input id="file_name" type="file" name="file_name" id="file_name" /></td>
                     </tr>
                     <tr>
                         <th><i class="must"></i>原作者</th>
@@ -71,7 +75,7 @@
                     </tr>
                     <tr>
                         <th></th>
-                        <td>出于对吉他谱制原作者付出辛劳的尊重，请填写曲谱原作者。</td>
+                        <td class="c9">出于对吉他谱制原作者付出辛劳的尊重，请填写曲谱原作者。</td>
                     </tr>
                     <tr>
                         <th><i class="must"></i>吉他谱来源</th>
@@ -79,7 +83,7 @@
                     </tr>
                     <tr>
                         <th></th>
-                        <td>如果吉他谱并非原创，出于版权考虑，请填写转载来源。</td>
+                        <td class="c9">如果吉他谱并非原创，出于版权考虑，请填写转载来源。</td>
                     </tr>
                     <tr>
                         <th>&nbsp;</th>
@@ -93,6 +97,7 @@
     </div>
             
     <div class="home-right">
+        <!--
         <div class="fast">
             <dl>
                 <dt>发布应用<sub>Publish</sub></dt>
@@ -103,6 +108,7 @@
                 <dd>选中文字内容后使用键盘快捷键<br/>CTRL+B ：字体加粗<br/>ALT + U ：添加超链接<br/> ALT + C ：插入代码</dd>
             </dl>
         </div>
+        -->
     </div>
         
 </div>

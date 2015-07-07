@@ -17,8 +17,11 @@
                 <div class="left">
                 </div>
                 <div class="middle">
-                    <span class="title"><a href="__SITE__/gtp/{$gtp.id}">{$gtp.song_title}</a></span>-
+                    <span class="title"><a href="__SITE__/gtp/{$gtp.id}">{$gtp.song_title}</a></span>-&nbsp;
+                    
+                    <span class="comment"></span>
                     <span class="author"><a href="__SITE__/gtp/?artist_name={$gtp.artist_name|urlencode}">{$gtp.artist_name}</a></span>
+                    <span class="down"> [ 下载： {$gtp.download_num} ]</span>
                 </div>
                 <div class="right">
                     <span class="date">{$gtp.add_time|firendlyTime}</span>
@@ -35,8 +38,6 @@
     </div>
     <!-- right begin --> 
     <div class="channel-right">
-        
-        <include file="Public:right_search" />
         
         <div class="sort">
             <ul class="cf">

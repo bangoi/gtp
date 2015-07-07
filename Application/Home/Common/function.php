@@ -516,6 +516,10 @@ function getParentUser($parent_id) {
 	echo "<a href='".C("TMPL_PARSE_STRING.__SITE__").'/user/'.$domain."'>".$user['nick']."</a>";
 }
 
+function getParentMessageTitle($msg_id) {
+	return "ssssss";
+}
+
 /*
 function is_group_owner($group_id, $user_id) {
 	$map["group_id"] = $group_id;

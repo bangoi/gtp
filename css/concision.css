@@ -362,6 +362,14 @@ a:hover{ text-decoration: underline; }
 .item .lang,.item .down{ color: #999; }
 .item .left{ float: left; padding-right: 3px; }
 .item .right{ position: absolute; right: 0; top: 0; }
+
+
+.tbl { width: 100%; }
+.tbl table { border-collapse:collapse; border:none; }
+.tbl table { width: 100%; }
+.tbl table thead td { font-weight: bold; height:35px; border-bottom: 1px dashed #eee; }
+.tbl table tbody td { height: 55px; line-height: 28px; border-bottom: 1px dashed #eee; }
+
 /*操作*/
 .operate{  }
 /*屑*/
@@ -369,10 +377,11 @@ a:hover{ text-decoration: underline; }
 .crumb a{ color: #333; margin: 0 3px; }
 .crumb b{ color: #333; margin-left: 3px; font-weight: normal; }
 /*页脚*/
-.footer{ clear:both;overflow: hidden; zoom: 1; padding: 6px 0; height: 24px; line-height: 24px; background: #fff; font-size: 14px; color: #666; border-top: 1px solid #ddd; }
+.footer { clear:both;overflow: hidden; zoom: 1; padding: 6px 0; height: 24px; line-height: 24px; background: #fff; font-size: 14px; color: #666; border-top: 1px solid #ddd; }
+.footer a { color: #666; }
 .footer .navg{ float: left; }
 .footer .navg a{ color: #666; margin-left: 12px; }
-.footer .copy{ float: left; border: none; }
+.footer .copy{ float: left; border: none; width: 150px; }
 .footer .copy sup{ font-weight: normal; }
 .footer .links{ float: right; }
 .footer .links a{ color: #666; margin-left: 12px; }

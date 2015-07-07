@@ -12,7 +12,7 @@
     <?php else: ?>
     <meta name="description" content="Guitar-pro,收集分享Guitar-pro吉他谱,吉他视频,为吉他爱好者打造网上资源互动社区." /><?php endif; ?>
     <link rel="alternate" type="application/rss+xml" title="阿谱小站" href="http://localhost:9990/gtp/feed" />
-    <link rel="shortcut icon" href="http://localhost:9990/gtp/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="http://localhost:9990/gtp/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/concision.css" />
     <link rel="stylesheet" type="text/css" href="http://localhost:9990/gtp/css/prettify.css" />
     <script type="text/javascript" src="http://localhost:9990/gtp/js/jquery-2.1.3.min.js"></script>
@@ -23,16 +23,25 @@
         <div class="header-wrap wp cf">
             <h3 class="logo"><a href="http://localhost:9990/gtp" title="返回首页">Guitar Pro</a></h3>
             <ul class="navg">
-                <li class="title <?php if(($channel == 'Home')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp">首页</a></li>
-                <li class="title <?php if(($channel == 'Gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
+                <li class="title <?php if((CONTROLLER_NAME == 'Index')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp">首页</a></li>
+                <li class="title <?php if((CONTROLLER_NAME == 'Gtp')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/gtp/">吉他谱</a></li>
+                <!--
                 <li class="title <?php if(($channel == 'Vedio')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/vedio/">吉他视频</a></li>
                 <li class="title <?php if($channel == "Group" || $channel == "Topic") { ?>selected<?php } ?>"><a class="show" href="http://localhost:9990/gtp/group/">小组</a></li>
+                <?php if($_logined) { ?>
+                    <li class="title <?php if(($channel == 'user')): ?>selected<?php endif; ?>"><a class="show" href="http://localhost:9990/gtp/user/<?php echo (getuserdomainbyid($_uid)); ?>">我的空间</a></li>
+                <?php } ?>
+                -->
             </ul>
             <p class="user">
                 <?php if(!$_logined) { ?>
                 [<a href="http://localhost:9990/gtp/user/login">登录</a><a href="http://localhost:9990/gtp/user/register">注册</a>]
                 <?php } else { ?>
-                [ <?php echo (urldecode($_nick)); ?> <a href="http://localhost:9990/gtp/user/settings">设置</a> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
+                [ <?php echo (urldecode($_nick)); ?> &nbsp; 
+                <!--
+                <a href="http://localhost:9990/gtp/message/" class="mlr0">邮件<?php if($_msgNum > 0) { ?><span id="msg">(<?php echo ($_msgNum); ?>)</span><?php } ?></a>
+                -->
+                <a href="http://localhost:9990/gtp/user/settings">设置</a> <a href="http://localhost:9990/gtp/user/logout">退出</a>]
                 <?php } ?>
             </p>
         </div>
@@ -43,33 +52,33 @@
     <div class="register" style="width: 580px;">
         <div class="head">
             <strong>用户注册</strong><span>已有帐号？点击<a href="http://localhost:9990/gtp/user/login">登录</a></span>
-            <?php if (!empty($err)): ?><span style="color: red"><?php echo ($err); ?></span><?php endif; ?>
+            <span style="color: red" id="err"><?php echo ($err); ?></span>
         </div>
         <div class="body form">
-            <form action="http://localhost:9990/gtp/user/register" method="post" class="login">
+            <form action="http://localhost:9990/gtp/user/register" id="regFrm" method="post" class="login">
                 <table style="width: 580px;">
                     <tr>
                         <th>用户名</th>
                         <td>
-                            <input class="text" type="text" name="nick" value="<?php echo ($nick); ?>"  />
+                            <input class="text" type="text" id="txtNick" name="nick" value="<?php echo ($nick); ?>" placeholder="用户名/昵称" />
                         </td>
                     </tr>
                     <tr>
                         <th>密&#12288;码</th>
                         <td>
-                            <input class="text" type="password" name="pwd" />
+                            <input class="text" type="password" id="txtPwd" name="pwd" placeholder="会员密码" />
                         </td>
                     </tr>
                     <tr>
                         <th>确认密码</th>
                         <td>
-                            <input class="text" type="password" name="re_pwd" />
+                            <input class="text" type="password" id="txtRePwd" name="re_pwd" placeholder="再次输入密码" />
                         </td>
                     </tr>
                     <tr>
                         <th>邮&#12288;箱</th>
                         <td>
-                            <input class="text" type="text" name="email" value="<?php echo ($email); ?>" />
+                            <input class="text" type="text" id="txtEmail" name="email" value="<?php echo ($email); ?>" placeholder="会员邮箱" />
                         </td>
                     </tr>
                     <tr>
@@ -84,21 +93,18 @@
     </div>
     <div class="login-other">
         <div class="head">
+            <!--
             <strong>使用其他帐号直接登录</strong>
+            -->
         </div>
         <div class="body">
+            <!--
             <ul class="other-account">
                 <li><a class="qq" href="/oauth/index/type/qq.html">腾讯QQ登录</a></li><li><a class="tencent" href="/oauth/index/type/tencent.html">腾讯微博登录</a></li><li><a class="t163" href="/oauth/index/type/t163.html">网易微博登录</a></li><li><a class="sina" href="/oauth/index/type/sina.html">新浪微博登录</a></li>            </ul>
+            -->
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(function(){
-        $('.reloadverify').click(function(){
-            $('.verifyimg').attr('src', "/member/verify.html?" + Math.random());
-        });
-    })
-</script>
 
 <div class="footer">
         <div class="wp">

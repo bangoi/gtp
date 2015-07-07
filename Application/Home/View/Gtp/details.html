@@ -11,7 +11,7 @@
                 <div class="app-info">
                     <span class="date">{$gtp.add_time|toDate='Y-m-d H:i'}</span>
                     <a class="author" href="__SITE__/gtp/?artist_name={$gtp.artist_name|urlencode}">{$gtp.artist_name}的吉他谱</a>
-                    <span class="version"><a href="__SITE__/user/<?php getUserDomain($user); ?>">{$user.nick}</a>上传</span>
+                    <span class="version"><!--<a href="__SITE__/user/<?php getUserDomain($user); ?>">-->{$user.nick}<!--</a>-->上传</span>
                     <a class="class" href="__SITE__/gtp/">[ 吉他谱 ]</a>
                     <?php if ($can_edit) { ?>
                     <a href="__SITE__/gtp/edit/{$gtp.id}">[编辑]</a>
@@ -24,9 +24,32 @@
             </div>
             <div class="body">
                 <div class="app-relative">
-                    <a href="__SITE__/gtp/download/{$gtp.id}" target="_blank">下载吉他谱</a>
-                    <i class="line">&nbsp;</i>{$gtp.download_num}人下载过
+                    <a href="__SITE__/gtp/download/{$gtp.id}" class="button" target="_blank">下载吉他谱</a>
+                    <i class="line">&nbsp;</i>{$gtp.download_num}人下载过 
+                    <?php if(!empty($gtp['author'])) { ?><i class="line">&nbsp;</i><span class="c7">制作者：{$gtp.author}</span><?php } ?>
+                    <?php if(!empty($gtp['source'])) { ?><i class="line">&nbsp;</i><span class="c7">来源：{$gtp.source}</span><?php } ?>
                 </div>
+                
+                <?php if(count($vedioes) > 0): ?>
+                <br/>
+                <div class="app-summary v_list">
+                    <b>{$gtp.artist_name}-{$gtp.song_title} 吉他视频</b>
+                    <br />
+                    <br />
+                    <ul>
+                        <foreach name="vedioes" item="vedio">
+                        <li class="vitem">
+                        <ul>
+                            <li><a href="__SITE__/vedio/{$vedio.id}"><img src="{$vedio.thumb}" alt="{$vedio.song_title}" /></a></li>
+                            <li><a href="__SITE__/vedio/{$vedio.id}">{$vedio.song_title}</a></li>
+                            <li>发布：{$vedio.add_time|firendlyTime}</li>
+                            <li>播放：{$vedio.view_num}</li>
+                        </ul>
+                        </li>
+                        </foreach>
+                    </ul>
+                </div>
+                <?php endif; ?>
                 
                 <?php if(count($song_title_gtps) > 0): ?>
                 <div class="relation">
@@ -60,26 +83,8 @@
                 </p>
                 
                 <br/>
+
                 
-                <?php if(count($vedioes) > 0): ?>
-                <div class="app-summary v_list">
-                    <b>{$gtp.artist_name}-{$gtp.song_title} 吉他视频</b>
-                    <br />
-                    <br />
-                    <ul>
-                        <foreach name="vedioes" item="vedio">
-                        <li class="vitem">
-                        <ul>
-                            <li><a href="__SITE__/vedio/{$vedio.id}"><img src="{$vedio.thumb}" alt="{$vedio.song_title}" /></a></li>
-                            <li><a href="__SITE__/vedio/{$vedio.id}">{$vedio.song_title}</a></li>
-                            <li>发布：{$vedio.add_time|firendlyTime}</li>
-                            <li>播放：{$vedio.view_num}</li>
-                        </ul>
-                        </li>
-                        </foreach>
-                    </ul>
-                </div>
-                <?php endif; ?>
                 
             </div>
             
@@ -132,6 +137,17 @@
         <!--/文章评论-->
     </div>
     <!-- right begin --> 
+    <div class="channel-right">
+        <div class="sort">
+            <ul class="cf">
+                <li class="selected"><a href="#">全部</a></li>
+                <li><a href="__SITE__/gtp/add">发布吉他谱</a></li>
+                <li><a href="__SITE__/gtp/add?artist_name={$gtp.artist_name}">发布 "{$gtp.artist_name}" 的吉他谱</a></li>
+                <li><a href="__SITE__/vedio/add?artist_name={$gtp.artist_name}">发布这个吉他视频</a></li>
+            </ul>
+        </div>
+    </div>
+    <br />
     <div class="channel-right">
         <script type="text/javascript"> 
         alimama_pid="mm_10574926_3506959_11486840"; 
